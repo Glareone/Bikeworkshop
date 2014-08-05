@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BFC0360F-B55A-40EC-892C-82CCD7CEBF80}</ProjectGuid>
+    <ProjectGuid>{6F6EEB34-499C-47DA-A5BC-7D23EE47F714}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Training.Workshop.test_UnitOfWork</RootNamespace>
-    <AssemblyName>Training.Workshop.test_UnitOfWork</AssemblyName>
+    <RootNamespace>UnitOfWork2</RootNamespace>
+    <AssemblyName>UnitOfWork2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,25 +38,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Training.Workshop.Data.FileSystem">
-      <HintPath>..\Training.Workshop.Data.FileSystem\bin\Debug\Training.Workshop.Data.FileSystem.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\GenericTransaction.cs" />
-    <Compile Include="Classes\Local.cs" />
-    <Compile Include="Classes\Session.cs" />
-    <Compile Include="Classes\UnitOfWork.cs" />
-    <Compile Include="Interfaces\IGenericTransaction.cs" />
+    <Compile Include="FlushMode.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Interfaces\ITransaction.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUnitOfWorkFactory.cs" />
-    <Compile Include="Interfaces\IUnitOfWorkImplementor.cs" />
-    <Compile Include="Classes\UnitOfWorkManager.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\UnitOfWorkFactory.cs" />
-    <Compile Include="Classes\UnitOfWorkImplementor.cs" />
+    <Compile Include="UnitOfWorkFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

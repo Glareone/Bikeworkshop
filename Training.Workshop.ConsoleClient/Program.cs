@@ -18,6 +18,7 @@ namespace Training.Workshop.ConsoleClient
             ServiceLocator.RegisterService<IUserService>(typeof(UserService));
             ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
             ServiceLocator.RegisterService<ISparepartService>(typeof(SparepartService));
+            //Create a RepositoryFactory 
             Data.Context.Current.RepositoryFactory = new RepositoryFactory();
 
             // execute

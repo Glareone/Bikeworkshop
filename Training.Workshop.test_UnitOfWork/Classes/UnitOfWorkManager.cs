@@ -54,12 +54,21 @@ namespace Training.Workshop.test_UnitOfWork
             {
                 foreach (var el in Local.List_UnitOfWork)
                 { 
-                 
+                 if (el.Key.GetHashCode().ToString()==value)
                 }
             }
             set 
             {
-                CurrentUnitOfWork=value;
+                if (Local.List_UnitOfWork.ContainsKey(value.GetHashCode().ToString()))
+                {
+                    Local.List_UnitOfWork.Remove(value.GetHashCode().ToString());
+                    Local.List_UnitOfWork.Add(value.GetHashCode().ToString(), value);
+                }
+                else
+                {
+                    Local.List_UnitOfWork.Add(value.GetHashCode().ToString(), value);
+                }
+                
             }
             
         }
