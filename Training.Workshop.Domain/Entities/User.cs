@@ -26,6 +26,7 @@ namespace Training.Workshop.Domain.Entities
         public static User Create(string username, string password)
         {
             return ServiceLocator.Resolve<IUserService>().Create(username, password);
+            //old version
             //return Context.Current.UserService.Create(username, password);
         }
 
