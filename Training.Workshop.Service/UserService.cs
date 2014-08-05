@@ -18,6 +18,9 @@ namespace Training.Workshop.Service
                            Username = username,
                            Password = password
                        };
+
+            //ServiceLocator.Resolve<RepositoryFactory>().Save(user);
+
             //Жесткая сцепка сущностей,надо будет развязать посредством локатора.
             Data.Context.Current.RepositoryFactory.GetUserRepository()
                 .Save(user);

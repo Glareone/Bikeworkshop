@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Training.Workshop.Domain.Entities
 {
-    public class Bike:AbEntity
+    public class Bike:Entitybase
     {
         /// <summary>
         /// motocycle's manufacturer

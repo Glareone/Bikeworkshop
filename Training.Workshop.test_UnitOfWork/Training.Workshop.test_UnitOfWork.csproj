@@ -41,9 +41,6 @@
     <Reference Include="Training.Workshop.Data.FileSystem">
       <HintPath>..\Training.Workshop.Data.FileSystem\bin\Debug\Training.Workshop.Data.FileSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Training.Workshop.Domain">
-      <HintPath>..\Training.Workshop.Domain\bin\Debug\Training.Workshop.Domain.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\FileTransaction.cs" />

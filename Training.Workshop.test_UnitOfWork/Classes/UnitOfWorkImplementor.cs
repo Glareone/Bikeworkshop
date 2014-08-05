@@ -19,7 +19,9 @@ namespace Training.Workshop.test_UnitOfWork
         }
         public IGenericTransaction BeginTransaction()
         {
-            return new GenericTransaction(_session.BeginTransaction());
+            //Need to understand what we need to return
+            return new GenericTransaction();
+            //return new GenericTransaction(_session.BeginTransaction());
         }
         public void Dispose()
         { 

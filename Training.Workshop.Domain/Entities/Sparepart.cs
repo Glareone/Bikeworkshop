@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Training.Workshop.Domain.Entities
 {
-    public class Sparepart:AbEntity
+    public class Sparepart:Entitybase
     {
         /// <summary>
         ///  sparepart's name

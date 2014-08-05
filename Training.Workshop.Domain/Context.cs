@@ -1,4 +1,6 @@
 ﻿using Training.Workshop.Domain.Services;
+using Training.Workshop.Service.ServiceLocator;
+using Training.Workshop.Domain.IService;
 
 namespace Training.Workshop.Domain
 {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Training.Workshop.Domain.Entities
+namespace Training.Workshop.Domain.IService
 {
-    public abstract class AbEntity
+    interface IServiceLocator
     {
     }
 }

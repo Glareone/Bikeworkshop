@@ -7,7 +7,7 @@ namespace Training.Workshop.test_UnitOfWork
 {
     public interface ISession
     {
-        Type OpenSession();
+        void OpenSession();
         void BeginTransaction();
     }
 }

@@ -38,14 +38,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Training.Workshop.Service.ServiceLocator">
+      <HintPath>..\Training.Workshop.Service.ServiceLocator\bin\Debug\Training.Workshop.Service.ServiceLocator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
-    <Compile Include="Entities\AbEntity.cs" />
+    <Compile Include="Entities\Entitybase.cs" />
     <Compile Include="Entities\Bike.cs" />
     <Compile Include="Entities\Database.cs" />
     <Compile Include="Entities\Sparepart.cs" />
     <Compile Include="IService\IBikeService.cs" />
+    <Compile Include="IService\IServiceLocator.cs" />
     <Compile Include="IService\ISparepartService.cs" />
     <Compile Include="IService\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,9 +1,11 @@
 ﻿using System;
+using Training.Workshop.Service.ServiceLocator;
+using Training.Workshop.Domain.Services;
 
 namespace Training.Workshop.Domain.Entities
 {
     [Serializable]
-    public class User:AbEntity
+    public class User:Entitybase
     {
         /// <summary>
         /// User's name / login
@@ -23,7 +25,8 @@ namespace Training.Workshop.Domain.Entities
         /// <returns></returns>
         public static User Create(string username, string password)
         {
-            return Context.Current.UserService.Create(username, password);
+            return ServiceLocator.Resolve<IUserService>().Create(username, password);
+            //return Context.Current.UserService.Create(username, password);
         }
 
         /// <summary>

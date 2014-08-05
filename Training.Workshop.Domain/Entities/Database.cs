@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 
 using Training.Workshop.Domain.Entities;
+using System.Xml.Serialization;
 
 namespace Training.Workshop.Data.Entities
 {
+    [XmlInclude(typeof(User))]
+    [XmlInclude(typeof(Bike))]
+    [XmlInclude(typeof(Sparepart))]
     [Serializable]
     public class Database
     {

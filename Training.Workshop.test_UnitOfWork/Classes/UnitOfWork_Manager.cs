@@ -8,12 +8,12 @@ namespace Training.Workshop.test_UnitOfWork.Classes
     public class UnitOfWork_Manager:IUnitOfWork_Manager
     {
         public void Add()
-        { 
-        
+        {
+            UnitOfWork.Start();
         }
         public void Delete()
         { 
-        
+         
         }
     }
 }
