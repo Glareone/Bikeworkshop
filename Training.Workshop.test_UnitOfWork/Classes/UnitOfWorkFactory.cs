@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Training.Workshop.test_UnitOfWork.Classes;
 
 namespace Training.Workshop.test_UnitOfWork
 {
@@ -27,7 +28,7 @@ namespace Training.Workshop.test_UnitOfWork
         }
         private ISession CreateSession()
         {
-            return Session.OpenSession();
+            //return Session.OpenSession();
         }
     }
 

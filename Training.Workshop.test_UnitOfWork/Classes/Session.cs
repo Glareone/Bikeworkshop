@@ -7,13 +7,14 @@ namespace Training.Workshop.test_UnitOfWork.Classes
 {
     public class Session:ISession
     {
-        private Session innersession;
+       // private Session innersession;
+        
         private Session()
         {
         }
         public void OpenSession()
         {
-            innersession = new Session();
+            //innersession = new Session();
         }
         public void BeginTransaction()
         { 

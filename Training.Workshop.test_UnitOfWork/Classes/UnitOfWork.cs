@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Training.Workshop.test_UnitOfWork
+namespace Training.Workshop.test_UnitOfWork.Classes
 {
-    public static class UnitOfWork
+    public class UnitOfWork:IUnitOfWork
     {
-        private static readonly IUnitOfWorkFactory _unitOfWorkFactory = new UnitOfWorkFactory();
-
-        public static IUnitOfWork Start()
-        {
-            var unitOfWork = _unitOfWorkFactory.Create();
-            return unitOfWork;
-        }
     }
 }

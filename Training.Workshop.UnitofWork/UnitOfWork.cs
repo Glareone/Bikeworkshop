@@ -11,7 +11,7 @@ namespace Training.Workshop.UnitOfWork
     {
         private static readonly IUnitOfWorkFactory _unitOfWorkFactory = new UnitOfWorkFactory();
 
-        public static Configuration Configuration
+        public static Configuration
         {
             get { return _unitOfWorkFactory.Configuration; }
         }

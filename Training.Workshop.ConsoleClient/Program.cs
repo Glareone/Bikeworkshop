@@ -19,33 +19,6 @@ namespace Training.Workshop.ConsoleClient
             ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
             ServiceLocator.RegisterService<ISparepartService>(typeof(SparepartService));
             Data.Context.Current.RepositoryFactory = new RepositoryFactory();
-            
-            
-            //Create and Attachment of Services.
-            //foreach (var el in ServiceLocator.services)
-            //{
-            //    if (el.Key.Name == "UserService") 
-            //    {
-            //         var obj = Activator.CreateInstance(el.Value);
-            //         Domain.Context.Current.UserService = (UserService)obj;
-            //    }
-            //    if (el.Key.Name== "BikeService")
-            //    {
-            //        var obj = Activator.CreateInstance(el.Value);
-            //        Domain.Context.Current.BikeService = (BikeService)obj;
-            //    }
-            //    if (el.Key.Name== "SparepartService")
-            //    {
-            //        var obj = Activator.CreateInstance(el.Value);
-            //        Domain.Context.Current.SparepartService = (SparepartService)obj;
-            //    }
-            //}
-
-            // OLD Need to Delete
-            //Domain.Context.Current.UserService = ServiceLocator.RegisterService<UserService>(typeof(UserService));
-            //Domain.Context.Current.BikeService = new BikeService();
-            //Domain.Context.Current.SparepartService = new SparepartService();
-            //Data.Context.Current.RepositoryFactory = new RepositoryFactory();
 
             // execute
 
@@ -60,7 +33,6 @@ namespace Training.Workshop.ConsoleClient
                         User.Create(commandArgs[1], commandArgs[2]);
                         break;
                     case "deleteuser":
-                        Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(commandArgs[1]);
                         Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(commandArgs[1]);
                         break;
                     case "updateuser":

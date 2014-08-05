@@ -45,15 +45,16 @@
   <ItemGroup>
     <Compile Include="Classes\FileTransaction.cs" />
     <Compile Include="Classes\GenericTransaction.cs" />
+    <Compile Include="Classes\Local.cs" />
     <Compile Include="Classes\Session.cs" />
-    <Compile Include="Classes\UnitOfWork_Manager.cs" />
+    <Compile Include="Classes\UnitOfWork.cs" />
     <Compile Include="Interfaces\IGenericTransaction.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Interfaces\ITransaction.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IUnitOfWorkImplementor.cs" />
-    <Compile Include="Classes\UnitOfWork.cs" />
+    <Compile Include="Classes\UnitOfWorkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\UnitOfWorkFactory.cs" />
     <Compile Include="Classes\UnitOfWorkImplementor.cs" />
