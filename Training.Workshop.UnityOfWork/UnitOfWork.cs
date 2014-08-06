@@ -19,7 +19,7 @@ namespace Training.Workshop.UnitOfWork
                     if (_innerUnitOfWork != null)
                         throw new InvalidOperationException("You cannot start more than one unit of work at the same time.");
                     //Need to uncomment
-                    //_unitOfWorkFactory = new UnitOfWorkFactory();
+                    _unitOfWorkFactory = new Training.Workshop.Data.FileSystem.UnitOfWork_FileDatabase();
                     _innerUnitOfWork = _unitOfWorkFactory.Create();
                     return _innerUnitOfWork;
                 }

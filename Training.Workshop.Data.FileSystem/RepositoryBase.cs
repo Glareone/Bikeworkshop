@@ -3,6 +3,8 @@ using System.IO;
 using System.Xml.Serialization;
 using Training.Workshop.Domain.Entities;
 using Training.Workshop.Data.Entities;
+using Training.Workshop.UnitOfWork.Interfaces;
+using Training.Workshop.UnitOfWork;
 
 namespace Training.Workshop.Data.FileSystem
 {
@@ -14,7 +16,7 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="callback"></param>
         public void Add(User AddingUser)
         {
-            using (UnitOfWork.)
+            using (Training.Workshop.UnitOfWork.UnitOfWork.Start("file"))
             { 
 
             }

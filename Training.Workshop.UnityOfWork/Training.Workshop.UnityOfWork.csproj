@@ -38,6 +38,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Training.Workshop.Data.FileSystem">
+      <HintPath>..\Training.Workshop.Data.FileSystem\bin\Debug\Training.Workshop.Data.FileSystem.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlushMode.cs" />

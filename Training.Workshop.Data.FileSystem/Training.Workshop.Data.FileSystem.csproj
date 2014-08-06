@@ -44,7 +44,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Training.Workshop.UnityOfWork">
+    <Reference Include="Training.Workshop.UnityOfWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Training.Workshop.UnityOfWork\bin\Debug\Training.Workshop.UnityOfWork.dll</HintPath>
     </Reference>
   </ItemGroup>

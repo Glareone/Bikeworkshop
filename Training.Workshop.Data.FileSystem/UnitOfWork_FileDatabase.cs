@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnitOfWork;
-using UnitOfWork.Interfaces;
+using Training.Workshop.UnitOfWork.Interfaces;
+using Training.Workshop.UnitOfWork;
 
 namespace Training.Workshop.Data.FileSystem
 {
