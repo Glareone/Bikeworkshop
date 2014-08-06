@@ -20,7 +20,9 @@ namespace UnitOfWork2
             ISession session = CreateSession();
             //TODO
             //Разобраться для чего нужна эта строка.
-            session.FlushMode = FlushMode.Commit;
+            //ОБЯЗАТЕЛЬНО ВКЛЮЧИТЬ
+            //session.FlushMode = FlushMode.Commit;
+            
             _currentSession = session;
             //TODO
             //исполнение нужной транзакции,разобраться с исполнителем.

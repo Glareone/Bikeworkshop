@@ -12,14 +12,20 @@ namespace Training.Workshop.Data.FileSystem
         /// Interacts with database
         /// </summary>
         /// <param name="callback"></param>
-        public void Add()
+        public void Add(User AddingUser)
         {
+            using (UnitOfWork2.UnitOfWork.Start())
+            { 
+
+            }
         }
-        public void Delete()
+        public void Delete(User DeletingUser)
         {
+
         }
-        public void Update()
+        public void Update(User UpdatingUser)
         {
+
         }
 
         public void UnitOfWork(Action<Database> callback)

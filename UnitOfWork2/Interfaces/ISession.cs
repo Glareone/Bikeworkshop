@@ -8,5 +8,6 @@ namespace UnitOfWork2.Interfaces
      public interface ISession
     {
          void Flush();
+         object FlushMode { get; set; }
     }
 }

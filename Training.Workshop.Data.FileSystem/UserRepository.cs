@@ -13,10 +13,13 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="user"></param>
         public void Save(User user)
         {
-            UnitOfWork((database) =>
-                {
-                    database.DomainElements.Add(user);
-                });
+            base.Add(user);
+            //OLD version, to delete
+            //UnitOfWork((database) =>
+            //    {
+            //        database.DomainElements.Add(user);
+            //    });
+
         }
 
         /// <summary>
@@ -25,12 +28,12 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="username"></param>
         public void Delete(string username)
         {
-            ///
-            ///Переписать лямбда выражение для того,чтобы можно было сравнивать объекты разных типов.
-            UnitOfWork((database) =>
-                {  
-                    database.DomainElements.RemoveAll(element =>string.Equals(element.Username, username, System.StringComparison.CurrentCulture));
-                });
+            
+            //OLD version, to delete
+            //UnitOfWork((database) =>
+            //    {  
+            //        database.DomainElements.RemoveAll(element =>string.Equals(element.Username, username, System.StringComparison.CurrentCulture));
+            //    });
         }
     }
 }
