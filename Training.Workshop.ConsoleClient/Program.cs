@@ -6,6 +6,7 @@ using Training.Workshop.Domain.Entities;
 using Training.Workshop.Service;
 using Training.Workshop.Service.ServiceLocator;
 using Training.Workshop.Domain.Services;
+using Training.Workshop.UnitOfWork;
 
 namespace Training.Workshop.ConsoleClient
 {
@@ -18,9 +19,13 @@ namespace Training.Workshop.ConsoleClient
             ServiceLocator.RegisterService<IUserService>(typeof(UserService));
             ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
             ServiceLocator.RegisterService<ISparepartService>(typeof(SparepartService));
+
             //Create a RepositoryFactory 
             Data.Context.Current.RepositoryFactory = new RepositoryFactory();
-
+            
+            //Configuration of Database
+           UnitOfWork.Context.Current.UnitOfWorkFactory = new FileUnitOfWorkFactory();
+            //UnitOfWork.Context.Current.UnitOfWorkFactory = new FileUnitOfWorkFactory();
             // execute
 
             string command;

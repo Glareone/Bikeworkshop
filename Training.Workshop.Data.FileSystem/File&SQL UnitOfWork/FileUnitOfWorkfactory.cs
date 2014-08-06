@@ -7,21 +7,15 @@ using Training.Workshop.UnitOfWork;
 
 namespace Training.Workshop.Data.FileSystem
 {
-    public class FileUnitOfWorkFactory:UnitOfWorkFactoryBase,IUnitOfWorkFactory
+    public class FileUnitOfWorkFactory:IUnitOfWorkFactory
     {
         public string ReadInformationTMP;
-        public override IUnitOfWork Create()
+        public IUnitOfWork Create()
         {
-            //ISession session = CreateSession(@"D:\Myproject_git\Bikeworkshop\Training.Workshop.ConsoleClient\bin\Debug\workshop.database");
-
+           
             //TODO
             //need to understand what we need to do in Implementor
-            return new UnitOfWorkImplementor(this);
-        }
-        public void Dispose()
-        {
-            //need rework
-            this.Dispose();
+            return new FileDatabaseUnitOfWorkImplementor(this);
         }
     }
 }

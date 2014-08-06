@@ -41,8 +41,8 @@
     <Reference Include="Training.Workshop.Service.ServiceLocator">
       <HintPath>..\Training.Workshop.Service.ServiceLocator\bin\Debug\Training.Workshop.Service.ServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Training.Workshop.UnityOfWork">
-      <HintPath>..\Training.Workshop.UnityOfWork\bin\Debug\Training.Workshop.UnityOfWork.dll</HintPath>
+    <Reference Include="Training.Workshop.UnitOfWork">
+      <HintPath>..\Training.Workshop.UnitOfWork\bin\Debug\Training.Workshop.UnitOfWork.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -44,10 +44,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Training.Workshop.UnityOfWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Training.Workshop.UnityOfWork\bin\Debug\Training.Workshop.UnityOfWork.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeRepository.cs" />
@@ -67,6 +63,10 @@
     <ProjectReference Include="..\Training.Workshop.Domain\Training.Workshop.Domain.csproj">
       <Project>{674ED349-4605-4C02-AFC8-F5E3FC205390}</Project>
       <Name>Training.Workshop.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.UnitOfWork\Training.Workshop.UnitOfWork.csproj">
+      <Project>{01088FFF-7FAB-4207-9CFF-16BF6BDB8370}</Project>
+      <Name>Training.Workshop.UnitOfWork</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

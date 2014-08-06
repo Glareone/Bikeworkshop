@@ -23,6 +23,6 @@ namespace Training.Workshop.UnitOfWork
         /// <summary>
         /// Gets current UnitofWorkFactories
         /// </summary>
-        public IUnitOfWorkFactories UnitOfWorkFactories { get; set; }
+        public IUnitOfWorkFactory UnitOfWorkFactory { get; set; }
     }
 }

@@ -7,20 +7,20 @@ using System.IO;
 
 namespace Training.Workshop.UnitOfWork
 {
-    public class UnitOfWorkImplementor_FileDatabase : UnitOfWorkImplementorBase, IUnitOfWork, IDisposable
+    public class FileDatabaseUnitOfWorkImplementor : IUnitOfWork
     {
         public string FileData="";
-        public UnitOfWorkImplementor_FileDatabase(UnitOfWorkFactoryBase unitofworkfactory)
+        public FileDatabaseUnitOfWorkImplementor(IUnitOfWorkFactory unitofworkfactory)
         { 
             lock(FileData)
             {
-             //FileData=File.ReadAllText();
+                FileData = File.ReadAllText(@"D:\Myproject_git\Bikeworkshop\Training.Workshop.ConsoleClient\bin\Debug\workshop.database");
             }
         }
         public void Dispose()
         {
             //need rework
-            this.Dispose();
+            //this.Dispose();
         }
     }
 }
