@@ -14,10 +14,10 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="callback"></param>
         public void Add(User AddingUser)
         {
-            using (UnitOfWork2.UnitOfWork.Start())
-            { 
+            //using (UnitOfWork.UnitOfWork.Start())
+            //{ 
 
-            }
+            //}
         }
         public void Delete(User DeletingUser)
         {
