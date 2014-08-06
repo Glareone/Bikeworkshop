@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Training.Workshop.UnitOfWork.Interfaces
 {
-    public abstract class UnitOfWorkImplementroBase
+    public abstract class UnitOfWorkImplementorBase
     {
     }
 }

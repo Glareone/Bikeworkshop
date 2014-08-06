@@ -17,8 +17,8 @@ namespace Training.Workshop.Data.FileSystem
         public void Add(User AddingUser)
         {
             using (Training.Workshop.UnitOfWork.UnitOfWork.Start("file"))
-            { 
-                
+            {
+                object obj = Training.Workshop.UnitOfWork.UnitOfWork.Current;
             }
         }
         public void Delete(User DeletingUser)

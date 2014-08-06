@@ -6,7 +6,7 @@ using Training.Workshop.UnitOfWork.Interfaces;
 
 namespace Training.Workshop.UnitOfWork
 {
-    public class UnitOfWorkImplementor:UnitOfWorkImplementroBase,IUnitOfWork,IDisposable
+    public class UnitOfWorkImplementor:UnitOfWorkImplementorBase,IUnitOfWork,IDisposable
     {
         public UnitOfWorkImplementor(UnitOfWorkFactoryBase unitofworkfactory,ISession session)
         { 
