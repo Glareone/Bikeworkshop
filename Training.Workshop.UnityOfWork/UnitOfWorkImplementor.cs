@@ -8,7 +8,7 @@ namespace Training.Workshop.UnitOfWork
 {
     public class UnitOfWorkImplementor:UnitOfWorkImplementorBase,IUnitOfWork,IDisposable
     {
-        public UnitOfWorkImplementor(UnitOfWorkFactoryBase unitofworkfactory,ISession session)
+        public UnitOfWorkImplementor(UnitOfWorkFactoryBase unitofworkfactory)
         { 
         }
         public void Dispose()

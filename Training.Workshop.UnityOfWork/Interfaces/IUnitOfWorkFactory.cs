@@ -8,6 +8,5 @@ namespace Training.Workshop.UnitOfWork.Interfaces
     public interface IUnitOfWorkFactory
     {
         IUnitOfWork Create();
-        ISession CurrentSession { get; set; }
     }
 }

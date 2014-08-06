@@ -5,7 +5,11 @@ using System.Text;
 
 namespace Training.Workshop.UnitOfWork.Interfaces
 {
-    public abstract class UnitOfWorkImplementorBase
+    public abstract class UnitOfWorkImplementorBase:IUnitOfWork
     {
+        public void Dispose()
+        { 
+        
+        }
     }
 }

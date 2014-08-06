@@ -16,9 +16,8 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="callback"></param>
         public void Add(User AddingUser)
         {
-            using (Training.Workshop.UnitOfWork.UnitOfWork.Start("file"))
+            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                object obj = Training.Workshop.UnitOfWork.UnitOfWork.Current;
             }
         }
         public void Delete(User DeletingUser)

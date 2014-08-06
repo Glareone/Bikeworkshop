@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Training.Workshop.UnitOfWork.Interfaces
 {
-     public interface ISession
+    public interface IUnitOfWorkFactories
     {
-         void Flush();
-         object FlushMode { get; set; }
+        IUnitOfWorkFactory GetFileUnitOfWorkFactory();
+        IUnitOfWorkFactory GetSQLUnitOfWorkFactory();
     }
 }
