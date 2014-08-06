@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnitOfWork.Interfaces;
+using Training.Workshop.UnitOfWork.Interfaces;
 
-namespace UnitOfWork
+namespace Training.Workshop.UnitOfWork
 {
     public class Session: ISession
     {
