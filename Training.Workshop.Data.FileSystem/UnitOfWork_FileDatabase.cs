@@ -13,7 +13,7 @@ namespace Training.Workshop.Data.FileSystem
         public ISession CurrentSession { get; set; }
         public override IUnitOfWork Create()
         {
-            ISession session = CreateSession();
+            ISession session = CreateSession(@"D:\Myproject_git\Bikeworkshop\Training.Workshop.ConsoleClient\bin\Debug\workshop.database");
             //TODO
             //need o understand why we need this property=field (property=method() )?
             
@@ -26,9 +26,9 @@ namespace Training.Workshop.Data.FileSystem
             //исполнение нужной транзакции,разобраться с исполнителем.
             return new UnitOfWorkImplementor(this, session);
         }
-        public override ISession CreateSession()
+        public override ISession CreateSession(string fileconnectionstring)
         {
-            return new Session();
+            return new Session(fileconnectionstring);
         }
     }
 }

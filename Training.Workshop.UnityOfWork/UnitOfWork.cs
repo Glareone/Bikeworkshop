@@ -35,7 +35,7 @@ namespace Training.Workshop.UnitOfWork
                     return _innerUnitOfWork;
                 }
             }
-            else throw new NullReferenceException();
+            else throw new InvalidOperationException("we dont have needed parameters");
         }
 
 
