@@ -21,8 +21,8 @@ namespace Training.Workshop.UnitOfWork
         public static Context Current = new Context();
 
         /// <summary>
-        /// Gets current <see cref="IUserService"/>
+        /// Gets current UnitofWorkFactories
         /// </summary>
-        public IUnitOfWorkFactory UnitOfWorkFactories { get; set; }
+        public IUnitOfWorkFactories UnitOfWorkFactories { get; set; }
     }
 }
