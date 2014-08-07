@@ -2,20 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A1545B1C-4612-43E3-909D-EB2293E6F77B}</ProjectGuid>
+    <ProjectGuid>{488CD806-EB3A-40A2-BC7C-D1A8960079B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Training.Workshop.Data.FileSystem</RootNamespace>
-    <AssemblyName>Training.Workshop.Data.FileSystem</AssemblyName>
+    <RootNamespace>Training.Workshop.Data.SQL</RootNamespace>
+    <AssemblyName>Training.Workshop.Data.SQL</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,17 +22,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,13 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeRepository.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="FileSystemUnitOfWork\FileSystemDatabaseUnitOfWork.cs" />
-    <Compile Include="FileSystemUnitOfWork\IFileUnitOfWork.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SparepartRepository.cs" />
-    <Compile Include="FileSystemUnitOfWork\FileSystemDatabaseUnitOfWorkFactory.cs" />
+    <Compile Include="SQLSystemUnitOfWork\ISQLUnitOfWork.cs" />
+    <Compile Include="SQLSystemUnitOfWork\SQLSystemDatabaseUnitOfWork.cs" />
+    <Compile Include="SQLSystemUnitOfWork\SQLSystemDatabaseUnitofWorkFactory.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +63,7 @@
       <Name>Training.Workshop.UnitOfWork</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

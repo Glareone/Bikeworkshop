@@ -32,7 +32,6 @@ namespace Training.Workshop.Data.FileSystem
 
         public void Update(string owner, string mark)
         {
-
         }
     }
 }

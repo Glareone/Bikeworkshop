@@ -7,7 +7,9 @@
         /// </summary>
         /// <returns></returns>
         IUserRepository GetUserRepository();
+
         IBikeRepository GetBikeRepository();
+
         ISparepartRepository GetSparepartRepository();
     }
 }

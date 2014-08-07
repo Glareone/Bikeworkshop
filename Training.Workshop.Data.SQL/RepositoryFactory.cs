@@ -1,7 +1,13 @@
-﻿namespace Training.Workshop.Data.FileSystem
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Training.Workshop.Data.SQL
 {
     public class RepositoryFactory : IRepositoryFactory
     {
+
         /// <summary>
         /// Gets user repository
         /// </summary>
@@ -10,6 +16,7 @@
         {
             return new UserRepository();
         }
+
         /// <summary>
         /// Gets bike repository
         /// </summary>
@@ -18,6 +25,7 @@
         {
             return new BikeRepository();
         }
+
         /// <summary>
         /// Gets Sparepart repository
         /// </summary>

@@ -7,6 +7,5 @@ namespace Training.Workshop.UnitOfWork.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        //Need to delete
     }
 }

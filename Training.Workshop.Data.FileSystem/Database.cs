@@ -23,7 +23,7 @@ namespace Training.Workshop.Data.FileSystem
         }
 
         /// <summary>
-        /// Collection of <see cref="User"/>
+        /// Collections of <see cref="User"/><see cref="Bike"/><see cref="Sparepart"/>
         /// </summary>
         public List<User> users { get; set; }
         public List<Bike> bikes { get; set; }
