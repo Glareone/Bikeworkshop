@@ -17,5 +17,9 @@ namespace Training.Workshop.Data.FileSystem
             //need to understand what we need to do in Implementor
             return new FileDatabaseUnitOfWorkImplementor(this);
         }
+        public void Add(Training.Workshop.Domain.Entities.User user)
+        { 
+         
+        }
     }
 }

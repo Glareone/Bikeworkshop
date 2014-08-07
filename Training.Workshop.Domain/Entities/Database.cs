@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Training.Workshop.Domain.Entities;
 using System.Xml.Serialization;
 
-namespace Training.Workshop.Data.Entities
+namespace Training.Workshop.Domain.Entities
 {
     [XmlInclude(typeof(User))]
     [XmlInclude(typeof(Bike))]
@@ -17,12 +17,12 @@ namespace Training.Workshop.Data.Entities
         /// </summary>
         public Database()
         {
-            DomainElements = new List<User>();
+            users = new List<User>();
         }
 
         /// <summary>
         /// Collection of <see cref="User"/>
         /// </summary>
-        public List<User> DomainElements { get; set; }
+        public List<User> users { get; set; }
     }
 }

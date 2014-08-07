@@ -39,6 +39,10 @@ namespace Training.Workshop.UnitOfWork
         {
             get { return _innerUnitOfWork != null; }
         }
-
+        public static void Stop()
+        {
+          _unitOfWorkFactory=null;
+          _innerUnitOfWork=null;
+        }
     }
 }

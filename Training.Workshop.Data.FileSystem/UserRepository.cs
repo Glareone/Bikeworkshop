@@ -14,11 +14,7 @@ namespace Training.Workshop.Data.FileSystem
         public void Save(User user)
         {
             base.Add(user);
-            //OLD version, to delete
-            //UnitOfWork((database) =>
-            //    {
-            //        database.DomainElements.Add(user);
-            //    });
+
 
         }
 
@@ -28,12 +24,7 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="username"></param>
         public void Delete(string username)
         {
-            
-            //OLD version, to delete
-            //UnitOfWork((database) =>
-            //    {  
-            //        database.DomainElements.RemoveAll(element =>string.Equals(element.Username, username, System.StringComparison.CurrentCulture));
-            //    });
+            base.Delete(username);
         }
     }
 }
