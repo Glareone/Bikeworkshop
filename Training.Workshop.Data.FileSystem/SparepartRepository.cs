@@ -24,6 +24,12 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="partnumber"></param>
         public void Delete(string partnumber)
         {
+            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.spareparts.RemoveAll(x => x.PartNumber == partnumber);
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
+                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
+            }
         }
         /// <summary>
         /// find concrete sparepart in db and returns it

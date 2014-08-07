@@ -15,7 +15,12 @@ namespace Training.Workshop.Data.FileSystem
         }
         public void Delete(string owner, string mark)
         {
-
+            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.bikes.RemoveAll(x => x.Owner == owner && x.Mark==mark);
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
+                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
+            }
         }
         public Bike Find(string mark)
         {
