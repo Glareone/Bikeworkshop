@@ -10,9 +10,12 @@ namespace Training.Workshop.Data.FileSystem
         /// <param name="sparepart"></param>
         public void Save(Sparepart sparepart)
         {
-            //TODO
-            //Old,need to change
-            //base.Save(sparepart);
+            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.spareparts.Add(sparepart);
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
+                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
+            }
         }
         /// <summary>
         /// Delete concrete sparepart from file

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Training.Workshop.Service.ServiceLocator;
+using Training.Workshop.Domain.Services;
 
 namespace Training.Workshop.Domain.Entities
 {
@@ -30,7 +32,7 @@ namespace Training.Workshop.Domain.Entities
 
         public static Bike Create(string manufacturer, string mark, string owner, int year)
         {
-            return Context.Current.BikeService.Create(manufacturer, mark, owner, year);
+            return ServiceLocator.Resolve<IBikeService>().Create(manufacturer,mark,owner,year);
         }
         public void Delete(string mark, string owner)
         {

@@ -6,10 +6,12 @@ namespace Training.Workshop.Data.FileSystem
     {
         public void Save(Bike bike)
         {
-            UnitOfWork((database) =>
+            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                //database.DomainElements.Add(bike);
-            });
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.bikes.Add(bike);
+                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
+                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
+            }
         }
         public void Delete(string owner, string mark)
         {

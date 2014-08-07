@@ -18,11 +18,15 @@ namespace Training.Workshop.Data.FileSystem
         public Database()
         {
             users = new List<User>();
+            bikes = new List<Bike>();
+            spareparts = new List<Sparepart>();
         }
 
         /// <summary>
         /// Collection of <see cref="User"/>
         /// </summary>
         public List<User> users { get; set; }
+        public List<Bike> bikes { get; set; }
+        public List<Sparepart> spareparts { get; set; }
     }
 }

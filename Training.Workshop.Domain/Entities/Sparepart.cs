@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Training.Workshop.Service.ServiceLocator;
+using Training.Workshop.Domain.Services;
 
 namespace Training.Workshop.Domain.Entities
 {
@@ -22,7 +24,7 @@ namespace Training.Workshop.Domain.Entities
 
         public static Sparepart Create(string sparepartname, string partnumber, int prise)
         {
-            return Context.Current.SparepartService.Create(sparepartname, partnumber, prise);
+            return ServiceLocator.Resolve<ISparepartService>().Create(sparepartname, partnumber, prise);
         }
 
         public void Delete(string partnumber)
