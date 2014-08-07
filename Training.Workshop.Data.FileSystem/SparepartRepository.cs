@@ -14,7 +14,6 @@ namespace Training.Workshop.Data.FileSystem
             {
                 ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.spareparts.Add(sparepart);
                 ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
-                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
             }
         }
         /// <summary>
@@ -28,7 +27,6 @@ namespace Training.Workshop.Data.FileSystem
             {
                 ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.spareparts.RemoveAll(x => x.PartNumber == partnumber);
                 ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
-                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
             }
         }
         /// <summary>

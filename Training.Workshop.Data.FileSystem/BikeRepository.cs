@@ -6,22 +6,22 @@ namespace Training.Workshop.Data.FileSystem
     {
         public void Save(Bike bike)
         {
-            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            using (var unitofwork = (IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.bikes.Add(bike);
-                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
-                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
+                unitofwork.Database.bikes.Add(bike);
+                unitofwork.Commit();
             }
         }
+
         public void Delete(string owner, string mark)
         {
-            using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            using (var unitofwork = (IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Database.bikes.RemoveAll(x => x.Owner == owner && x.Mark==mark);
-                ((IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Current).Commit();
-                Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork();
+                unitofwork.Database.bikes.RemoveAll(x => x.Owner == owner && x.Mark == mark);
+                unitofwork.Commit();
             }
         }
+
         public Bike Find(string mark)
         {
             //TODO
@@ -29,6 +29,7 @@ namespace Training.Workshop.Data.FileSystem
             return new Bike();
 
         }
+
         public void Update(string owner, string mark)
         {
 

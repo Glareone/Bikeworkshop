@@ -48,14 +48,12 @@
   <ItemGroup>
     <Compile Include="BikeRepository.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="File&amp;SQL UnitOfWork\FileSystemDatabaseUnitOfWork.cs" />
-    <Compile Include="File&amp;SQL UnitOfWork\IFileUnitOfWork.cs" />
-    <Compile Include="File&amp;SQL UnitOfWork\SQLUnitOfWork.cs" />
+    <Compile Include="FileSystemUnitOfWork\FileSystemDatabaseUnitOfWork.cs" />
+    <Compile Include="FileSystemUnitOfWork\IFileUnitOfWork.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SparepartRepository.cs" />
-    <Compile Include="File&amp;SQL UnitOfWork\SQLUnitOfWorkFactory.cs" />
-    <Compile Include="File&amp;SQL UnitOfWork\FileUnitOfWorkfactory.cs" />
+    <Compile Include="FileSystemUnitOfWork\FileSystemDatabaseUnitOfWorkFactory.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

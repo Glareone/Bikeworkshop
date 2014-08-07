@@ -34,6 +34,7 @@ namespace Training.Workshop.Domain.Entities
         {
             return ServiceLocator.Resolve<IBikeService>().Create(manufacturer,mark,owner,year);
         }
+
         public void Delete(string mark, string owner)
         {
             Context.Current.BikeService.Delete(mark, owner);

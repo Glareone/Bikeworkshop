@@ -24,7 +24,7 @@ namespace Training.Workshop.ConsoleClient
             Data.Context.Current.RepositoryFactory = new RepositoryFactory();
             
             //Configuration of Database
-           UnitOfWork.Context.Current.UnitOfWorkFactory = new FileUnitOfWorkFactory();
+           UnitOfWork.Context.Current.UnitOfWorkFactory = new FileSystemDatabaseUnitOfWorkFactory();
           
             // execute
 

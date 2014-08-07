@@ -51,7 +51,6 @@
     <Compile Include="Entities\Bike.cs" />
     <Compile Include="Entities\Sparepart.cs" />
     <Compile Include="IService\IBikeService.cs" />
-    <Compile Include="IService\IServiceLocator.cs" />
     <Compile Include="IService\ISparepartService.cs" />
     <Compile Include="IService\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

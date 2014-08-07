@@ -13,6 +13,7 @@ namespace Training.Workshop.Service.ServiceLocator
         {
             services[typeof(T)] = service;
         }
+
         public static T Resolve<T>()
         {
             return (T)Activator.CreateInstance(services[typeof(T)]);

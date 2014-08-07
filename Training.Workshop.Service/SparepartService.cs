@@ -17,9 +17,9 @@ namespace Training.Workshop.Service
             };
             Data.Context.Current.RepositoryFactory.GetSparepartRepository()
               .Save(sparepart);
-
             return sparepart;
         }
+
         public virtual void Delete(string partnumber)
         {
             Data.Context.Current.RepositoryFactory.GetSparepartRepository()

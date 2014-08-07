@@ -7,19 +7,13 @@ using Training.Workshop.UnitOfWork;
 
 namespace Training.Workshop.Data.FileSystem
 {
-    public class FileUnitOfWorkFactory:IUnitOfWorkFactory
+    public class FileSystemDatabaseUnitOfWorkFactory:IUnitOfWorkFactory
     {
         public string ReadInformationTMP;
+        
         public IUnitOfWork Create()
         {
-           
-            //TODO
-            //need to understand what we need to do in Implementor
             return new FileSystemDatabaseUnitOfWork(this);
-        }
-        public void Add(Training.Workshop.Domain.Entities.User user)
-        { 
-         
         }
     }
 }

@@ -19,10 +19,8 @@ namespace Training.Workshop.Service
                            Password = password
                        };
 
-            
 
-            //Жесткая сцепка сущностей,надо будет развязать посредством локатора.
-            //ServiceLocator.Resolve<RepositoryFactory>().Save(user);
+            //rigid coupling, may write the repository locator
             Data.Context.Current.RepositoryFactory.GetUserRepository()
                 .Save(user);
 
@@ -35,7 +33,7 @@ namespace Training.Workshop.Service
         /// <param name="username"></param>
         public virtual void Delete(string username)
         {
-            //Жесткая сцепка сущностей,надо будет развязать посредством локатора.
+            //rigid coupling, may write the repository locator
             Data.Context.Current.RepositoryFactory.GetUserRepository()
                 .Delete(username);
         }

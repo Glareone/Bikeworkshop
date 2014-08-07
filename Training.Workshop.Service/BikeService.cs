@@ -17,7 +17,6 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual Bike Create(string manufacturer, string mark, string owner, int year)
         {
-
             var bike = new Bike
             {
                 Manufacturer = manufacturer,
@@ -27,10 +26,7 @@ namespace Training.Workshop.Service
             };
             Data.Context.Current.RepositoryFactory.GetBikeRepository()
               .Save(bike);
-
             return bike;
-
-
         }
 
         /// <summary>
@@ -40,7 +36,8 @@ namespace Training.Workshop.Service
         /// <param name="owner"></param>
         public virtual void Delete(string mark, string owner)
         {
-
+            Data.Context.Current.RepositoryFactory.GetBikeRepository()
+                   .Delete(mark,owner);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Training.Workshop.UnitOfWork
     public static class UnitOfWork
     {
         private static IUnitOfWorkFactory _unitOfWorkFactory;
+        
         private static IUnitOfWork _innerUnitOfWork;
 
         public static IUnitOfWork Start()
@@ -21,7 +22,9 @@ namespace Training.Workshop.UnitOfWork
         }
 
 
-
+        /// <summary>
+        /// Get Current Unitofwork Implementor
+        /// </summary>
         public static IUnitOfWork Current
         {
             get
@@ -43,14 +46,11 @@ namespace Training.Workshop.UnitOfWork
         {
             get { return _innerUnitOfWork != null; }
         }
-        //TODO
-        //rework with Dispose()
-        public static void Stop()
-        {
-          _unitOfWorkFactory=null;
-          _innerUnitOfWork=null;
-        }
-        public static void DisposeUnitOfWork()
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="unitofwork"></param>
+        public static void DisposeUnitOfWork(IUnitOfWork unitofwork)
         {
            Current = null;
         }

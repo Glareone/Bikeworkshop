@@ -12,6 +12,7 @@ namespace Training.Workshop.Data.FileSystem
     public class FileSystemDatabaseUnitOfWork : IFileUnitOfWork
     {
         private static Database database = new Database();
+        
         public FileSystemDatabaseUnitOfWork(IUnitOfWorkFactory unitofworkfactory)
         {
             lock (database)
@@ -27,6 +28,7 @@ namespace Training.Workshop.Data.FileSystem
             }
   
         }
+
         public void Commit()
         {
             lock (database)
@@ -36,8 +38,8 @@ namespace Training.Workshop.Data.FileSystem
                     new XmlSerializer(typeof(Database)).Serialize(stream, database);
                 }
             }
-            Dispose();
         }
+        
         public Database Database
         {
             get
@@ -45,9 +47,10 @@ namespace Training.Workshop.Data.FileSystem
                 return database;
             }
         }
+        
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
+            Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork(this);
         }
 
 }
