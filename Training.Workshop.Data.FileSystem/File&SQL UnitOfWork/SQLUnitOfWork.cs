@@ -6,9 +6,9 @@ using Training.Workshop.UnitOfWork.Interfaces;
 
 namespace Training.Workshop.Data.FileSystem
 {
-    public class SQLUnitOfWorkImplementor:IUnitOfWork
+    public class SQLUnitOfWork:IUnitOfWork
     {
-        public SQLUnitOfWorkImplementor(IUnitOfWorkFactory unitofworkfactory)
+        public SQLUnitOfWork(IUnitOfWorkFactory unitofworkfactory)
         { 
         
         }

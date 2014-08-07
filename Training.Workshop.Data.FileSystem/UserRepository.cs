@@ -6,7 +6,7 @@ using Training.Workshop.UnitOfWork.Interfaces;
 
 namespace Training.Workshop.Data.FileSystem
 {
-    public class UserRepository : RepositoryBase, IUserRepository
+    public class UserRepository :  IUserRepository
     {
         /// <summary>
         /// Saves user into repository

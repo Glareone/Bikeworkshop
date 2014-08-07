@@ -2,7 +2,7 @@
 
 namespace Training.Workshop.Data.FileSystem
 {
-    public class BikeRepository : RepositoryBase, IBikeRepository
+    public class BikeRepository :  IBikeRepository
     {
         public void Save(Bike bike)
         {

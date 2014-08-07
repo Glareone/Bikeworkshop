@@ -10,11 +10,7 @@ namespace Training.Workshop.Data.FileSystem
     {
         public IUnitOfWork Create()
         {
-            //ISession session = CreateSession(@"D:\Myproject_git\Bikeworkshop\Training.Workshop.ConsoleClient\bin\Debug\workshop.database");
-
-            //TODO
-            //need to understand what we need to do in Implementor
-            return new SQLUnitOfWorkImplementor(this);
+            return new SQLUnitOfWork(this);
         }
         public void Dispose()
         {

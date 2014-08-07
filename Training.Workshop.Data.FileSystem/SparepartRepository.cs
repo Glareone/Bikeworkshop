@@ -2,7 +2,7 @@
 
 namespace Training.Workshop.Data.FileSystem
 {
-    public class SparepartRepository : RepositoryBase, ISparepartRepository
+    public class SparepartRepository : ISparepartRepository
     {
         /// <summary>
         /// Save sparepart into file
