@@ -17,7 +17,7 @@ namespace Training.Workshop.Data.FileSystem
         {
             using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                Training.Workshop.UnitOfWork.UnitOfWork.Current.AddtoDatabase(AddingUser);
+                //Training.Workshop.UnitOfWork.UnitOfWork.Current.AddtoDatabase(AddingUser);
             }
             Training.Workshop.UnitOfWork.UnitOfWork.Stop();
         }
@@ -25,7 +25,7 @@ namespace Training.Workshop.Data.FileSystem
         {
             using (Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                Training.Workshop.UnitOfWork.UnitOfWork.Current.Deletefromdatabase(username);
+                //Training.Workshop.UnitOfWork.UnitOfWork.Current.Deletefromdatabase(username);
             }
             Training.Workshop.UnitOfWork.UnitOfWork.Stop();
         }

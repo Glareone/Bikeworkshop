@@ -30,6 +30,10 @@ namespace Training.Workshop.UnitOfWork
                     throw new InvalidOperationException("You are not in a unit of work.");
                 return _innerUnitOfWork;
             }
+            private set 
+            {
+                _innerUnitOfWork = value;
+            }
         }
 
         /// <summary>
@@ -39,10 +43,16 @@ namespace Training.Workshop.UnitOfWork
         {
             get { return _innerUnitOfWork != null; }
         }
+        //TODO
+        //rework with Dispose()
         public static void Stop()
         {
           _unitOfWorkFactory=null;
           _innerUnitOfWork=null;
+        }
+        public static void DisposeUnitOfWork()
+        {
+           Current = null;
         }
     }
 }

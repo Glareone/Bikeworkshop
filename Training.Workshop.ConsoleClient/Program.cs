@@ -25,7 +25,7 @@ namespace Training.Workshop.ConsoleClient
             
             //Configuration of Database
            UnitOfWork.Context.Current.UnitOfWorkFactory = new FileUnitOfWorkFactory();
-            //UnitOfWork.Context.Current.UnitOfWorkFactory = new FileUnitOfWorkFactory();
+          
             // execute
 
             string command;

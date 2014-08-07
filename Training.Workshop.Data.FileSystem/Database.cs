@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Training.Workshop.Domain.Entities;
 using System.Xml.Serialization;
 
-namespace Training.Workshop.Domain.Entities
+namespace Training.Workshop.Data.FileSystem
 {
     [XmlInclude(typeof(User))]
     [XmlInclude(typeof(Bike))]

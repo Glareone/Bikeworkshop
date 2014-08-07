@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeRepository.cs" />
-    <Compile Include="File&amp;SQL UnitOfWork\FileDatabaseUnitOfWorkImplementor.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="File&amp;SQL UnitOfWork\FileSystemDatabaseUnitOfWork.cs" />
+    <Compile Include="File&amp;SQL UnitOfWork\IFileUnitOfWork.cs" />
     <Compile Include="File&amp;SQL UnitOfWork\SQLUnitOfWorkImplementor.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="RepositoryFactory.cs" />
