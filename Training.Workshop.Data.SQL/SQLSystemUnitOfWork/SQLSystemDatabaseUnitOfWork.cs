@@ -32,8 +32,9 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(String.Format("SET IDENTITY_INSERT Users ON insert into Users (username,password) VALUES (1,'{0}','{1}')",
-                                                     user.Username,user.Password), connection);
+                SqlCommand command = new SqlCommand(String.Format(
+                    "SET IDENTITY_INSERT dbo.Users OFF;insert into dbo.Users (Username,UserPassword) VALUES ('{0}','{1}')",
+                    user.Username,user.Password), connection);
                 command.BeginExecuteNonQuery();
 
             }
