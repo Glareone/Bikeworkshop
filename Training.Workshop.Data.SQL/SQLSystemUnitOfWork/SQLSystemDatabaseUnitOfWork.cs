@@ -32,7 +32,7 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(String.Format("insert into Users (username,password)'VALUES ('{0}','{1}')",
+                SqlCommand command = new SqlCommand(String.Format("SET IDENTITY_INSERT Users ON insert into Users (username,password) VALUES (1,'{0}','{1}')",
                                                      user.Username,user.Password), connection);
                 command.BeginExecuteNonQuery();
 
@@ -47,12 +47,6 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
                     connection.Close();
             }
 
-            //while (sqldatareader.Read())
-            //{
-            //    User user = new User();
-            //    user.Username=sqldatareader[1].ToString();
-            //    user.Password = sqldatareader[2].ToString();
-            //}
         }
 
         public void Delete(string username)
@@ -60,7 +54,7 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(String.Format("delete from Users where username='{0}'",username), connection);
+                SqlCommand command = new SqlCommand(String.Format("delete from dbo.Users where username='{0}'",username), connection);
                 command.BeginExecuteNonQuery();
             }
             catch 
