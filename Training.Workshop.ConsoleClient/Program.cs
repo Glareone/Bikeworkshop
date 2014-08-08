@@ -7,6 +7,7 @@ using Training.Workshop.Service;
 using Training.Workshop.Service.ServiceLocator;
 using Training.Workshop.Domain.Services;
 using Training.Workshop.UnitOfWork;
+using Training.Workshop.Data.SQL;
 
 namespace Training.Workshop.ConsoleClient
 {
@@ -21,10 +22,15 @@ namespace Training.Workshop.ConsoleClient
             ServiceLocator.RegisterService<ISparepartService>(typeof(SparepartService));
 
             //Create a RepositoryFactory 
-            Data.Context.Current.RepositoryFactory = new RepositoryFactory();
+            //Work with file database, uncomment if need.
+            //Data.Context.Current.RepositoryFactory = new RepositoryFactory();
+            //Work with SQL Database
+            Data.Context.Current.RepositoryFactory = new Training.Workshop.Data.SQL.RepositoryFactory();
             
             //Configuration of Database
-           UnitOfWork.Context.Current.UnitOfWorkFactory = new FileSystemDatabaseUnitOfWorkFactory();
+            //Work with file database,uncomment if need
+            //UnitOfWork.Context.Current.UnitOfWorkFactory = new FileSystemDatabaseUnitOfWorkFactory();
+            UnitOfWork.Context.Current.UnitOfWorkFactory = new Training.Workshop.Data.SQL.SQLSystemUnitOfWork.SQLSystemDatabaseUnitofWorkFactory();
           
             // execute
             string command;

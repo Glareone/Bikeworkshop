@@ -6,7 +6,7 @@ using Training.Workshop.UnitOfWork.Interfaces;
 
 namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
 {
-    class SQLSystemDatabaseUnitofWorkFactory:IUnitOfWorkFactory
+    public class SQLSystemDatabaseUnitofWorkFactory:IUnitOfWorkFactory
     {
         public IUnitOfWork Create()
         {

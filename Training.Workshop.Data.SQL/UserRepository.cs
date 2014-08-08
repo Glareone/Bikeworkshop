@@ -17,10 +17,7 @@ namespace Training.Workshop.Data.SQL
         {
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                //TODO
-                //Need rework
-                //unitofwork.Database.users.Add(user);
-                //unitofwork.Commit();
+                unitofwork.Add(user);
             }
         }
         /// <summary>
@@ -31,10 +28,7 @@ namespace Training.Workshop.Data.SQL
         {
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
-                //TDOD
-                //need realisation
-                //unitofwork.Database.users.RemoveAll(x => x.Username == username);
-                //unitofwork.Commit();
+                unitofwork.Delete(username);
             }
         }
     }

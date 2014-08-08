@@ -54,6 +54,10 @@
       <Project>{A1545B1C-4612-43E3-909D-EB2293E6F77B}</Project>
       <Name>Training.Workshop.Data.FileSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.Data.SQL\Training.Workshop.Data.SQL.csproj">
+      <Project>{488CD806-EB3A-40A2-BC7C-D1A8960079B0}</Project>
+      <Name>Training.Workshop.Data.SQL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Training.Workshop.Data\Training.Workshop.Data.csproj">
       <Project>{2A5F60DF-91B6-43FC-9CE3-7602D004C803}</Project>
       <Name>Training.Workshop.Data</Name>

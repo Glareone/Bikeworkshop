@@ -12,33 +12,72 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
         /// <summary>
         /// Connection string to SQL database
         /// </summary>
-        private static SqlConnection connectionstring = new SqlConnection(
-            "Data Source=(local);Initial Catalog=Northwind;Integrated Security=SSPI");
-        
+        private static SqlConnection connection = new SqlConnection(
+            "Data Source=KOLESNIKOV7;Initial Catalog=Training.Workshop.SQLDatabase;Integrated Security=True");
         /// <summary>
         /// SQL DataReader Class
         /// </summary>
         private SqlDataReader sqldatareader = null;
-        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="unitofworkfactory"></param>
         public SQLSystemDatabaseUnitOfWork(SQLSystemDatabaseUnitofWorkFactory unitofworkfactory)
         {
-            try 
+        }
+        /// <summary>
+        /// Insert
+        /// </summary>
+        public void Add(User user)
+        {
+            try
             {
-             SqlCommand cmd = new SqlCommand("select * from Users", connectionstring);
-             sqldatareader= cmd.ExecuteReader();
-                 while (sqldatareader.Read())
-                {
-                 //TODO
-                 //need realisation
-                }
+                connection.Open();
+                SqlCommand command = new SqlCommand(String.Format("insert into Users (username,password)'VALUES ('{0}','{1}')",
+                                                     user.Username,user.Password), connection);
+                command.BeginExecuteNonQuery();
+
             }
-            catch
+            catch 
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("imposible insert into database");
             }
+            finally
+            {
+                if (connection != null) 
+                    connection.Close();
+                if (sqldatareader != null) 
+                    sqldatareader.Close();
+            }
+
+            //while (sqldatareader.Read())
+            //{
+            //    User user = new User();
+            //    user.Username=sqldatareader[1].ToString();
+            //    user.Password = sqldatareader[2].ToString();
+            //}
         }
 
-
+        public void Delete(string username)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(String.Format("delete from Users where username='{0}'",username), connection);
+                command.BeginExecuteNonQuery();
+            }
+            catch 
+            {
+                throw new InvalidOperationException("imposible select from database");
+            }
+            finally
+            {
+                if (connection != null)
+                    connection.Close();
+                if (sqldatareader != null)
+                    sqldatareader.Close();
+            }
+        }
         public void Dispose()
         {
             Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork(this);
