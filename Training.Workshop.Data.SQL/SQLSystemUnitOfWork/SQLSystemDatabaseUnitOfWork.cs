@@ -17,7 +17,6 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
         /// <summary>
         /// SQL DataReader Class
         /// </summary>
-        private SqlDataReader sqldatareader = null;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -46,8 +45,6 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             {
                 if (connection != null) 
                     connection.Close();
-                if (sqldatareader != null) 
-                    sqldatareader.Close();
             }
 
             //while (sqldatareader.Read())
@@ -74,8 +71,6 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             {
                 if (connection != null)
                     connection.Close();
-                if (sqldatareader != null)
-                    sqldatareader.Close();
             }
         }
         public void Dispose()

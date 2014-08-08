@@ -18,18 +18,21 @@ namespace Training.Workshop.ConsoleClient
             
             //Register Existing Services
             ServiceLocator.RegisterService<IUserService>(typeof(UserService));
+            
             ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
+            
             ServiceLocator.RegisterService<ISparepartService>(typeof(SparepartService));
 
-            //Create a RepositoryFactory 
-            //Work with file database, uncomment if need.
+            //Configuration of Database 
+            //Work with file database, uncomment if need and comment the SQL factory.
             //Data.Context.Current.RepositoryFactory = new RepositoryFactory();
-            //Work with SQL Database
+            
+            //UnitOfWork.Context.Current.UnitOfWorkFactory = new FileSystemDatabaseUnitOfWorkFactory();
+
+            //Configuration of Database
+            //Work with SQL Database,if need work with file database need to comment Factory;
             Data.Context.Current.RepositoryFactory = new Training.Workshop.Data.SQL.RepositoryFactory();
             
-            //Configuration of Database
-            //Work with file database,uncomment if need
-            //UnitOfWork.Context.Current.UnitOfWorkFactory = new FileSystemDatabaseUnitOfWorkFactory();
             UnitOfWork.Context.Current.UnitOfWorkFactory = new Training.Workshop.Data.SQL.SQLSystemUnitOfWork.SQLSystemDatabaseUnitofWorkFactory();
           
             // execute
