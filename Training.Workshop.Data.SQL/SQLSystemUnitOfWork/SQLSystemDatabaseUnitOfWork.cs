@@ -13,7 +13,7 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
         /// Connection string to SQL database
         /// </summary>
         private static SqlConnection connection = new SqlConnection(
-            "Data Source=KOLESNIKOV7;Initial Catalog=Training.Workshop.SQLDatabase;Integrated Security=True");
+            "Data Source=KOLESNIKOV7;Initial Catalog=Training.Workshop.SQLDatabase;Integrated Security=True;");
         /// <summary>
         /// SQL DataReader Class
         /// </summary>
@@ -33,14 +33,10 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(String.Format(
-                    "SET IDENTITY_INSERT dbo.Users OFF;insert into dbo.Users (Username,UserPassword) VALUES ('{0}','{1}')",
+                    "SET IDENTITY_INSERT Users OFF;insert into Users (Username,UserPassword) VALUES ('{0}','{1}')",
                     user.Username,user.Password), connection);
-                command.BeginExecuteNonQuery();
+                command.ExecuteNonQuery();
 
-            }
-            catch 
-            {
-                throw new InvalidOperationException("imposible insert into database");
             }
             finally
             {
@@ -55,12 +51,8 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(String.Format("delete from dbo.Users where username='{0}'",username), connection);
-                command.BeginExecuteNonQuery();
-            }
-            catch 
-            {
-                throw new InvalidOperationException("imposible select from database");
+                SqlCommand command = new SqlCommand(String.Format("delete from Users where Username='{0}'",username), connection);
+                command.ExecuteNonQuery();
             }
             finally
             {
