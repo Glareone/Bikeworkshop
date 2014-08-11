@@ -148,4 +148,12 @@
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\DeleteUser.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\InsertUser.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+  </ItemGroup>
 </Project>

@@ -12,56 +12,29 @@ namespace Training.Workshop.Data.SQL.SQLSystemUnitOfWork
         /// <summary>
         /// Connection string to SQL database
         /// </summary>
-        private static SqlConnection connection = new SqlConnection(
-            "Data Source=KOLESNIKOV7;Initial Catalog=Training.Workshop.SQLDatabase;Integrated Security=True;");
-        /// <summary>
-        /// SQL DataReader Class
-        /// </summary>
-        /// <summary>
+        private SqlConnection connection;
+
+        public SqlConnection Connection 
+        {
+            get
+            {
+                return connection;
+            }
+        }
         /// Constructor
         /// </summary>
         /// <param name="unitofworkfactory"></param>
         public SQLSystemDatabaseUnitOfWork(SQLSystemDatabaseUnitofWorkFactory unitofworkfactory)
         {
+            connection=new SqlConnection ("Data Source=KOLESNIKOV7;Initial Catalog=Training.Workshop.SQLDatabase;Integrated Security=True;");
+            connection.Open();
         }
         /// <summary>
-        /// Insert
+        /// Free all resources and close current Unit of Work.
         /// </summary>
-        public void Add(User user)
-        {
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(String.Format(
-                    "SET IDENTITY_INSERT Users OFF;insert into Users (Username,UserPassword) VALUES ('{0}','{1}')",
-                    user.Username,user.Password), connection);
-                command.ExecuteNonQuery();
-
-            }
-            finally
-            {
-                if (connection != null) 
-                    connection.Close();
-            }
-
-        }
-
-        public void Delete(string username)
-        {
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(String.Format("delete from Users where Username='{0}'",username), connection);
-                command.ExecuteNonQuery();
-            }
-            finally
-            {
-                if (connection != null)
-                    connection.Close();
-            }
-        }
         public void Dispose()
         {
+            connection.Close();
             Training.Workshop.UnitOfWork.UnitOfWork.DisposeUnitOfWork(this);
         }
     }
