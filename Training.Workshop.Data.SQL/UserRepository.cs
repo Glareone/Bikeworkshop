@@ -17,7 +17,7 @@ namespace Training.Workshop.Data.SQL
         /// <param name="user"></param>
         public void Save(User user)
         {
-            var salt=GenerateSalt();
+            var salt = GenerateSalt();
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
@@ -45,7 +45,6 @@ namespace Training.Workshop.Data.SQL
                 {
                     command.CommandText = "DeleteUser";
                     command.CommandType = CommandType.StoredProcedure;
-
                     command.Parameters.AddWithValue("Username", username);
                     command.ExecuteNonQuery();
                 }
@@ -57,7 +56,8 @@ namespace Training.Workshop.Data.SQL
             string salt = "";
 
             //Create salt with random lenght
-            Random rnd = new Random();
+            var rnd = new Random();
+
             for(int i=0;i<rnd.Next(8,15);i++)
             {
                 //Take random char from eng alphabet and push to string salt
@@ -74,11 +74,13 @@ namespace Training.Workshop.Data.SQL
             {
                  hash = sha1.ComputeHash(Encoding.Unicode.GetBytes(password+salt));
             }
+
             var stringbuilder = new StringBuilder();
             foreach (byte b in hash)
             {
                 stringbuilder.AppendFormat("{0:x2}", b);
             } 
+
             return stringbuilder.ToString();
         }
     }
