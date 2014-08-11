@@ -18,7 +18,6 @@ namespace Training.Workshop.Data.SQL
         public void Save(User user)
         {
             var salt=GenerateSalt();
-            var HashFromPasswordandSalt = GenerateSHAHashFromPasswordWithSalt(user.Password, salt);
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
@@ -27,7 +26,7 @@ namespace Training.Workshop.Data.SQL
                     command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("Username", user.Username);
-                    command.Parameters.AddWithValue("Password", HashFromPasswordandSalt);
+                    command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(user.Password, salt));
                     command.Parameters.AddWithValue("Salt", salt);
                     command.ExecuteNonQuery();
                 }
