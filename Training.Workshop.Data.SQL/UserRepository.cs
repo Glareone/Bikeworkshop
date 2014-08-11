@@ -18,7 +18,7 @@ namespace Training.Workshop.Data.SQL
         public void Save(User user)
         {
             var salt=GenerateSalt();
-            var HashFromPasswordandSalt = GenerateHashWithSalt(salt, user.Password);
+            var HashFromPasswordandSalt = GenerateSHAHashFromPasswordWithSalt(user.Password, salt);
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
@@ -59,64 +59,28 @@ namespace Training.Workshop.Data.SQL
 
             //Create salt with random lenght
             Random rnd = new Random();
-            for(int i=0;i<rnd.Next(1,15);i++)
+            for(int i=0;i<rnd.Next(8,15);i++)
             {
                 //Take random char from eng alphabet and push to string salt
-                salt += Convert.ToChar(64+rnd.Next(1, 31));
+                salt += Convert.ToChar(64+rnd.Next(1, 26));
             }
             return salt;
         }
 
-        private string GenerateHashWithSalt(string salt, string password)
-        {
-            string hashwithsalt = "";
-              
-            using (MD5 md5Hash = MD5.Create())
-            {
-                hashwithsalt = GetMd5Hash(md5Hash, password+salt);
-            }
-            
-            return hashwithsalt;
-        }
-
-        private string GetMd5Hash(MD5 md5Hash, string input)
+        private string GenerateSHAHashFromPasswordWithSalt(string password, string salt)
         {
 
-            // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
-            StringBuilder sBuilder = new StringBuilder();
-
-            // Loop through each byte of the hashed data 
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < data.Length; i++)
+            byte[] hash;
+            using (var sha1 = new System.Security.Cryptography.SHA1CryptoServiceProvider())
             {
-                sBuilder.Append(data[i].ToString("x2"));
+                 hash = sha1.ComputeHash(Encoding.Unicode.GetBytes(password+salt));
             }
-
-            // Return the hexadecimal string.
-            return sBuilder.ToString();
+            var stringbuilder = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                stringbuilder.AppendFormat("{0:x2}", b);
+            } 
+            return stringbuilder.ToString();
         }
-
-        private bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
-        {
-            // Hash the input.
-            string hashOfInput = GetMd5Hash(md5Hash, input);
-
-            // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-            if (0 == comparer.Compare(hashOfInput, hash))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
     }
 }

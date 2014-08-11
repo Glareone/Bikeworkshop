@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE InsertUser (@Username nvarchar(50), @Password nvarchar(100), @Salt nvarchar(15))
+﻿CREATE PROCEDURE InsertUser (@Username nvarchar(50), @Password nvarchar(250), @Salt nvarchar(15))
 AS
 BEGIN
 INSERT INTO dbo.Users 
