@@ -12,10 +12,10 @@ namespace Training.Workshop.ASP.Client
 
         public T Controller
         {
-            get { return _controller ?? (_controller = CreateController()); }
+            get { return _controller ?? (_controller = GetController()); }
         }
 
-        protected abstract T CreateController();
+        protected abstract T GetController();
     }
 
     public class UserControlView<T> : UserControl

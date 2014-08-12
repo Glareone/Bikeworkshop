@@ -23,6 +23,8 @@
            <p class="submitButton">
              <asp:Button ID="AddUserButton" runat="server" Text="Add User" 
                    OnClick="AddNewUser" Height="30px" Width="321px" />
+             <asp:Button ID="DeleteUserButton" runat="server" Text="Delete User" 
+                   OnClick="DeleteUser" Height="30px" Width="321px" />
            </p>
         </fieldset>
     </div>

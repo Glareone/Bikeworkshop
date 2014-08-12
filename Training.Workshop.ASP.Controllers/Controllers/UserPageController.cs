@@ -15,16 +15,16 @@ namespace Training.Workshop.ASP.Controllers
         /// <param name="username"></param>
         /// <param name="password"></param>
         public void Add(string username, string password)
-        { 
-         
+        {
+            User.Create(username, password);
         }
         /// <summary>
         /// Delete all existing users with this username.
         /// </summary>
         /// <param name="username"></param>
         public void Delete(string username)
-        { 
-        
+        {
+            Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(username);
         }
     }
 }
