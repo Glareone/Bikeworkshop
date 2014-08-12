@@ -5,11 +5,7 @@ using System.Text;
 
 namespace Training.Workshop.ASP.Controllers.Interfaces
 {
-    public interface IUserPageController:IPageController
+    public interface IPageController
     {
-        void Add(string username, string password);
-
-        void Delete(string username);
     }
 }
-

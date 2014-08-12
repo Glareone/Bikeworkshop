@@ -24,8 +24,9 @@ namespace Training.Workshop.ASP.Client
             base.OnLoad(e);
         }
         protected void AddNewUser(object sender, EventArgs e)
-        { 
-        
+        {
+            var controller = PageControllerLocator.PageControllerLocator.Resolve<IUserPageController>();
+            controller.Add(UserNameTextBox.Text, UserPasswordTextBox.Text);
         }
     }
 }

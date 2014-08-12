@@ -9,5 +9,22 @@ namespace Training.Workshop.ASP.Controllers
 {
     public class UserPageController:IUserPageController
     {
+        /// <summary>
+        /// Add new User
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        public void Add(string username, string password)
+        { 
+         
+        }
+        /// <summary>
+        /// Delete all existing users with this username.
+        /// </summary>
+        /// <param name="username"></param>
+        public void Delete(string username)
+        { 
+        
+        }
     }
 }

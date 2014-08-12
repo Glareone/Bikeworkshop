@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Context.cs" />
     <Compile Include="Controllers\UserPageController.cs" />
+    <Compile Include="Interfaces\IBikePageController.cs" />
+    <Compile Include="Interfaces\IPageController.cs" />
     <Compile Include="Interfaces\IUserPageController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
