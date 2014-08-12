@@ -41,8 +41,7 @@ namespace Training.Workshop.ASP.Client
         {
             try
             {
-                GetController().
-                   Add(UserNameTextBox.Text, UserPasswordTextBox.Text);
+                GetController().Add(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
             }
             catch
             {
@@ -57,8 +56,14 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected void DeleteUser(object sender, EventArgs e)
         {
-            GetController().
-                Delete(UserNameTextBox.Text);
+            try
+            {
+                GetController().Delete(UserNameTextBox.Text);
+            }
+            catch
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
     }
 }

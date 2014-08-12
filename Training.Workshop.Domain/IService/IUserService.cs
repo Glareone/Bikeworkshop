@@ -10,7 +10,7 @@ namespace Training.Workshop.Domain.Services
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        User Create(string username, string password);
+        User Create(string username, string password,string permissions,string role);
 
         /// <summary>
         /// Removes a user from the system by username

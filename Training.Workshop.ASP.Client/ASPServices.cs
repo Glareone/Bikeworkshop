@@ -14,6 +14,7 @@ namespace Training.Workshop.ASP.Client
     public static class ASPServices
     {
         private static bool isInitialized = false;
+        
         public static bool IsInitialized
         {
             get 
@@ -21,6 +22,7 @@ namespace Training.Workshop.ASP.Client
                 return isInitialized;
             }
         }
+
         public static void InitializedResourcesAndServices()
         {
             //Register Existing Services

@@ -11,12 +11,14 @@ namespace Training.Workshop.Service
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public virtual User Create(string username, string password)
+        public virtual User Create(string username, string password,string permissions,string role)
         {
             var user = new User
                        {
                            Username = username,
-                           Password = password
+                           Password = password,
+                           Permissions=permissions,
+                           Role=role
                        };
 
 

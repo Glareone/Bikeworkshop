@@ -28,6 +28,8 @@ namespace Training.Workshop.Data.SQL
                     command.Parameters.AddWithValue("Username", user.Username);
                     command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(user.Password, salt));
                     command.Parameters.AddWithValue("Salt", salt);
+                    command.Parameters.AddWithValue("Permissions", user.Permissions);
+                    command.Parameters.AddWithValue("Role", user.Role);
                     command.ExecuteNonQuery();
                 }
 

@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context.cs" />
     <Compile Include="Controllers\UserPageController.cs" />
     <Compile Include="Interfaces\IBikePageController.cs" />
     <Compile Include="Interfaces\IPageController.cs" />

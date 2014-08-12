@@ -14,9 +14,9 @@ namespace Training.Workshop.ASP.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        public void Add(string username, string password)
+        public void Add(string username, string password,string permissions,string role)
         {
-            User.Create(username, password);
+            User.Create(username, password,permissions,role);
         }
         /// <summary>
         /// Delete all existing users with this username.
