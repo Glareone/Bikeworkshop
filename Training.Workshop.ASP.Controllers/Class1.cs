@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Training.Workshop.ASP.Views
+namespace Training.Workshop.ASP.Controllers
 {
-    public interface IView
+    public class Class1
     {
     }
 }

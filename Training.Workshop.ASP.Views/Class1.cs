@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Training.Workshop.ASP.Views
 {
-    public interface IView
+    public class Class1
     {
     }
 }

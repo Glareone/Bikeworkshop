@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BD494CE6-A12E-48C6-8085-12BFDEF691AF}</ProjectGuid>
+    <ProjectGuid>{73C48B1F-19B8-4F68-A57E-4569E02D2CDC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Training.Workshop.ASP.Views</RootNamespace>
-    <AssemblyName>Training.Workshop.ASP.Views</AssemblyName>
+    <RootNamespace>Training.Workshop.ASP.PageControllerLocator</RootNamespace>
+    <AssemblyName>Training.Workshop.ASP.PageControllerLocator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,8 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IUserPageView.cs" />
-    <Compile Include="IView.cs" />
+    <Compile Include="PageControllerLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

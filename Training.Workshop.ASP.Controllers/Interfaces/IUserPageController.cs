@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Training.Workshop.ASP.Views
+namespace Training.Workshop.ASP.Controllers.Interfaces
 {
-    public interface IView
+    public interface IUserPageController
     {
     }
 }
+

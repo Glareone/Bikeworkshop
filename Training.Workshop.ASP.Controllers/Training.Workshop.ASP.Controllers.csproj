@@ -40,9 +40,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Login\UserController.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Controllers\UserPageController.cs" />
+    <Compile Include="Interfaces\IUserPageController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Training.Workshop.Data.FileSystem\Training.Workshop.Data.FileSystem.csproj">
+      <Project>{A1545B1C-4612-43E3-909D-EB2293E6F77B}</Project>
+      <Name>Training.Workshop.Data.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.Data\Training.Workshop.Data.csproj">
+      <Project>{2A5F60DF-91B6-43FC-9CE3-7602D004C803}</Project>
+      <Name>Training.Workshop.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.Domain\Training.Workshop.Domain.csproj">
+      <Project>{674ED349-4605-4C02-AFC8-F5E3FC205390}</Project>
+      <Name>Training.Workshop.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.Service.ServiceLocator\Training.Workshop.Service.ServiceLocator.csproj">
+      <Project>{91BDD227-F046-440C-889A-644948FB5A21}</Project>
+      <Name>Training.Workshop.Service.ServiceLocator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.Service\Training.Workshop.Service.csproj">
+      <Project>{206DFF09-6070-4E10-959F-52134FA2DC09}</Project>
+      <Name>Training.Workshop.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.UnitOfWork\Training.Workshop.UnitOfWork.csproj">
+      <Project>{01088FFF-7FAB-4207-9CFF-16BF6BDB8370}</Project>
+      <Name>Training.Workshop.UnitOfWork</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
