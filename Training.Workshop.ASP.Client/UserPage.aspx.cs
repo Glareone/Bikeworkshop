@@ -18,9 +18,12 @@ namespace Training.Workshop.ASP.Client
             return PageControllerLocator.PageControllerLocator.Resolve<IUserPageController>();
         }
 
-        protected override void OnLoad(System.EventArgs e)
+        protected override void OnLoad(System.EventArgs e /*mb without anything*/)
         {
             //Control me
+            //TODO
+            //need to rework
+            // onLoad(blabla.Init(this));
             base.OnLoad(e);
         }
         protected void AddNewUser(object sender, EventArgs e)
