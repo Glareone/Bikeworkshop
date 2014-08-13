@@ -102,11 +102,8 @@ namespace Training.Workshop.Data.SQL
                     command.Parameters.Add(salt);
 
                     command.ExecuteNonQuery();
-                    
-                    var salttohash=command.Parameters["salt"].Value.ToString();
-                    var pas = command.Parameters["userpassword"].Value.ToString();
                     //if input password are equals with user's password in database
-                    if (command.Parameters["userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password, salttohash))
+                    if (command.Parameters["userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password, command.Parameters["salt"].Value.ToString()))
                     {
 
                         list.Add(username);
