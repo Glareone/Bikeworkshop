@@ -6,6 +6,7 @@ using Training.Workshop.Domain.Entities;
 using Training.Workshop.Data.SQL.SQLSystemUnitOfWork;
 using System.Data;
 using System.Security.Cryptography;
+using System.Data.SqlClient;
 
 namespace Training.Workshop.Data.SQL
 {
@@ -17,7 +18,7 @@ namespace Training.Workshop.Data.SQL
         /// <param name="user"></param>
         public void Save(User user)
         {
-            var salt = GenerateSalt();
+            
             if (CountUsersWithUsername(user.Username) == 0)
             {
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
@@ -25,6 +26,7 @@ namespace Training.Workshop.Data.SQL
                     using (var command = unitofwork.Connection.CreateCommand())
                     {
                         //Add new user if database do not have another user with this username
+                        var salt = GenerateSalt();
 
                         command.CommandText = "InsertUser";
                         command.CommandType = CommandType.StoredProcedure;
@@ -69,23 +71,41 @@ namespace Training.Workshop.Data.SQL
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
+                    //add Value to search by username
                     command.CommandText = "SearchUserbyName";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username",username);
+                    //add values to output data from database
+                    var userpassword = new SqlParameter("userpassword", "");
+                    userpassword.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(userpassword);
+
+                    var permissions = new SqlParameter("permissions", "");
+                    permissions.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(permissions);
+
+                    var role = new SqlParameter("role", "");
+                    role.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(role);
+
+                    var salt = new SqlParameter("salt", "");
+                    salt.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(salt);
+
                     command.ExecuteNonQuery();
                     
-                    var salt=command.Parameters["@salt"].Value.ToString();
+                    var salttohash=command.Parameters["salt"].Value.ToString();
                  
                     var list = new List<string>();
 
                     //if input password are equals with user's password in database
-                    if (command.Parameters["@userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password,salt))
+                    if (command.Parameters["userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password, salttohash))
                     {
 
                         list.Add(username);
-                        list.Add(command.Parameters["@userpassword"].Value.ToString());
-                        list.Add(command.Parameters["@permissions"].Value.ToString());
-                        list.Add(command.Parameters["@role"].Value.ToString());
+                        list.Add(command.Parameters["userpassword"].Value.ToString());
+                        list.Add(command.Parameters["permissions"].Value.ToString());
+                        list.Add(command.Parameters["role"].Value.ToString());
                         return list;
                     }
                     return list;
@@ -106,11 +126,16 @@ namespace Training.Workshop.Data.SQL
                     command.CommandText = "CountUsersWithUsername";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username", username);
-                    string UserWithUsernameCount = "";
-                    command.Parameters.AddWithValue("@UserWithUsernameCount", UserWithUsernameCount);
+
+                    var countParameter = new SqlParameter("@UserWithUsernameCount", 0);
+                    
+                    countParameter.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(countParameter);
                     command.ExecuteNonQuery();
                     
-                    return Convert.ToInt32(command.Parameters["@UserWithUsernameCount"].Value.ToString());
+                    int count=Int32.Parse(command.Parameters["@UserWithUsernameCount"].Value.ToString());
+                    
+                    return count;
                 }
             }
         }

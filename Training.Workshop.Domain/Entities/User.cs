@@ -45,6 +45,12 @@ namespace Training.Workshop.Domain.Entities
         {
             ServiceLocator.Resolve<IUserService>().Delete(Username);
         }
+        /// <summary>
+        /// Return User if he exist in database, else returns guest user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static User Read(string username, string password)
         {
             return ServiceLocator.Resolve<IUserService>().Read(username, password);

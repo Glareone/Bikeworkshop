@@ -42,14 +42,31 @@ namespace Training.Workshop.Service
         }
         public virtual User Read(string username, string password)
         {
+            User user;
             var list=Data.Context.Current.RepositoryFactory.GetUserRepository().Read(username, password);
-            var user= new User
+            //return existing user
+            if (list.Count != 0)
             {
-             Username=list[0],
-             Password=list[1],
-             Permissions=list[2],
-             Role=list[3]
-            };
+                user = new User
+                {
+                    Username = list[0],
+                    Password = list[1],
+                    Permissions = list[2],
+                    Role = list[3]
+                };
+            }
+            //return guest user
+            else 
+            {
+                user = new User
+                {
+                    Username = "guest",
+                    Password = "guest",
+                    Permissions = "partial",
+                    Role = "guest"
+                };
+            }
+            
             return user;
         }
     }
