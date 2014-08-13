@@ -71,33 +71,40 @@ namespace Training.Workshop.Data.SQL
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
+                    var userpassword = new SqlParameter("userpassword", SqlDbType.VarChar);
+
+                    var permissions = new SqlParameter("permissions", SqlDbType.VarChar);
+
+                    var role = new SqlParameter("role", SqlDbType.VarChar);
+
+                    var salt = new SqlParameter("salt", SqlDbType.VarChar);
+                    
+                    var list = new List<string>();
+                    
                     //add Value to search by username
                     command.CommandText = "SearchUserbyName";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username",username);
                     //add values to output data from database
-                    var userpassword = new SqlParameter("userpassword", "");
+                    
                     userpassword.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(userpassword);
-
-                    var permissions = new SqlParameter("permissions", "");
+                    userpassword.Size = 50;
                     permissions.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(permissions);
-
-                    var role = new SqlParameter("role", "");
+                    permissions.Size = 50;
                     role.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(role);
-
-                    var salt = new SqlParameter("salt", "");
+                    role.Size = 30;
                     salt.Direction = ParameterDirection.Output;
+                    salt.Size = 15;
+
+                    command.Parameters.Add(userpassword);
+                    command.Parameters.Add(permissions);
+                    command.Parameters.Add(role);
                     command.Parameters.Add(salt);
 
                     command.ExecuteNonQuery();
                     
                     var salttohash=command.Parameters["salt"].Value.ToString();
-                 
-                    var list = new List<string>();
-
+                    var pas = command.Parameters["userpassword"].Value.ToString();
                     //if input password are equals with user's password in database
                     if (command.Parameters["userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password, salttohash))
                     {
@@ -106,7 +113,6 @@ namespace Training.Workshop.Data.SQL
                         list.Add(command.Parameters["userpassword"].Value.ToString());
                         list.Add(command.Parameters["permissions"].Value.ToString());
                         list.Add(command.Parameters["role"].Value.ToString());
-                        return list;
                     }
                     return list;
                 }
