@@ -38,7 +38,7 @@ namespace Training.Workshop.Domain.Entities
         }
 
         /// <summary>
-        /// Creates a new user
+        /// Delete user with current username if he exist in database
         /// </summary>
         /// <returns></returns>
         public void Delete() 
@@ -46,7 +46,7 @@ namespace Training.Workshop.Domain.Entities
             ServiceLocator.Resolve<IUserService>().Delete(Username);
         }
         /// <summary>
-        /// Return User if he exist in database, else returns guest user
+        /// Login function,read user if he exist in database or return guest user if is not
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>

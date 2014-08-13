@@ -21,12 +21,21 @@ namespace Training.Workshop.Domain.Entities
         /// sparepart's prise
         /// </summary>
         public int Prise { get; set; }
-
+        /// <summary>
+        /// Create a new sparepart in database
+        /// </summary>
+        /// <param name="sparepartname"></param>
+        /// <param name="partnumber"></param>
+        /// <param name="prise"></param>
+        /// <returns></returns>
         public static Sparepart Create(string sparepartname, string partnumber, int prise)
         {
             return ServiceLocator.Resolve<ISparepartService>().Create(sparepartname, partnumber, prise);
         }
-
+        /// <summary>
+        /// Delete existing sparepart by partnumber
+        /// </summary>
+        /// <param name="partnumber"></param>
         public void Delete(string partnumber)
         {
             Context.Current.BikeService.Delete(SparepartName, PartNumber);
