@@ -54,6 +54,9 @@ namespace Training.Workshop.ConsoleClient
                     
                     case "updateuser":
                         break;
+                    case "login":
+                        User.Read(commandArgs[1], commandArgs[2]);
+                        break;
                     
                     case "addbike":
                         Bike.Create(commandArgs[1], commandArgs[2], commandArgs[3], Convert.ToInt32(commandArgs[4]));

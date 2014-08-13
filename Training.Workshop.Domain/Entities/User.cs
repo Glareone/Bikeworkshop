@@ -24,6 +24,8 @@ namespace Training.Workshop.Domain.Entities
         /// User's role
         /// </summary>
         public string Role { get; set; }
+
+        
         /// <summary>
         /// Creates a new user
         /// </summary>
@@ -42,6 +44,10 @@ namespace Training.Workshop.Domain.Entities
         public void Delete() 
         {
             ServiceLocator.Resolve<IUserService>().Delete(Username);
+        }
+        public static User Read(string username, string password)
+        {
+            return ServiceLocator.Resolve<IUserService>().Read(username, password);
         }
     }
 }

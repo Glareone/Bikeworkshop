@@ -17,5 +17,7 @@ namespace Training.Workshop.Domain.Services
         /// </summary>
         /// <param name="username"></param>
         void Delete(string username);
+
+        User Read(string username, string password);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Training.Workshop.Domain.Entities;
 using Training.Workshop.Domain.Services;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Service
 {
@@ -38,6 +39,18 @@ namespace Training.Workshop.Service
             //rigid coupling, may write the repository locator
             Data.Context.Current.RepositoryFactory.GetUserRepository()
                 .Delete(username);
+        }
+        public virtual User Read(string username, string password)
+        {
+            var list=Data.Context.Current.RepositoryFactory.GetUserRepository().Read(username, password);
+            var user= new User
+            {
+             Username=list[0],
+             Password=list[1],
+             Permissions=list[2],
+             Role=list[3]
+            };
+            return user;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Training.Workshop.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Data
 {
@@ -15,5 +16,7 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <param name="username"></param>
         void Delete(string username);
+
+        List<string> Read(string username, string password);
     }
 }

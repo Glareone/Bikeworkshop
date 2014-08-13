@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Training.Workshop.Domain.Entities;
 using Training.Workshop.UnitOfWork.Interfaces;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Data.FileSystem
 {
@@ -32,6 +33,18 @@ namespace Training.Workshop.Data.FileSystem
                 unitofwork.Database.users.RemoveAll(x => x.Username == username);
                 unitofwork.Commit();
             }
+        }
+        /// <summary>
+        /// Read userdata from storage
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public List<string> Read(string username, string password)
+        {
+            //Need to rework if we want to use this func with file storage
+            var list = new List<string>();
+            return list;
         }
     }
 }
