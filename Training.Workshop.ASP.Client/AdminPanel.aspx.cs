@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Training.Workshop.ASP.Controllers.Interfaces;
 using Training.Workshop.ASP.Views;
+using System.Web.Security;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -29,6 +30,7 @@ namespace Training.Workshop.ASP.Client
             //TODO
             //need to rework
             // onLoad(blabla.Init(this));
+            
             base.OnLoad(e);
         }
         /// <summary>
@@ -40,7 +42,19 @@ namespace Training.Workshop.ASP.Client
         {
             try
             {
-                GetController().AddNewUser(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
+                var user=GetController().AddNewUser(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
+                if (user.Username != "")
+                {
+                    //create session info
+                    var sessionlist = new List<string>();
+                    
+                    sessionlist.Add(UserNameTextBox.Text);
+                    sessionlist.Add(UserPermissionsTextBox.Text);
+                    sessionlist.Add(UserRoleTextBox.Text);
+                    //add info in session
+                    Session["Sessionparameters"] = sessionlist;
+                }
+                
             }
             catch
             {

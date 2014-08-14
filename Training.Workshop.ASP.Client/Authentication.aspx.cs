@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Training.Workshop.ASP.Controllers;
 using Training.Workshop.ASP.Views;
 using Training.Workshop.ASP.Controllers.Interfaces;
+using System.Web.Security;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -23,12 +24,33 @@ namespace Training.Workshop.ASP.Client
                 //TODO
                 //need to rework
                 // onLoad(blabla.Init(this));
+                
                 base.OnLoad(e);
             }
 
              protected void LogIn(object sender, EventArgs e)
             {
-                GetController().LogIn(UserNameLoginTextBox.Text, UserPasswordLoginTextBox.Text);
+                var user=GetController().LogIn(UserNameLoginTextBox.Text, UserPasswordLoginTextBox.Text);
+                
+                 var sessionlist = new List<string>();
+                 
+                 //if user found set cookie to registered user,if user not found set user to guest.
+                if (user.Username != "guest")
+                {
+                    
+                    sessionlist.Add(user.Username);
+                    sessionlist.Add(user.Permissions);
+                    sessionlist.Add(user.Role);
+                    Session["UsernameInfo"] = sessionlist;
+                }
+                else
+                {
+                    sessionlist.Add("guest");
+                    sessionlist.Add("read");
+                    sessionlist.Add("guest");
+                    Session["UsernameInfo"] = sessionlist;
+                }
+                
             }
         }
 
