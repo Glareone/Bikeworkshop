@@ -9,8 +9,6 @@
 
 namespace Training.Workshop.ASP.Client
 {
-
-
     public partial class PersonalCabinet
     {
     }

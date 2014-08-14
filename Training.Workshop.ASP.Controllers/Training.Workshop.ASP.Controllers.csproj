@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\PersonalCabinetController.cs" />
     <Compile Include="Controllers\UserPageController.cs" />
     <Compile Include="Interfaces\IAdminPanelController.cs" />
     <Compile Include="Interfaces\IAuthenticationController.cs" />
     <Compile Include="Interfaces\IBikePageController.cs" />
     <Compile Include="Interfaces\IPageController.cs" />
+    <Compile Include="Interfaces\IPersonalCabinetController.cs" />
     <Compile Include="Interfaces\IUserPageController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

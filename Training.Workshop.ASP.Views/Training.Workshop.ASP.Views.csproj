@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IAdminPanelView.cs" />
     <Compile Include="IAuthentificationView.cs" />
+    <Compile Include="IPersonalCabinetView.cs" />
     <Compile Include="IUserPageView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
