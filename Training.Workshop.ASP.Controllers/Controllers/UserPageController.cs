@@ -22,9 +22,5 @@ namespace Training.Workshop.ASP.Controllers
         /// Delete all existing users with this username.
         /// </summary>
         /// <param name="username"></param>
-        public void Delete(string username)
-        {
-            Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(username);
-        }
     }
 }

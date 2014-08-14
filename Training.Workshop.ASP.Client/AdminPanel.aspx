@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="accountInfo">
         <fieldset class="login">
-           <legend>Add new user panel</legend>
+           <legend>Add\Delete new user panel</legend>
            
            <asp:Label ID="UserNameLabel" runat="server">Username:</asp:Label>
             <br />
@@ -26,12 +26,29 @@
                    OnClick="AddNewUser" Height="30px" Width="321px" />
              <asp:Button ID="DeleteUserButton" runat="server" Text="Delete User" 
                    OnClick="DeleteUser" Height="30px" Width="321px" />
-             <asp:Button ID="UpdateUser" runat="server" Text="Delete User" 
-                   OnClick="UpdateUser" Height="30px" Width="321px" />
            </p>
         </fieldset>
     </div>
 
+    <div class="accountInfo">
+        <fieldset class="login">
+           <legend>Update user panel</legend>
+           
+           <asp:Label ID="UsernameUpdatelabel" runat="server">Username:</asp:Label>
+           <asp:TextBox ID="_UpdateUsername" runat="server" CssClass="textEntry"></asp:TextBox>
+           <br />
+           <asp:Label ID="UpdateUserPasswordlabel" runat="server">Password:</asp:Label>
+           <asp:TextBox ID="_UpdateUserPassword" runat="server" CssClass="textEntry"></asp:TextBox>
+           <br />
+           <asp:Label ID="UpdateNewUserPasswordlabel" runat="server">New Password:</asp:Label>
+           <asp:TextBox ID="_UpdateNewUserPassword" runat="server" CssClass="textEntry"></asp:TextBox>
+            
+           <p class="submitButton">
+             <asp:Button ID="UpdateUserButton" runat="server" Text="Update User" 
+                   OnClick="UpdateUser" Height="30px" Width="321px" />
+           </p>
+        </fieldset>
+    </div>
 
       <div class="accountInfo">
         <fieldset class="login">
@@ -56,9 +73,9 @@
            <br />
             
            <p class="submitButton">
-             <asp:Button ID="AddBike" runat="server" Text="Add User" 
+             <asp:Button ID="AddBikeButton" runat="server" Text="Add Bike" 
                    OnClick="AddNewBike" Height="30px" Width="321px" />
-             <asp:Button ID="UpdateBike" runat="server" Text="Delete User" 
+             <asp:Button ID="UpdateBikeButton" runat="server" Text="Update Bike" 
                    OnClick="UpdateExistingBike" Height="30px" Width="321px" />
            </p>
         </fieldset>

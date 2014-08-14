@@ -103,13 +103,67 @@ namespace Training.Workshop.ASP.Client {
         protected global::System.Web.UI.WebControls.Button DeleteUserButton;
         
         /// <summary>
-        /// UpdateUser control.
+        /// UsernameUpdatelabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateUser;
+        protected global::System.Web.UI.WebControls.Label UsernameUpdatelabel;
+        
+        /// <summary>
+        /// _UpdateUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _UpdateUsername;
+        
+        /// <summary>
+        /// UpdateUserPasswordlabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UpdateUserPasswordlabel;
+        
+        /// <summary>
+        /// _UpdateUserPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _UpdateUserPassword;
+        
+        /// <summary>
+        /// UpdateNewUserPasswordlabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UpdateNewUserPasswordlabel;
+        
+        /// <summary>
+        /// _UpdateNewUserPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _UpdateNewUserPassword;
+        
+        /// <summary>
+        /// UpdateUserButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateUserButton;
         
         /// <summary>
         /// BikeManufacturer control.
@@ -202,21 +256,21 @@ namespace Training.Workshop.ASP.Client {
         protected global::System.Web.UI.WebControls.TextBox _BikeCondition;
         
         /// <summary>
-        /// AddBike control.
+        /// AddBikeButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddBike;
+        protected global::System.Web.UI.WebControls.Button AddBikeButton;
         
         /// <summary>
-        /// UpdateBike control.
+        /// UpdateBikeButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateBike;
+        protected global::System.Web.UI.WebControls.Button UpdateBikeButton;
     }
 }

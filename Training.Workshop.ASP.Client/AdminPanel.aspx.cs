@@ -15,9 +15,9 @@ namespace Training.Workshop.ASP.Client
         /// Get needed controller for this page
         /// </summary>
         /// <returns></returns>
-        protected override IUserPageController GetController()
+        protected override IAdminPanelController GetController()
         {
-            return PageControllerLocator.PageControllerLocator.Resolve<IUserPageController>();
+            return PageControllerLocator.PageControllerLocator.Resolve<IAdminPanelController>();
         }
         /// <summary>
         /// Call base onload to check is all needed resourses are create and connected
@@ -40,7 +40,7 @@ namespace Training.Workshop.ASP.Client
         {
             try
             {
-                GetController().Add(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
+                GetController().AddNewUser(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
             }
             catch
             {
@@ -59,7 +59,7 @@ namespace Training.Workshop.ASP.Client
         {
             try
             {
-                GetController().Delete(UserNameTextBox.Text);
+                GetController().DeleteUser(UserNameTextBox.Text);
             }
             catch
             {
@@ -67,6 +67,16 @@ namespace Training.Workshop.ASP.Client
                 //need rework
                 Response.Redirect("Default.aspx");
             }
+        }
+        /// <summary>
+        /// Update existing user from admin panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void UpdateUser(object sender, EventArgs e)
+        { 
+            //TODO
+            //need realization
         }
         /// <summary>
         /// Add new bike method from admin panel
@@ -83,7 +93,7 @@ namespace Training.Workshop.ASP.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void UpdateBike(object sender, EventArgs e)
+        protected void UpdateExistingBike(object sender, EventArgs e)
         {
             //TODO
             //need rework

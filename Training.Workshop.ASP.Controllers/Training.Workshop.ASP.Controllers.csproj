@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\UserPageController.cs" />
+    <Compile Include="Interfaces\IAdminPanelController.cs" />
     <Compile Include="Interfaces\IAuthenticationController.cs" />
     <Compile Include="Interfaces\IBikePageController.cs" />
     <Compile Include="Interfaces\IPageController.cs" />

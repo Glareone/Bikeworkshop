@@ -8,8 +8,6 @@ namespace Training.Workshop.ASP.Controllers.Interfaces
     public interface IUserPageController:IPageController
     {
         void Add(string username, string password,string permissions,string role);
-
-        void Delete(string username);
     }
 }
 

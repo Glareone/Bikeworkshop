@@ -54,16 +54,5 @@ namespace Training.Workshop.ASP.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void DeleteUser(object sender, EventArgs e)
-        {
-            try
-            {
-                GetController().Delete(UserNameTextBox.Text);
-            }
-            catch
-            {
-                Response.Redirect("Default.aspx");
-            }
-        }
     }
 }
