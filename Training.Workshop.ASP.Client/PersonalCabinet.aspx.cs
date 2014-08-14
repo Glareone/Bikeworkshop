@@ -20,15 +20,9 @@ namespace Training.Workshop.ASP.Client
         {
             var sessionlist = (List<string>)Session["UsernameInfo"];
             //if cookie exist output needed info about bikes and something else
-            if (sessionlist.Count != 0)
+            if (sessionlist==null)
             {
-                string str = sessionlist[0];
-                string str2 = sessionlist[1];
-                string str3 = sessionlist[2];
-                
-                //Do something
-
-                base.OnLoad(e);
+                Response.RedirectPermanent("~/Default.aspx");
             }
             //if guest redirect
             else if (sessionlist[0] == "guest")
@@ -40,7 +34,13 @@ namespace Training.Workshop.ASP.Client
             //if another person on page
             else
             {
-                Response.RedirectPermanent("~/Default.aspx");
+                string str = sessionlist[0];
+                string str2 = sessionlist[1];
+                string str3 = sessionlist[2];
+
+                //Do something
+
+                base.OnLoad(e);
             }
         }
 
