@@ -227,7 +227,6 @@ input.textEntry
 
 input.passwordEntry 
 {
-    width: 320px;
     border: 1px solid #ccc;
 }
 

@@ -6,8 +6,8 @@ using Training.Workshop.Service.ServiceLocator;
 using Training.Workshop.Domain.Services;
 using Training.Workshop.Service;
 using Training.Workshop.ASP.PageControllerLocator;
-using Training.Workshop.ASP.Controllers;
 using Training.Workshop.ASP.Controllers.Interfaces;
+using Training.Workshop.ASP.Controllers;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -47,6 +47,8 @@ namespace Training.Workshop.ASP.Client
             //Register Existing PageControllers
             //Use Resolve Methods in Page Creation stage.
             PageControllerLocator.PageControllerLocator.RegisterPageController<IUserPageController>(typeof(UserPageController));
+            PageControllerLocator.PageControllerLocator.RegisterPageController<IAuthenticationController>(typeof(AuthenticationController));
+            PageControllerLocator.PageControllerLocator.RegisterPageController<IAdminPanelController>(typeof(AdminPanelController));
 
             isInitialized = true;
         }
