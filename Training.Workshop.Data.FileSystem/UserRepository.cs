@@ -47,5 +47,11 @@ namespace Training.Workshop.Data.FileSystem
             var list = new List<string>();
             return list;
         }
+        public List<string> Search(string username)
+        {
+            //Need to rework if we want to use this func with file storage
+            var list = new List<string>();
+            return list;
+        }
     }
 }

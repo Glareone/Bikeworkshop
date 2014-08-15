@@ -1,6 +1,7 @@
 ﻿using System;
 using Training.Workshop.Service.ServiceLocator;
 using Training.Workshop.Domain.Services;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Domain.Entities
 {
@@ -54,6 +55,13 @@ namespace Training.Workshop.Domain.Entities
         public static User Read(string username, string password)
         {
             return ServiceLocator.Resolve<IUserService>().Read(username, password);
+        }
+
+        public static List<string> Search(string username)
+        {
+            //TODO
+            //realization
+            return ServiceLocator.Resolve<IUserService>().Search(username);;
         }
     }
 }

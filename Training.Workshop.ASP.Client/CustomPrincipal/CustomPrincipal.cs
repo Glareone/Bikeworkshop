@@ -28,18 +28,22 @@ namespace Training.Workshop.ASP.Client.CustomPrincipal
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        public bool IsInRole(string role)
+        public bool IsInRole(string condition)
         {
             //TODO
-            //Need rework with database
-            return Identity != null && Identity.IsAuthenticated &&
-               !string.IsNullOrWhiteSpace(role) && Roles.IsUserInRole(Identity.Name, role);
+            //return user permissions and role
+            var list = new List<string>();
+
+            if (Identity != null)
+            {
+                list = Data.Context.Current.RepositoryFactory.GetUserRepository().Search(Identity.Name);
+            }
+            //if user role is "condition" or user permissions has "condition" 
+            if (list[1] == condition || list[0].Contains(condition))
+            {
+                return true;
+            }
+            else return false;
         }
-
-        
-
-
     }
-
-
 }

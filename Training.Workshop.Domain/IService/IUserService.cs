@@ -1,4 +1,5 @@
 ﻿using Training.Workshop.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Domain.Services
 {
@@ -17,7 +18,18 @@ namespace Training.Workshop.Domain.Services
         /// </summary>
         /// <param name="username"></param>
         void Delete(string username);
-
+        /// <summary>
+        /// reads user with current username,check the password and return user if he exist in database, else return empty user 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         User Read(string username, string password);
+        /// <summary>
+        /// search user and retrieve his permissions and role
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        List<string> Search(string username);
     }
 }

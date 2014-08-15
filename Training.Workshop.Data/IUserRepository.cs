@@ -18,5 +18,6 @@ namespace Training.Workshop.Data
         void Delete(string username);
 
         List<string> Read(string username, string password);
+        List<string> Search(string username);
     }
 }

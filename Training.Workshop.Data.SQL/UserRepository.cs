@@ -69,6 +69,8 @@ namespace Training.Workshop.Data.SQL
         /// <param name="password"></param>
         public List<string> Read(string username, string password)
         {
+            var list = new List<string>();
+
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
@@ -81,7 +83,7 @@ namespace Training.Workshop.Data.SQL
 
                     var salt = new SqlParameter("salt", SqlDbType.VarChar);
                     
-                    var list = new List<string>();
+                    
                     
                     //add Value to search by username
                     command.CommandText = "SearchUserbyName";
@@ -113,10 +115,47 @@ namespace Training.Workshop.Data.SQL
                         list.Add(command.Parameters["permissions"].Value.ToString());
                         list.Add(command.Parameters["role"].Value.ToString());
                     }
-                    return list;
                 }
             }
+            return list;
         }
+
+        public List<string> Search(string username)
+        {
+            var list = new List<string>();
+
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    
+                   
+
+                    var permissions = new SqlParameter("permissions", SqlDbType.VarChar);
+
+                    var role = new SqlParameter("role", SqlDbType.VarChar);
+
+                    command.CommandText = "RetrievePermissionsAndRoleFromUserbyUsername";
+                    command.CommandType = CommandType.StoredProcedure;
+                    
+                    permissions.Direction = ParameterDirection.Output;
+                    permissions.Size = 50;
+                    role.Direction = ParameterDirection.Output;
+                    role.Size = 30;
+
+                    command.Parameters.AddWithValue("username", username);
+                    command.Parameters.Add(permissions);
+                    command.Parameters.Add(role);
+
+                    command.ExecuteNonQuery();
+
+                    list.Add(command.Parameters["permissions"].Value.ToString());
+                    list.Add(command.Parameters["role"].Value.ToString());
+                }
+            }
+            return list;
+        }
+
         /// <summary>
         /// Function returns Count of Users with this username
         /// </summary>

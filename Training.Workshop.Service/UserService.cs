@@ -40,6 +40,12 @@ namespace Training.Workshop.Service
             Data.Context.Current.RepositoryFactory.GetUserRepository()
                 .Delete(username);
         }
+        /// <summary>
+        /// reads user with current username,check the password and return user if he exist in database, else return empty user 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public virtual User Read(string username, string password)
         {
             User user;
@@ -62,6 +68,11 @@ namespace Training.Workshop.Service
             }
             
             return user;
+        }
+
+        public virtual List<string> Search(string username)
+        {
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().Search(username);
         }
     }
 }

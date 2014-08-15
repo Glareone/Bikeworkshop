@@ -30,11 +30,11 @@ namespace Training.Workshop.ASP.Client
         protected override void OnLoad(System.EventArgs e)
         {
             if (HttpContext.Current.User.IsInRole("admin"))
-            { 
-            
+            {
+                base.OnLoad(e);
             }
-
-            base.OnLoad(e);
+            else Response.Redirect("~\\Authentication.aspx");
+            
         }
         /// <summary>
         /// Add new user method from admin panel
