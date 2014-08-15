@@ -9,6 +9,8 @@ using Training.Workshop.Domain.Services;
 using Training.Workshop.Service;
 using Training.Workshop.ASP.Controllers.Interfaces;
 using Training.Workshop.ASP.Controllers;
+using System.Web.Script.Serialization;
+using Training.Workshop.ASP.Client.CustomPrincipal;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -75,6 +77,26 @@ namespace Training.Workshop.ASP.Client
             // is set to InProc in the Web.config file. If session mode is set to StateServer 
             // or SQLServer, the event is not raised.
 
+        }
+        /// <summary>
+        /// Authenticate request. Decrypt ticket,deserialize information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                CustomPrincipalSerializedModel serializeModel =
+                  serializer.Deserialize<CustomPrincipalSerializedModel>(authTicket.UserData);
+                CustomPrincipal.CustomPrincipal newUser = new CustomPrincipal.CustomPrincipal(authTicket.Name);
+                newUser.Id = serializeModel.Id;
+                newUser.Username = serializeModel.Username;
+                HttpContext.Current.User = newUser;
+            }
         }
 
     }

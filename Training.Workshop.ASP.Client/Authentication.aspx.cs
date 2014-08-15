@@ -12,6 +12,7 @@ using System.Security.Principal;
 using Training.Workshop.ASP.Client.CustomPrincipal;
 using Training.Workshop.Domain.Entities;
 using System.Web.Script.Serialization;
+using System.Security.Policy;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -31,8 +32,12 @@ namespace Training.Workshop.ASP.Client
                 
                 base.OnLoad(e);
             }
-
-             protected void LogIn(object sender, EventArgs e)
+            /// <summary>
+            /// Basic Login function
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            protected void LogIn(object sender, EventArgs e)
             {
                 var user = GetController().LogIn(UserNameLoginTextBox.Text, UserPasswordLoginTextBox.Text);
                  
@@ -58,7 +63,16 @@ namespace Training.Workshop.ASP.Client
                 }
                 
             }
-            
+            /// <summary>
+            /// External Login function
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            protected void ExternalLogInCallback(object sender, EventArgs e)
+            {
+                //TODO
+                //Need realization
+            }
 
             /// <summary>
             /// work with autentication tickets
@@ -68,7 +82,7 @@ namespace Training.Workshop.ASP.Client
             {
                 var serializemodel = new CustomPrincipalSerializedModel();
 
-                serializemodel.UserName = user.Username;
+                serializemodel.Username = user.Username;
                 //need or not? need to think 
                 //serializemodel.Id= SOMETHING
                     

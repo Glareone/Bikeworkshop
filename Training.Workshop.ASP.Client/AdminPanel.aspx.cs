@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using Training.Workshop.ASP.Controllers.Interfaces;
 using Training.Workshop.ASP.Views;
 using System.Web.Security;
+using Training.Workshop.ASP.Client.CustomPrincipal;
+using Training.Workshop.Domain.Entities;
+using System.Web.Script.Serialization;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -26,8 +29,10 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected override void OnLoad(System.EventArgs e)
         {
-            if (!User.Identity.IsAuthenticated || !User.IsInRole("admin"))
-                Response.Redirect("~\\Authentication.aspx");
+            if (HttpContext.Current.User.IsInRole("admin"))
+            { 
+            
+            }
 
             base.OnLoad(e);
         }
@@ -44,15 +49,7 @@ namespace Training.Workshop.ASP.Client
                 {
                     //TODO
                     //need rework with IPrincipal and IIdentity
-
-                    //my create session example
-                    //var sessionlist = new List<string>();
-                    //sessionlist.Add(UserNameTextBox.Text);
-                    //sessionlist.Add(UserPermissionsTextBox.Text);
-                    //sessionlist.Add(UserRoleTextBox.Text);
-                    ////add info in session
-                    //Session["Sessionparameters"] = sessionlist;
-
+                    CreateAuthenticationTicket(user);
 
                     AddedPopUp.Text = "user Correctly added to database";
                     AddedPopUp.Visible = true;
@@ -112,6 +109,29 @@ namespace Training.Workshop.ASP.Client
         {
             //TODO
             //need rework
+        }
+        /// <summary>
+        /// Create ticket for user
+        /// </summary>
+        /// <param name="user"></param>
+        public void CreateAuthenticationTicket(User user)
+        {
+            var serializemodel = new CustomPrincipalSerializedModel();
+
+            serializemodel.Username = user.Username;
+            //need or not? need to think 
+            //serializemodel.Id= SOMETHING
+
+            //serializing our user
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string userData = serializer.Serialize(serializemodel);
+            //create new ticket and encrypted it
+            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, user.Username, DateTime.Now, DateTime.Now.AddHours(2), false, userData);
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            //create http cookie which exist ticket and added it
+            HttpCookie ourCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            Response.Cookies.Add(ourCookie);
+
         }
     }
 }

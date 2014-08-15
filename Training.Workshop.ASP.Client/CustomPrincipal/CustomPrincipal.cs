@@ -7,9 +7,10 @@ using System.Web.Security;
 
 namespace Training.Workshop.ASP.Client.CustomPrincipal
 {
-    public class CustomPrincipal
+    public class CustomPrincipal:ICustomPrincipal
     {
-        public string UserName { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
 
         public IIdentity Identity { get; private set; }
         
@@ -29,6 +30,8 @@ namespace Training.Workshop.ASP.Client.CustomPrincipal
         /// <returns></returns>
         public bool IsInRole(string role)
         {
+            //TODO
+            //Need rework with database
             return Identity != null && Identity.IsAuthenticated &&
                !string.IsNullOrWhiteSpace(role) && Roles.IsUserInRole(Identity.Name, role);
         }
