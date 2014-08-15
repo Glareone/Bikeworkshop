@@ -16,7 +16,7 @@ namespace Training.Workshop.ASP.Client
             return PageControllerLocator.PageControllerLocator.Resolve<IPersonalCabinetController>();
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             var sessionlist = (List<string>)Session["UsernameInfo"];
             //if cookie exist output needed info about bikes and something else

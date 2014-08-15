@@ -47,6 +47,7 @@ namespace Training.Workshop.ASP.Client
             PageControllerLocator.PageControllerLocator.RegisterPageController<IAuthenticationController>(typeof(AuthenticationController));
             PageControllerLocator.PageControllerLocator.RegisterPageController<IAdminPanelController>(typeof(AdminPanelController));
             PageControllerLocator.PageControllerLocator.RegisterPageController<IPersonalCabinetController>(typeof(PersonalCabinetController));
+            PageControllerLocator.PageControllerLocator.RegisterPageController<IDefaultController>(typeof(DefaultController));
         }
 
         void Application_End(object sender, EventArgs e)

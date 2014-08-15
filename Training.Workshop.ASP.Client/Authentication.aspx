@@ -3,6 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
                     <p>
+                        <span class="name"><asp:LoginName ID="LoginName" runat="server" /></span>
+                        <br />
                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserNameLoginTextBox">Username:</asp:Label>
                         <asp:TextBox ID="UserNameLoginTextBox" runat="server" CssClass="textEntry"></asp:TextBox>
                     </p>

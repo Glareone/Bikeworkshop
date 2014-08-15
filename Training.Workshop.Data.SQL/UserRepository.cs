@@ -16,7 +16,7 @@ namespace Training.Workshop.Data.SQL
         /// Save User in SQL database
         /// </summary>
         /// <param name="user"></param>
-        public void Save(User user)
+        public bool Save(User user)
         {
             
             if (CountUsersWithUsername(user.Username) == 0)
@@ -41,7 +41,9 @@ namespace Training.Workshop.Data.SQL
                     }
 
                 }
+                return true;
             }
+            return false;
         }
         /// <summary>
         /// Delete all users with username from SQL Database

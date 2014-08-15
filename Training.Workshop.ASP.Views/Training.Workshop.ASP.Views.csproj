@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="IAdminPanelView.cs" />
     <Compile Include="IAuthentificationView.cs" />
+    <Compile Include="IDefaultView.cs" />
     <Compile Include="IPersonalCabinetView.cs" />
     <Compile Include="IUserPageView.cs" />
     <Compile Include="IView.cs" />

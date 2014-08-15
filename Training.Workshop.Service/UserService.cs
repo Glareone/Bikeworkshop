@@ -23,11 +23,12 @@ namespace Training.Workshop.Service
                        };
 
 
-            //rigid coupling, may write the repository locator
-            Data.Context.Current.RepositoryFactory.GetUserRepository()
-                .Save(user);
-
-            return user;
+            //save current user to database
+            //if user with username dont exist in database-write him into database
+            if (Data.Context.Current.RepositoryFactory.GetUserRepository().Save(user)) 
+                 return user;
+            //if user with username exist in database-dont write new user and return user with empty fields
+            else return new User();
         }
 
         /// <summary>
@@ -36,7 +37,6 @@ namespace Training.Workshop.Service
         /// <param name="username"></param>
         public virtual void Delete(string username)
         {
-            //rigid coupling, may write the repository locator
             Data.Context.Current.RepositoryFactory.GetUserRepository()
                 .Delete(username);
         }
@@ -55,16 +55,10 @@ namespace Training.Workshop.Service
                     Role = list[3]
                 };
             }
-            //return guest user
+            //return empty user
             else 
             {
-                user = new User
-                {
-                    Username = "guest",
-                    Password = "guest",
-                    Permissions = "partial",
-                    Role = "guest"
-                };
+                user = new User();
             }
             
             return user;

@@ -5,7 +5,9 @@
     <div class="accountInfo">
         <fieldset class="login">
            <legend>Add\Delete new user panel</legend>
-           
+           <br />
+           <asp:Label ID="AddedPopUp" runat="server" Visible="false">User added to database</asp:Label>
+           <br />
            <asp:Label ID="UserNameLabel" runat="server">Username:</asp:Label>
             <br />
            <asp:TextBox ID="UserNameTextBox" runat="server" CssClass="textEntry"></asp:TextBox>

@@ -6,14 +6,27 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using log4net;
+using System.Security.Principal;
+using Training.Workshop.ASP.Controllers.Interfaces;
+using Training.Workshop.ASP.Views;
 
 namespace Training.Workshop.ASP.Client
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class _Default : PageView<IDefaultController>, IDefaultView
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override IDefaultController GetController()
         {
+            return PageControllerLocator.PageControllerLocator.Resolve<IDefaultController>();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            // Clear Current User
+            HttpContext.Current.User =new GenericPrincipal(new GenericIdentity(string.Empty), null);
+            
             log4net.ILog logger = log4net.LogManager.GetLogger(typeof(_Default));
+            //example
+            //need to delete
             try
             {
                 logger.Info("Open Connection ");

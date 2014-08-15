@@ -13,13 +13,14 @@ namespace Training.Workshop.Data.FileSystem
         /// Saves user into repository
         /// </summary>
         /// <param name="user"></param>
-        public void Save(User user)
+        public bool Save(User user)
         {
             using (var unitofwork = (IFileUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 unitofwork.Database.users.Add(user);
                 unitofwork.Commit();
             }
+            return true;
         }
 
         /// <summary>
