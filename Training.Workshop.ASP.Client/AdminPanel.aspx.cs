@@ -47,8 +47,6 @@ namespace Training.Workshop.ASP.Client
                 //user correctly added to database
                 if (user.Username != null)
                 {
-                    //TODO
-                    //need rework with IPrincipal and IIdentity
                     CreateAuthenticationTicket(user);
 
                     AddedPopUp.Text = "user Correctly added to database";

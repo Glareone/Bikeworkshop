@@ -6,7 +6,7 @@ using Training.Workshop.Domain.Entities;
 
 namespace Training.Workshop.ASP.Controllers.Interfaces
 {
-    public interface IAuthenticationController:IPageController
+    public interface IAuthenticationController : IPageController
     {
         User LogIn(string username, string password);
     }

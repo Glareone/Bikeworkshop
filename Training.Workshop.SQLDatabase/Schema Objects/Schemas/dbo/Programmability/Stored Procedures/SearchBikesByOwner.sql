@@ -7,15 +7,11 @@
 									)
 AS
 SELECT
-@Manufacturer=Manufacturer,
-@Mark=Mark,
-@BikeYear=BikeYear,
-@OwnerID=OwnerID,
-@ConditionState=ConditionState
+*
 FROM dbo.Bikes
 WHERE OwnerID=
 (
- SELECT UserID
- FROM dbo.Users
- WHERE Username=@Username
+ SELECT I.UserID
+ FROM dbo.Users AS I
+ WHERE I.Username=@Username
 )

@@ -49,6 +49,9 @@ namespace Training.Workshop.ConsoleClient
                         break;
                     
                     case "deleteuser":
+                        
+                        //TODO
+                        //wrong version of code,need rework (but working version)
                         Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(commandArgs[1]);
                         break;
                     
@@ -63,13 +66,13 @@ namespace Training.Workshop.ConsoleClient
                         break;
                     
                     case "deletebike":
-                        Data.Context.Current.RepositoryFactory.GetBikeRepository().Delete(commandArgs[1], Convert.ToInt32(commandArgs[2]));
+                        Bike.Delete(commandArgs[1],int.Parse(commandArgs[2]));
                         break;
                     
                     case "updatebike":
                         break;
                     case "searchbike":
-                        Data.Context.Current.RepositoryFactory.GetBikeRepository().Search(commandArgs[1]);
+                        var ownerbikes=Bike.Search(commandArgs[1]);
                         break;
                     
                     case "addsparepart":

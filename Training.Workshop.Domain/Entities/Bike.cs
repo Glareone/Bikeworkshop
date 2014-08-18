@@ -50,13 +50,13 @@ namespace Training.Workshop.Domain.Entities
         /// </summary>
         /// <param name="mark"></param>
         /// <param name="owner"></param>
-        public void Delete(string mark, int ownerID)
+        public static void Delete(string mark, int ownerID)
         {
             ServiceLocator.Resolve<IBikeService>().Delete(mark, ownerID);
             //Context.Current.BikeService.Delete(mark, owner);
         }
 
-        public List<Bike> Search(string owner)
+        public static List<Bike> Search(string owner)
         {
             return ServiceLocator.Resolve<IBikeService>().Search(owner);
         }

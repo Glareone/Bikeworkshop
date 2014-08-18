@@ -18,31 +18,20 @@ namespace Training.Workshop.ASP.Client
 
         protected override void OnLoad(EventArgs e)
         {
-            var sessionlist = (List<string>)Session["UsernameInfo"];
-            //if cookie exist output needed info about bikes and something else
-            if (sessionlist==null)
+            if (HttpContext.Current.User == null)
             {
-                Response.RedirectPermanent("~/Default.aspx");
+                Response.Redirect("~\\Authentication.aspx");
             }
-            //if guest redirect
-            else if (sessionlist[0] == "guest")
-            {
-                //TODO
-                //may be must do something another
-                Response.RedirectPermanent("~/Default.aspx");
-            }
-            //if another person on page
             else
             {
-                string str = sessionlist[0];
-                string str2 = sessionlist[1];
-                string str3 = sessionlist[2];
-
-                //Do something
-
+                GridView1.DataSource=GetController().SearchBikesbyOwnername(HttpContext.Current.User.Identity.Name);
+                GridView1.DataBind();
                 base.OnLoad(e);
             }
-        }
 
+
+        }
     }
+
+    
 }

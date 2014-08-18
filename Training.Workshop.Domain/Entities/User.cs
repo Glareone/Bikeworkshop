@@ -42,9 +42,9 @@ namespace Training.Workshop.Domain.Entities
         /// Delete user with current username if he exist in database
         /// </summary>
         /// <returns></returns>
-        public void Delete() 
+        public static void Delete(string username) 
         {
-            ServiceLocator.Resolve<IUserService>().Delete(Username);
+            ServiceLocator.Resolve<IUserService>().Delete(username);
         }
         /// <summary>
         /// Login function,read user if he exist in database or return guest user if is not
@@ -59,8 +59,6 @@ namespace Training.Workshop.Domain.Entities
 
         public static List<string> Search(string username)
         {
-            //TODO
-            //realization
             return ServiceLocator.Resolve<IUserService>().Search(username);;
         }
     }
