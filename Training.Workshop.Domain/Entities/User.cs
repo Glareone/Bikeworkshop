@@ -24,7 +24,7 @@ namespace Training.Workshop.Domain.Entities
         /// <summary>
         /// User's role
         /// </summary>
-        public string Role { get; set; }
+        public List<Role> Roles { get; set; }
 
         
         /// <summary>
@@ -52,14 +52,14 @@ namespace Training.Workshop.Domain.Entities
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static User Read(string username, string password)
+        public static User GetUser(string username, string password)
         {
-            return ServiceLocator.Resolve<IUserService>().Read(username, password);
+            return ServiceLocator.Resolve<IUserService>().GetUser(username, password);
         }
 
-        public static List<string> Search(string username)
+        public static List<string> GetUser(string username)
         {
-            return ServiceLocator.Resolve<IUserService>().Search(username);;
+            return ServiceLocator.Resolve<IUserService>().GetUser(username);;
         }
     }
 }

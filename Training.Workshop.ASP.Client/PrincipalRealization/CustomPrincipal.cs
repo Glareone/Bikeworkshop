@@ -5,7 +5,7 @@ using System.Web;
 using System.Security.Principal;
 using System.Web.Security;
 
-namespace Training.Workshop.ASP.Client.CustomPrincipal
+namespace Training.Workshop.ASP.Client.PrincipalRealization
 {
     public class CustomPrincipal:ICustomPrincipal
     {

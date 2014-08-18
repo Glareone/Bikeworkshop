@@ -14,12 +14,20 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual User Create(string username, string password,string permissions,string role)
         {
+            //Create Role Collection
+           //TODO
+            //Need rework
+            var _role = new Role();
+            _role.Name = role;
+            var roles = new List<Role>();
+            roles.Add(_role);
+
             var user = new User
                        {
                            Username = username,
                            Password = password,
                            Permissions=permissions,
-                           Role=role
+                           Roles=roles
                        };
 
 
@@ -46,14 +54,15 @@ namespace Training.Workshop.Service
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public virtual User Read(string username, string password)
+        public virtual User GetUser(string username, string password)
         {
-            User user;
+            //TODO
+            //Rework cause roles and permissions changed
             var list=Data.Context.Current.RepositoryFactory.GetUserRepository().Read(username, password);
             //return existing user
             if (list.Count != 0)
             {
-                user = new User
+                return new User
                 {
                     Username = list[0],
                     Password = list[1],
@@ -64,13 +73,11 @@ namespace Training.Workshop.Service
             //return empty user
             else 
             {
-                user = new User();
+                return new User();
             }
-            
-            return user;
         }
 
-        public virtual List<string> Search(string username)
+        public virtual List<string> GetUser(string username)
         {
             return Data.Context.Current.RepositoryFactory.GetUserRepository().Search(username);
         }

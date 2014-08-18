@@ -52,6 +52,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="Entities\Entitybase.cs" />
     <Compile Include="Entities\Bike.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Sparepart.cs" />
     <Compile Include="IService\IBikeService.cs" />
     <Compile Include="IService\ISparepartService.cs" />

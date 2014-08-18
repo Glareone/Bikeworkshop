@@ -9,10 +9,10 @@ using Training.Workshop.ASP.Views;
 using Training.Workshop.ASP.Controllers.Interfaces;
 using System.Web.Security;
 using System.Security.Principal;
-using Training.Workshop.ASP.Client.CustomPrincipal;
 using Training.Workshop.Domain.Entities;
 using System.Web.Script.Serialization;
 using System.Security.Policy;
+using Training.Workshop.ASP.Client.PrincipalRealization;
 
 namespace Training.Workshop.ASP.Client
 {

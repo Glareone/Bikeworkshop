@@ -24,12 +24,12 @@ namespace Training.Workshop.Domain.Services
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        User Read(string username, string password);
+        User GetUser(string username, string password);
         /// <summary>
         /// search user and retrieve his permissions and role
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        List<string> Search(string username);
+        List<string> GetUser(string username);
     }
 }

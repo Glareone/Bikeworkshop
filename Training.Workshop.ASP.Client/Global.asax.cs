@@ -10,7 +10,7 @@ using Training.Workshop.Service;
 using Training.Workshop.ASP.Controllers.Interfaces;
 using Training.Workshop.ASP.Controllers;
 using System.Web.Script.Serialization;
-using Training.Workshop.ASP.Client.CustomPrincipal;
+using Training.Workshop.ASP.Client.PrincipalRealization;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -92,7 +92,7 @@ namespace Training.Workshop.ASP.Client
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 CustomPrincipalSerializedModel serializeModel =
                   serializer.Deserialize<CustomPrincipalSerializedModel>(authTicket.UserData);
-                CustomPrincipal.CustomPrincipal newUser = new CustomPrincipal.CustomPrincipal(authTicket.Name);
+                var newUser = new CustomPrincipal(authTicket.Name);
                 newUser.Id = serializeModel.Id;
                 newUser.Username = serializeModel.Username;
                 HttpContext.Current.User = newUser;

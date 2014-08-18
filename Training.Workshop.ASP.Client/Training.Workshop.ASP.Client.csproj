@@ -94,9 +94,9 @@
     <Compile Include="Authentication.aspx.designer.cs">
       <DependentUpon>Authentication.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CustomPrincipal\CustomPrincipal.cs" />
-    <Compile Include="CustomPrincipal\CustomPrincipalSerializedModel.cs" />
-    <Compile Include="CustomPrincipal\ICustomPrincipal.cs" />
+    <Compile Include="PrincipalRealization\CustomPrincipal.cs" />
+    <Compile Include="PrincipalRealization\CustomPrincipalSerializedModel.cs" />
+    <Compile Include="PrincipalRealization\ICustomPrincipal.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

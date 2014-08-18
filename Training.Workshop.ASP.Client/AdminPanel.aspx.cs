@@ -7,9 +7,9 @@ using System.Web.UI.WebControls;
 using Training.Workshop.ASP.Controllers.Interfaces;
 using Training.Workshop.ASP.Views;
 using System.Web.Security;
-using Training.Workshop.ASP.Client.CustomPrincipal;
 using Training.Workshop.Domain.Entities;
 using System.Web.Script.Serialization;
+using Training.Workshop.ASP.Client.PrincipalRealization;
 
 namespace Training.Workshop.ASP.Client
 {

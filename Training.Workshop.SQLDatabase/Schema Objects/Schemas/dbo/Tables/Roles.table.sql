@@ -1,0 +1,5 @@
+﻿CREATE TABLE [Roles]
+(
+	RoleID		int				NOT NULL PRIMARY KEY IDENTITY(1,1),
+	RoleNAME	nvarchar(50)	NOT NULL
+)
