@@ -23,12 +23,16 @@ namespace Training.Workshop.Domain.Entities
         /// <summary>
         /// moto's owner
         /// </summary>
-        public string Owner { get; set; }
+        public int OwnerID { get; set; }
 
         /// <summary>
-        /// moto's year
+        /// moto's year of creating
         /// </summary>
-        public int Year { get; set; }
+        public DateTime BikeYear { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ConditionState { get; set; }
         /// <summary>
         /// Add new Bike with all data. Uses this function by admin and owner
         /// </summary>
@@ -37,18 +41,24 @@ namespace Training.Workshop.Domain.Entities
         /// <param name="owner"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public static Bike Create(string manufacturer, string mark, string owner, int year)
+        public static Bike Create(string manufacturer, string mark, int ownerID, int year,string conditionstate)
         {
-            return ServiceLocator.Resolve<IBikeService>().Create(manufacturer,mark,owner,year);
+            return ServiceLocator.Resolve<IBikeService>().Create(manufacturer,mark,ownerID,year,conditionstate);
         }
         /// <summary>
         /// this func deletes all bike by mark and owner,this function used only by admins
         /// </summary>
         /// <param name="mark"></param>
         /// <param name="owner"></param>
-        public void Delete(string mark, string owner)
+        public void Delete(string mark, int ownerID)
         {
-            Context.Current.BikeService.Delete(mark, owner);
+            ServiceLocator.Resolve<IBikeService>().Delete(mark, ownerID);
+            //Context.Current.BikeService.Delete(mark, owner);
+        }
+
+        public List<Bike> Search(string owner)
+        {
+            return ServiceLocator.Resolve<IBikeService>().Search(owner);
         }
     }
 }

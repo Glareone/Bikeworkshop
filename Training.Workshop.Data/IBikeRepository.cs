@@ -1,4 +1,5 @@
 ﻿using Training.Workshop.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Data
 {
@@ -16,7 +17,7 @@ namespace Training.Workshop.Data
         /// <param name="username"></param>
         /// TODO
         /// May be need returns bool
-        void Delete(string owner, string mark);
+        void Delete(string mark, int ownerID);
         /// <summary>
         /// Find and return's concrete bike if he exist in BD
         /// </summary>
@@ -28,5 +29,7 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <param name="username"></param>
         void Update(string owner, string mark);
+
+        List<Bike> Search(string owner);
     }
 }

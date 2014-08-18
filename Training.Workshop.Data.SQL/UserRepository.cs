@@ -18,7 +18,7 @@ namespace Training.Workshop.Data.SQL
         /// <param name="user"></param>
         public bool Save(User user)
         {
-            
+            //Added user if username doesn't exist in database
             if (CountUsersWithUsername(user.Username) == 0)
             {
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())

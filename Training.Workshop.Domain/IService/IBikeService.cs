@@ -1,4 +1,5 @@
 ﻿using Training.Workshop.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Domain.Services
 {
@@ -12,13 +13,15 @@ namespace Training.Workshop.Domain.Services
         /// <param name="owner"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        Bike Create(string manufacturer, string mark, string owner, int year);
+        Bike Create(string manufacturer, string mark, int ownerID, int bikeyear,string condition);
 
         /// <summary>
         /// Delete existing bike from the system
         /// </summary>
         /// <param name="owner"></param>
         /// <param name="mark"></param>
-        void Delete(string owner, string mark);
+        void Delete(string mark, int ownerID);
+
+        List<Bike> Search(string owner);
     }
 }

@@ -38,7 +38,7 @@ namespace Training.Workshop.Domain.Entities
         /// <param name="partnumber"></param>
         public void Delete(string partnumber)
         {
-            Context.Current.BikeService.Delete(SparepartName, PartNumber);
+            ServiceLocator.Resolve<ISparepartService>().Delete(partnumber);
         }
     }
 }

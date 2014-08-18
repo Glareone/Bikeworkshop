@@ -44,17 +44,7 @@ namespace Training.Workshop.ASP.Client
                  //if user found set cookie to registered user,
                 if (user.Username != null)
                 {
-                    //first way
-                    //TODO
-                    //Need realization
                     CreateAuthenticationTicket(user);
-                    
-                    //second way with tickets
-                    //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, user.Username, DateTime.Now, DateTime.Now.AddHours(1),
-                    //                                                                   false, user.Role, FormsAuthentication.FormsCookiePath);
-                    // // Encrypt the current ticket
-                    //string encTicket = FormsAuthentication.Encrypt(ticket); 
-                    //Response.Cookies.Add(new HttpCookie("roles",encTicket));
                 }
                 //if user not found
                 else
@@ -83,9 +73,6 @@ namespace Training.Workshop.ASP.Client
                 var serializemodel = new CustomPrincipalSerializedModel();
 
                 serializemodel.Username = user.Username;
-                //need or not? need to think 
-                //serializemodel.Id= SOMETHING
-                    
                 //serializing our user
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 string userData = serializer.Serialize(serializemodel);

@@ -59,14 +59,17 @@ namespace Training.Workshop.ConsoleClient
                         break;
                     
                     case "addbike":
-                        Bike.Create(commandArgs[1], commandArgs[2], commandArgs[3], Convert.ToInt32(commandArgs[4]));
+                        Bike.Create(commandArgs[1], commandArgs[2], Convert.ToInt32(commandArgs[3]), Convert.ToInt32(commandArgs[4]),commandArgs[5]);
                         break;
                     
                     case "deletebike":
-                        Data.Context.Current.RepositoryFactory.GetBikeRepository().Delete(commandArgs[1], commandArgs[2]);
+                        Data.Context.Current.RepositoryFactory.GetBikeRepository().Delete(commandArgs[1], Convert.ToInt32(commandArgs[2]));
                         break;
                     
                     case "updatebike":
+                        break;
+                    case "searchbike":
+                        Data.Context.Current.RepositoryFactory.GetBikeRepository().Search(commandArgs[1]);
                         break;
                     
                     case "addsparepart":

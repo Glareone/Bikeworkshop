@@ -79,7 +79,7 @@ namespace Training.Workshop.ASP.Client
 
         }
         /// <summary>
-        /// Authenticate request. Decrypt ticket,deserialize information
+        /// Authenticate request. Decrypt ticket,deserialize information,then may used by HttpContext.Current.User.IsInRole();
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
