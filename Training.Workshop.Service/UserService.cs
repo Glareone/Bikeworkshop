@@ -123,7 +123,21 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual List<Role> GetRolesandPermissionsbyUsername(string username)
         {
-            return new List<Role>();
+            List<string> RoleNamesListwhichUserhas = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesByUsername(username);
+
+            var RoleList = new List<Role>();
+
+            foreach (var role in RoleNamesListwhichUserhas)
+            {
+                var Role = new Role()
+                {
+                    Name = role,
+                    Permissions = GetPermissionsbyRoleName(role)
+                };
+                RoleList.Add(Role);
+            }
+
+            return RoleList;
         }
     }
 }

@@ -200,4 +200,9 @@
       <SubType>NotInBuild</SubType>
     </NotInBuild>
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\RetrieveRolesbyUsername.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+  </ItemGroup>
 </Project>

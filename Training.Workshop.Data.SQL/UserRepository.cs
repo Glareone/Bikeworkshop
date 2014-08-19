@@ -190,6 +190,24 @@ namespace Training.Workshop.Data.SQL
             return Permissionlist;
         }
         /// <summary>
+        /// return all role names which user with username obtained
+        /// </summary>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        public List<string> GetRolesByUsername(string username)
+        {
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+
+                }
+            }
+
+
+            return new List<string>();
+        }
+        /// <summary>
         /// Generate Salt. Function,that works with user creating.
         /// </summary>
         /// <returns></returns>

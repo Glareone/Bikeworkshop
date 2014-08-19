@@ -29,5 +29,11 @@ namespace Training.Workshop.Data
         /// <param name="rolename"></param>
         /// <returns></returns>
         List<string> GetPermissionsbyRolename(string rolename);
+        /// <summary>
+        /// return all role names which user obtained
+        /// </summary>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        List<string> GetRolesByUsername(string roles);
     }
 }
