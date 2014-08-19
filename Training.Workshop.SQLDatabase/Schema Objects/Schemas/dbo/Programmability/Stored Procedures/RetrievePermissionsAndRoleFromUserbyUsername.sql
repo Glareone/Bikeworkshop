@@ -5,7 +5,6 @@
 			)
 AS
 SELECT 
-@role=Role,
-@permissions=Permissions
+*
 FROM dbo.Users
 WHERE Username=@username

@@ -11,8 +11,15 @@ namespace Training.Workshop.Domain.Services
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        User Create(string username, string password,string permissions,string role);
-
+        User Create(string username, string password,string role);
+        /// <summary>
+        /// Creates a new user with many roles
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        User Create(string username, string password, string[] roles);
         /// <summary>
         /// Removes a user from the system by username
         /// </summary>

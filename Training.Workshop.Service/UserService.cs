@@ -12,22 +12,27 @@ namespace Training.Workshop.Service
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public virtual User Create(string username, string password,string permissions,string role)
+        public virtual User Create(string username, string password,string role)
         {
             //Create Role Collection
-           //TODO
+            //TODO
             //Need rework
-            var _role = new Role();
-            _role.Name = role;
-            var roles = new List<Role>();
-            roles.Add(_role);
+            var NewRole = new Role()
+            { 
+                Name=role,
+                Permissions=GetPermissionsbyRoleName(role)
+            };
 
+
+            //Create user with obtained role and permissions
             var user = new User
                        {
                            Username = username,
                            Password = password,
-                           Permissions=permissions,
-                           Roles=roles
+                           Roles = new List<Role>() 
+                           { 
+                               NewRole 
+                           }
                        };
 
 
@@ -38,6 +43,38 @@ namespace Training.Workshop.Service
             //if user with username exist in database-dont write new user and return user with empty fields
             else return new User();
         }
+        /// <summary>
+        /// Creates a new user with many roles
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public virtual User Create(string username, string password, string[] role)
+        {
+            var UserRoles = new List<Role>();
+
+            foreach (var roleelement in role)
+            {
+                var NewRole = new Role()
+                {
+                    Name = roleelement,
+                    Permissions = GetPermissionsbyRoleName(roleelement)
+                };
+                UserRoles.Add(NewRole);
+            }
+            
+            
+            //TODO
+            //need rework
+
+
+
+            return new User();
+        }
+
+
+
 
         /// <summary>
         /// Removes a user from the system by username
@@ -66,11 +103,9 @@ namespace Training.Workshop.Service
                 {
                     Username = list[0],
                     Password = list[1],
-                    Permissions = list[2],
-                    Role = list[3]
                 };
             }
-            //return empty user
+            //return empty user if user are not exist in database
             else 
             {
                 return new User();
@@ -80,6 +115,13 @@ namespace Training.Workshop.Service
         public virtual List<string> GetUser(string username)
         {
             return Data.Context.Current.RepositoryFactory.GetUserRepository().Search(username);
+        }
+        public virtual List<string> GetPermissionsbyRoleName(string rolename)
+        {
+            //TODO
+            //change when realized.
+
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().GetPermissions(rolename);
         }
     }
 }

@@ -1,20 +1,18 @@
-﻿CREATE PROCEDURE InsertUser (@Username nvarchar(50), @Password nvarchar(250), @Salt nvarchar(15),@Permissions nvarchar(50),@Role nvarchar(30))
+﻿CREATE PROCEDURE InsertUser (@Username nvarchar(50), 
+							 @Password nvarchar(250), 
+							 @Salt nvarchar(15))
 AS
 BEGIN
 INSERT INTO dbo.Users 
 (
  [Username], 
  [UserPassword],
- [Salt],
- [Permissions],
- [Role] 
+ [Salt]
 )
 VALUES
 (
  @Username,
  @Password,
- @Salt,
- @Permissions,
- @Role 
+ @Salt
 )
 END

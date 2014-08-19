@@ -28,16 +28,26 @@ namespace Training.Workshop.Domain.Entities
 
         
         /// <summary>
-        /// Creates a new user
+        /// Creates a new user with one role
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static User Create(string username, string password,string permissions,string role)
+        public static User Create(string username, string password,string role)
         {
-            return ServiceLocator.Resolve<IUserService>().Create(username, password,permissions,role);
+            return ServiceLocator.Resolve<IUserService>().Create(username, password,role);
         }
-
+        /// <summary>
+        /// Creates a new user with many roles
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        public static User Create(string username, string password, string[] roles)
+        {
+            return ServiceLocator.Resolve<IUserService>().Create(username, password, roles);
+        }
         /// <summary>
         /// Delete user with current username if he exist in database
         /// </summary>
@@ -56,10 +66,14 @@ namespace Training.Workshop.Domain.Entities
         {
             return ServiceLocator.Resolve<IUserService>().GetUser(username, password);
         }
-
+        /// <summary>
+        /// Get permissions by username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static List<string> GetUser(string username)
         {
-            return ServiceLocator.Resolve<IUserService>().GetUser(username);;
+            return ServiceLocator.Resolve<IUserService>().GetUser(username);
         }
     }
 }

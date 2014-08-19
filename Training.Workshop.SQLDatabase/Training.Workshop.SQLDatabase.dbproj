@@ -156,6 +156,9 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\PermissionRoles.table.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\UserRole.table.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\DeleteUser.sql">
