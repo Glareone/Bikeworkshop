@@ -88,14 +88,17 @@ namespace Training.Workshop.Service
         {
             //TODO
             //Rework cause roles and permissions changed
+
             var list=Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password);
             //return existing user
             if (list.Count != 0)
             {
+                //if username and password correct-take his roles and permissions,construct new user and return him
                 return new User
                 {
                     Username = list[0],
                     Password = list[1],
+                    Roles = GetRolesandPermissionsbyUsername(username)
                 };
             }
             //return empty user if user are not exist in database
@@ -104,10 +107,23 @@ namespace Training.Workshop.Service
                 return new User();
             }
         }
-
+        /// <summary>
+        /// return list of permissions that role with rolename has
+        /// </summary>
+        /// <param name="rolename"></param>
+        /// <returns></returns>
         public virtual List<string> GetPermissionsbyRoleName(string rolename)
         {
             return Data.Context.Current.RepositoryFactory.GetUserRepository().GetPermissionsbyRolename(rolename);
+        }
+        /// <summary>
+        /// return all role with included permissions that user with username has
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public virtual List<Role> GetRolesandPermissionsbyUsername(string username)
+        {
+            return new List<Role>();
         }
     }
 }

@@ -23,6 +23,11 @@ namespace Training.Workshop.Data
         /// <param name="password"></param>
         /// <returns></returns>
         List<string> GetUser(string username, string password);
+        /// <summary>
+        /// returns all permissions for 1 role
+        /// </summary>
+        /// <param name="rolename"></param>
+        /// <returns></returns>
         List<string> GetPermissionsbyRolename(string rolename);
     }
 }

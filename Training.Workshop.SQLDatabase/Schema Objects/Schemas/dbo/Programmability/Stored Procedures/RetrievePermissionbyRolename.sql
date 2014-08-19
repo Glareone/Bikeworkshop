@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [RetrievePermissionbyRolename] (		@Rolename nvarchar(50),
+﻿CREATE PROCEDURE RetrievePermissionbyRolename (	@Rolename nvarchar(50),
 													@Permission nvarchar(50) OUTPUT
-				  							    )
+				  							  )
 AS 
 SELECT
 *

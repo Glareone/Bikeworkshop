@@ -162,17 +162,32 @@ namespace Training.Workshop.Data.SQL
         /// <returns></returns>
         public List<string> GetPermissionsbyRolename(string rolename)
         {
+            var Permissionlist = new List<string>();
+
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
+                    //Configure parameters
+                    var Permission = new SqlParameter("Permissions", SqlDbType.VarChar);
                     
+                    Permission.Direction = ParameterDirection.Output;
+                    Permission.Size = 50;
 
+                    command.CommandText = "RetrievePermissionbyRolename";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("Rolename", rolename);
+                    command.Parameters.Add(Permission);
+                    
+                    var reader=command.ExecuteReader();
+                    //take all permissions from database to list
+                    while (reader.Read())
+                    {
+                        Permissionlist.Add(reader["Permission"].ToString());
+                    }
                 }
             }
-            //TODO
-            //Need rework
-            return new List<string>();
+            return Permissionlist;
         }
         /// <summary>
         /// Generate Salt. Function,that works with user creating.

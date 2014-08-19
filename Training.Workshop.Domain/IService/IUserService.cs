@@ -32,5 +32,7 @@ namespace Training.Workshop.Domain.Services
         /// <param name="password"></param>
         /// <returns></returns>
         User GetUser(string username, string password);
+
+        List<Role> GetRolesandPermissionsbyUsername(string username);
     }
 }
