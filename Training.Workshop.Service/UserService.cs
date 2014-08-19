@@ -7,43 +7,6 @@ namespace Training.Workshop.Service
     public class UserService : IUserService
     {
         /// <summary>
-        /// Creates a new user in the system
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public virtual User Create(string username, string password,string role)
-        {
-            //Create Role Collection
-            //TODO
-            //Need rework
-            var NewRole = new Role()
-            { 
-                Name=role,
-                Permissions=GetPermissionsbyRoleName(role)
-            };
-
-
-            //Create user with obtained role and permissions
-            var user = new User
-                       {
-                           Username = username,
-                           Password = password,
-                           Roles = new List<Role>() 
-                           { 
-                               NewRole 
-                           }
-                       };
-
-
-            //save current user to database
-            //if user with username dont exist in database-write him into database
-            if (Data.Context.Current.RepositoryFactory.GetUserRepository().Save(user)) 
-                 return user;
-            //if user with username exist in database-dont write new user and return user with empty fields
-            else return new User();
-        }
-        /// <summary>
         /// Creates a new user with many roles
         /// </summary>
         /// <param name="username"></param>
@@ -55,6 +18,7 @@ namespace Training.Workshop.Service
             
             Data.Context.Current.RepositoryFactory.GetUserRepository().
                 SaveNewUser(username, password,role);
+            
             //TODO
             //need rework
             return new User();
@@ -79,9 +43,9 @@ namespace Training.Workshop.Service
             //TODO
             //Rework cause roles and permissions changed
 
-            var list=Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password);
+            var user=Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password);
             //return existing user
-            if (list.Count != 0)
+            if (user.Username!=null)
             {
                 //if username and password correct-take his roles and permissions,construct new user and return him
                 //take list of rolenames which user has
@@ -99,13 +63,13 @@ namespace Training.Workshop.Service
                     UserRoles.Add(NewRole);
                 }
                 //Construct user and return him
-                var user = new User()
+                var newuser = new User()
                 {
                     Username = username,
                     Password = password,
                     Roles = UserRoles
                 };
-                return user;
+                return newuser;
             }
             //return empty user if user are not exist in database
             else 

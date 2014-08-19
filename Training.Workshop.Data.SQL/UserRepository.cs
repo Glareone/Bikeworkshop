@@ -16,7 +16,7 @@ namespace Training.Workshop.Data.SQL
         /// Save User in SQL database
         /// </summary>
         /// <param name="user"></param>
-        public bool SaveNewUser(string username,string password,string[] role)
+        public bool SaveNewUser(string username,string password,string[] rolearray)
         {
             //Added user if username doesn't exist in database
             if (CountUsersWithUsername(username) == 0)
@@ -35,8 +35,16 @@ namespace Training.Workshop.Data.SQL
                         command.Parameters.AddWithValue("Salt", salt);
                         command.ExecuteNonQuery();
 
-                        //TODO
-                        //need added to UserRole rows!!!
+                        foreach (var role in rolearray)
+                        { 
+                            //TODO
+                            //adding new userrole rows
+                            command.CommandText = "InputintoUserRole";
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("Username", username);
+                            command.Parameters.AddWithValue("Rolename", role);
+                            command.ExecuteNonQuery();
+                        }
                     }
 
                 }
@@ -66,9 +74,9 @@ namespace Training.Workshop.Data.SQL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        public List<string> GetUser(string username, string password)
+        public User GetUser(string username, string password)
         {
-            var list = new List<string>();
+            var user = new User();
 
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
@@ -76,13 +84,7 @@ namespace Training.Workshop.Data.SQL
                 {
                     var userpassword = new SqlParameter("userpassword", SqlDbType.VarChar);
 
-                    var permissions = new SqlParameter("permissions", SqlDbType.VarChar);
-
-                    var role = new SqlParameter("role", SqlDbType.VarChar);
-
                     var salt = new SqlParameter("salt", SqlDbType.VarChar);
-                    
-                    
                     
                     //add Value to search by username
                     command.CommandText = "SearchUserbyName";
@@ -96,8 +98,7 @@ namespace Training.Workshop.Data.SQL
                     salt.Size = 15;
 
                     command.Parameters.Add(userpassword);
-                    command.Parameters.Add(permissions);
-                    command.Parameters.Add(role);
+
                     command.Parameters.Add(salt);
 
                     command.ExecuteNonQuery();
@@ -105,32 +106,17 @@ namespace Training.Workshop.Data.SQL
                     if (command.Parameters["userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password, command.Parameters["salt"].Value.ToString()))
                     {
 
-                        list.Add(username);
-                        list.Add(command.Parameters["userpassword"].Value.ToString());
+                        user.Username = username;
+                        user.Password = command.Parameters["userpassword"].Value.ToString();
+                        user.Roles = GetRolesandPermissionsbyUsername(username);
                         //TODO
                         //Rework
                         //may be need return user role and his permissions??
                     }
                 }
             }
-            return list;
+            return user;
         }
-
-        public List<string> Search(string username)
-        {
-            var list = new List<string>();
-
-            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
-            {
-                using (var command = unitofwork.Connection.CreateCommand())
-                {
-                    //TODO
-                    //Need realization
-                }
-            }
-            return list;
-        }
-
         /// <summary>
         /// Function returns Count of Users with this username
         /// </summary>
@@ -218,6 +204,29 @@ namespace Training.Workshop.Data.SQL
                 }
             }
             return rolenamelist;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public List<Role> GetRolesandPermissionsbyUsername(string username)
+        {
+            List<string> RoleNamesListwhichUserhas = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesByUsername(username);
+
+            var RoleList = new List<Role>();
+
+            foreach (var role in RoleNamesListwhichUserhas)
+            {
+                var Role = new Role()
+                {
+                    Name = role,
+                    Permissions = GetPermissionsbyRolename(role)
+                };
+                RoleList.Add(Role);
+            }
+
+            return RoleList;
         }
         /// <summary>
         /// Generate Salt. Function,that works with user creating.

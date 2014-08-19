@@ -22,7 +22,7 @@ namespace Training.Workshop.Data
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        List<string> GetUser(string username, string password);
+        User GetUser(string username, string password);
         /// <summary>
         /// returns all permissions for 1 role
         /// </summary>
@@ -35,5 +35,11 @@ namespace Training.Workshop.Data
         /// <param name="roles"></param>
         /// <returns></returns>
         List<string> GetRolesByUsername(string roles);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        List<Role> GetRolesandPermissionsbyUsername(string username);
     }
 }
