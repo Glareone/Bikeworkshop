@@ -52,19 +52,9 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual User Create(string username, string password, string[] role)
         {
-            var UserRoles = new List<Role>();
-
-            foreach (var roleelement in role)
-            {
-                var NewRole = new Role()
-                {
-                    Name = roleelement,
-                    Permissions = GetPermissionsbyRoleName(roleelement)
-                };
-                UserRoles.Add(NewRole);
-            }
             
-            
+            Data.Context.Current.RepositoryFactory.GetUserRepository().
+                SaveNewUser(username, password,role);
             //TODO
             //need rework
             return new User();
@@ -94,12 +84,28 @@ namespace Training.Workshop.Service
             if (list.Count != 0)
             {
                 //if username and password correct-take his roles and permissions,construct new user and return him
-                return new User
+                //take list of rolenames which user has
+                var rolenames = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesByUsername(username);
+                //construct new list of Roles and fill it by permissions from database
+                var UserRoles = new List<Role>();
+
+                foreach (var roleelement in rolenames)
                 {
-                    Username = list[0],
-                    Password = list[1],
-                    Roles = GetRolesandPermissionsbyUsername(username)
+                    var NewRole = new Role()
+                    {
+                        Name = roleelement,
+                        Permissions = GetPermissionsbyRoleName(roleelement)
+                    };
+                    UserRoles.Add(NewRole);
+                }
+                //Construct user and return him
+                var user = new User()
+                {
+                    Username = username,
+                    Password = password,
+                    Roles = UserRoles
                 };
+                return user;
             }
             //return empty user if user are not exist in database
             else 

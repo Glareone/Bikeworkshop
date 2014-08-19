@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE RetrievePermissionbyRolename (	@Rolename nvarchar(50),
-													@Permission nvarchar(50) OUTPUT
+											    @Permissionname nvarchar(50) OUTPUT
 				  							  )
 AS 
 SELECT
-*
+Permissionname
 FROM [Permission]
 WHERE Permission.PermissionID IN
 (

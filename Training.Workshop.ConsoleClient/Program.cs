@@ -45,7 +45,8 @@ namespace Training.Workshop.ConsoleClient
                 switch (commandArgs[0])
                 {
                     case "adduser":
-                        User.Create(commandArgs[1], commandArgs[2],commandArgs[3],commandArgs[4]);
+                        string[] str = {commandArgs[3],commandArgs[4]};
+                        User.Create(commandArgs[1], commandArgs[2],str);
                         break;
                     
                     case "deleteuser":
@@ -58,7 +59,7 @@ namespace Training.Workshop.ConsoleClient
                     case "updateuser":
                         break;
                     case "login":
-                        User.Read(commandArgs[1], commandArgs[2]);
+                        User.GetUser(commandArgs[1], commandArgs[2]);
                         break;
                     
                     case "addbike":

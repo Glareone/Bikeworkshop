@@ -32,7 +32,17 @@ namespace Training.Workshop.Domain.Services
         /// <param name="password"></param>
         /// <returns></returns>
         User GetUser(string username, string password);
-
+        /// <summary>
+        /// return all roles with permisions which user has
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         List<Role> GetRolesandPermissionsbyUsername(string username);
+        /// <summary>
+        /// returns permission list which role has in database
+        /// </summary>
+        /// <param name="rolename"></param>
+        /// <returns></returns>
+        List<string> GetPermissionsbyRoleName(string rolename);
     }
 }

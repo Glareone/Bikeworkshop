@@ -43,8 +43,9 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected void AddNewUser(object sender, EventArgs e)
         {
-                var user=GetController().AddNewUser(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
-                //user correctly added to database
+            string[] roles = { UserRoleTextBox.Text };
+            var user=GetController().AddNewUser(UserNameTextBox.Text, UserPasswordTextBox.Text,roles);
+             //user correctly added to database
                 if (user.Username != null)
                 {
                     CreateAuthenticationTicket(user);

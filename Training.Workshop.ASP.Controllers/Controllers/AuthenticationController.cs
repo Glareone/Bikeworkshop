@@ -18,7 +18,7 @@ namespace Training.Workshop.ASP.Controllers
         /// <returns></returns>
         public User LogIn(string username, string password)
         {
-          return  User.Read(username, password);
+          return  User.GetUser(username, password);
         }
     }
 }

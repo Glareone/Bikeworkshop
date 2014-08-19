@@ -41,7 +41,8 @@ namespace Training.Workshop.ASP.Client
         {
             try
             {
-                GetController().Add(UserNameTextBox.Text, UserPasswordTextBox.Text,UserPermissionsTextBox.Text,UserRoleTextBox.Text);
+                string[] roles = { UserPermissionsTextBox.Text };
+                GetController().Add(UserNameTextBox.Text, UserPasswordTextBox.Text,roles);
             }
             catch
             {

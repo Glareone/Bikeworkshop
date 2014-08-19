@@ -16,10 +16,10 @@ namespace Training.Workshop.Data.SQL
         /// Save User in SQL database
         /// </summary>
         /// <param name="user"></param>
-        public bool Save(User user)
+        public bool SaveNewUser(string username,string password,string[] role)
         {
             //Added user if username doesn't exist in database
-            if (CountUsersWithUsername(user.Username) == 0)
+            if (CountUsersWithUsername(username) == 0)
             {
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
                 {
@@ -30,10 +30,13 @@ namespace Training.Workshop.Data.SQL
 
                         command.CommandText = "InsertUser";
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("Username", user.Username);
-                        command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(user.Password, salt));
+                        command.Parameters.AddWithValue("Username", username);
+                        command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(password, salt));
                         command.Parameters.AddWithValue("Salt", salt);
                         command.ExecuteNonQuery();
+
+                        //TODO
+                        //need added to UserRole rows!!!
                     }
 
                 }
@@ -169,7 +172,7 @@ namespace Training.Workshop.Data.SQL
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
                     //Configure parameters
-                    var Permission = new SqlParameter("Permissions", SqlDbType.VarChar);
+                    var Permission = new SqlParameter("Permissionname", SqlDbType.VarChar);
                     
                     Permission.Direction = ParameterDirection.Output;
                     Permission.Size = 50;
@@ -183,7 +186,7 @@ namespace Training.Workshop.Data.SQL
                     //take all permissions from database to list
                     while (reader.Read())
                     {
-                        Permissionlist.Add(reader["Permission"].ToString());
+                        Permissionlist.Add(reader["Permissionname"].ToString());
                     }
                 }
             }
@@ -196,16 +199,25 @@ namespace Training.Workshop.Data.SQL
         /// <returns></returns>
         public List<string> GetRolesByUsername(string username)
         {
+            var rolenamelist = new List<string>();
+
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
+                    command.CommandText = "RetrieveRolesbyUsername";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("username", username);
 
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        rolenamelist.Add(reader["Rolename"].ToString());    
+                    }
                 }
             }
-
-
-            return new List<string>();
+            return rolenamelist;
         }
         /// <summary>
         /// Generate Salt. Function,that works with user creating.

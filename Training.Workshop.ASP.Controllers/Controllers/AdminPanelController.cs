@@ -9,9 +9,9 @@ namespace Training.Workshop.ASP.Controllers
 {
     public class AdminPanelController:IAdminPanelController
     {
-        public User AddNewUser(string username, string password, string permissions, string role)
+        public User AddNewUser(string username, string password,string[] role)
         {
-            return User.Create(username, password, permissions, role);
+            return User.Create(username, password,role);
         }
         /// <summary>
         /// Delete all existing users with this username.

@@ -3,12 +3,19 @@
 											)
 AS
 SELECT
-*
-FROM [UserRole]
-WHERE UserID=
+RoleName
+FROM
+[Role]
+WHERE RoleID IN
+(
+	SELECT
+	RoleID
+	FROM [UserRole]
+	WHERE UserID=
 	(
-	 SELECT
-	 A.UserID
-	 FROM [User] as A
-	 WHERE A.Username=@Username
+		SELECT
+		A.UserID
+		FROM [User] as A
+		WHERE A.Username=@Username
 	)
+)

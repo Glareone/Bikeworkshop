@@ -65,5 +65,14 @@ namespace Training.Workshop.Domain.Entities
         {
             return ServiceLocator.Resolve<IUserService>().GetRolesandPermissionsbyUsername(username);
         }
+        /// <summary>
+        /// returns permission list which role with rolename has in database
+        /// </summary>
+        /// <param name="rolename"></param>
+        /// <returns></returns>
+        public static List<string> GetPermissionsbyRoleName(string rolename) 
+        {
+            return ServiceLocator.Resolve<IUserService>().GetPermissionsbyRoleName(rolename);
+        }
     }
 }

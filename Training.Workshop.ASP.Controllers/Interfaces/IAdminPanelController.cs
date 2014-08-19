@@ -8,7 +8,7 @@ namespace Training.Workshop.ASP.Controllers.Interfaces
 {
     public interface IAdminPanelController:IPageController
     {
-        User AddNewUser(string username, string password, string permissions, string role);
+        User AddNewUser(string username, string password,string[] role);
         void DeleteUser(string username);
         User UpdateExistingUser(string username, string password, string newpassword);
         Bike AddNewBike(string manufacturer, string mark, int bikeyear, int ownerID, string condition);

@@ -9,7 +9,7 @@ namespace Training.Workshop.Data
         /// Saves user into repository
         /// </summary>
         /// <param name="user"></param>
-        bool Save(User user);
+        bool SaveNewUser(string username,string password,string[] role);
 
         /// <summary>
         /// Deletes user by username
