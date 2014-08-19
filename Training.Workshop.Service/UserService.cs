@@ -67,15 +67,8 @@ namespace Training.Workshop.Service
             
             //TODO
             //need rework
-
-
-
             return new User();
         }
-
-
-
-
         /// <summary>
         /// Removes a user from the system by username
         /// </summary>
@@ -95,7 +88,7 @@ namespace Training.Workshop.Service
         {
             //TODO
             //Rework cause roles and permissions changed
-            var list=Data.Context.Current.RepositoryFactory.GetUserRepository().Read(username, password);
+            var list=Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password);
             //return existing user
             if (list.Count != 0)
             {
@@ -112,16 +105,9 @@ namespace Training.Workshop.Service
             }
         }
 
-        public virtual List<string> GetUser(string username)
-        {
-            return Data.Context.Current.RepositoryFactory.GetUserRepository().Search(username);
-        }
         public virtual List<string> GetPermissionsbyRoleName(string rolename)
         {
-            //TODO
-            //change when realized.
-
-            return Data.Context.Current.RepositoryFactory.GetUserRepository().GetPermissions(rolename);
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().GetPermissionsbyRolename(rolename);
         }
     }
 }

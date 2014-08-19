@@ -8,10 +8,10 @@
 AS
 SELECT
 *
-FROM dbo.Bikes
+FROM [dbo.Bike]
 WHERE OwnerID=
 (
  SELECT I.UserID
- FROM dbo.Users AS I
+ FROM [dbo.User] 
  WHERE I.Username=@Username
 )

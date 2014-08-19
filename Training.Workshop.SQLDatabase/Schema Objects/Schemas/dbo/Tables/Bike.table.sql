@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Bikes]
+﻿CREATE TABLE [Bike]
 (
 	BikeID				int NOT NULL PRIMARY KEY IDENTITY(1,1), 
 	Manufacturer		nvarchar(30) NOT NULL,

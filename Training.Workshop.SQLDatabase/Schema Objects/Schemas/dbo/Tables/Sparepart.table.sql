@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Spareparts]
+﻿CREATE TABLE [Sparepart]
 (
 	SparepartID			int NOT NULL PRIMARY KEY IDENTITY(1,1), 
 	SparepartName		nvarchar(100) NOT NULL,

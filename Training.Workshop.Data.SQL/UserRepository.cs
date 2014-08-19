@@ -33,11 +33,7 @@ namespace Training.Workshop.Data.SQL
                         command.Parameters.AddWithValue("Username", user.Username);
                         command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(user.Password, salt));
                         command.Parameters.AddWithValue("Salt", salt);
-                        command.Parameters.AddWithValue("Permissions", user.Permissions);
-                        command.Parameters.AddWithValue("Role", user.Role);
                         command.ExecuteNonQuery();
-
-
                     }
 
                 }
@@ -67,7 +63,7 @@ namespace Training.Workshop.Data.SQL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        public List<string> Read(string username, string password)
+        public List<string> GetUser(string username, string password)
         {
             var list = new List<string>();
 
@@ -93,10 +89,6 @@ namespace Training.Workshop.Data.SQL
                     
                     userpassword.Direction = ParameterDirection.Output;
                     userpassword.Size = 50;
-                    permissions.Direction = ParameterDirection.Output;
-                    permissions.Size = 50;
-                    role.Direction = ParameterDirection.Output;
-                    role.Size = 30;
                     salt.Direction = ParameterDirection.Output;
                     salt.Size = 15;
 
@@ -112,8 +104,9 @@ namespace Training.Workshop.Data.SQL
 
                         list.Add(username);
                         list.Add(command.Parameters["userpassword"].Value.ToString());
-                        list.Add(command.Parameters["permissions"].Value.ToString());
-                        list.Add(command.Parameters["role"].Value.ToString());
+                        //TODO
+                        //Rework
+                        //may be need return user role and his permissions??
                     }
                 }
             }
@@ -128,29 +121,8 @@ namespace Training.Workshop.Data.SQL
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
-                    
-                   
-
-                    var permissions = new SqlParameter("permissions", SqlDbType.VarChar);
-
-                    var role = new SqlParameter("role", SqlDbType.VarChar);
-
-                    command.CommandText = "RetrievePermissionsAndRoleFromUserbyUsername";
-                    command.CommandType = CommandType.StoredProcedure;
-                    
-                    permissions.Direction = ParameterDirection.Output;
-                    permissions.Size = 50;
-                    role.Direction = ParameterDirection.Output;
-                    role.Size = 30;
-
-                    command.Parameters.AddWithValue("username", username);
-                    command.Parameters.Add(permissions);
-                    command.Parameters.Add(role);
-
-                    command.ExecuteNonQuery();
-
-                    list.Add(command.Parameters["permissions"].Value.ToString());
-                    list.Add(command.Parameters["role"].Value.ToString());
+                    //TODO
+                    //Need realization
                 }
             }
             return list;
@@ -183,7 +155,29 @@ namespace Training.Workshop.Data.SQL
                 }
             }
         }
+        /// <summary>
+        /// Get all permissions that role has.
+        /// </summary>
+        /// <param name="rolename"></param>
+        /// <returns></returns>
+        public List<string> GetPermissionsbyRolename(string rolename)
+        {
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    
 
+                }
+            }
+            //TODO
+            //Need rework
+            return new List<string>();
+        }
+        /// <summary>
+        /// Generate Salt. Function,that works with user creating.
+        /// </summary>
+        /// <returns></returns>
         private string GenerateSalt()
         {
             string salt = "";
@@ -198,7 +192,13 @@ namespace Training.Workshop.Data.SQL
             }
             return salt;
         }
-
+        /// <summary>
+        /// Generate new SHA-hash using user password and salt.
+        /// Used when user creating or when userpassword checking.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
         private string GenerateSHAHashFromPasswordWithSalt(string password, string salt)
         {
 
@@ -218,5 +218,7 @@ namespace Training.Workshop.Data.SQL
 
             return stringbuilder.ToString();
         }
+
+        
     }
 }

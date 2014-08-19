@@ -16,8 +16,13 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <param name="username"></param>
         void Delete(string username);
-
-        List<string> Read(string username, string password);
-        List<string> Search(string username);
+        /// <summary>
+        /// Get all user information
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        List<string> GetUser(string username, string password);
+        List<string> GetPermissionsbyRolename(string rolename);
     }
 }

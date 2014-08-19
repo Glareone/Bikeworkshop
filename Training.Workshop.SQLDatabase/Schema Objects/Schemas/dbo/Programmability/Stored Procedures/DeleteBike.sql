@@ -1,7 +1,8 @@
-﻿CREATE PROCEDURE DeleteBike (@ownerID int,@mark nvarchar(50))
+﻿CREATE PROCEDURE DeleteBike (@ownerID int,
+							 @mark nvarchar(50))
 AS
 BEGIN
-DELETE FROM dbo.Bikes 
+DELETE FROM [dbo.Bike]
 WHERE
  [OwnerID]=@ownerID AND
  [Mark]=mark

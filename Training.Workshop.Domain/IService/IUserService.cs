@@ -32,11 +32,5 @@ namespace Training.Workshop.Domain.Services
         /// <param name="password"></param>
         /// <returns></returns>
         User GetUser(string username, string password);
-        /// <summary>
-        /// search user and retrieve his permissions and role
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
-        List<string> GetUser(string username);
     }
 }

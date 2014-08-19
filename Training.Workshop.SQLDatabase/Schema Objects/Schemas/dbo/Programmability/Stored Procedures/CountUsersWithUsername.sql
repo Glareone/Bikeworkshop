@@ -2,5 +2,5 @@
 AS 
 SELECT 
 @UserWithUsernameCount = COUNT(*) 
-FROM dbo.Users
+FROM [dbo.User]
 WHERE Username=@username
