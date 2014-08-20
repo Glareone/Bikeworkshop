@@ -34,8 +34,7 @@ namespace Training.Workshop.ASP.Controllers
         /// <returns></returns>
         public List<User> GetAllUsers()
         {
-            //TODO
-            //need realization
+            Data.Context.Current.RepositoryFactory.GetUserRepository().GetUsers();
             return new List<User>();
 
 

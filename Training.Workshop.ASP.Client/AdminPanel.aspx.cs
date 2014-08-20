@@ -10,6 +10,7 @@ using System.Web.Security;
 using Training.Workshop.Domain.Entities;
 using System.Web.Script.Serialization;
 using Training.Workshop.ASP.Client.PrincipalRealization;
+using System.Data;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -31,7 +32,9 @@ namespace Training.Workshop.ASP.Client
         {
             if (HttpContext.Current.User.IsInRole("administrator"))
             {
-                Usercatalog.DataSource = GetController().GetAllUsers();
+               
+                var alluserlist= GetController().GetAllUsers();
+                Usercatalog.DataSource = alluserlist.ToArray();
                 Usercatalog.DataBind();
                 base.OnLoad(e);
             }

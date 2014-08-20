@@ -271,6 +271,20 @@ namespace Training.Workshop.Data.SQL
             return RoleList;
         }
         /// <summary>
+        /// return all users from database with permissions and roles
+        /// </summary>
+        /// <returns></returns>
+        public List<User> GetUsers()
+        {
+            //return user
+            //role - get permissions
+
+            //TODO
+            //need realization
+            return new List<User>();
+        }
+
+        /// <summary>
         /// Generate Salt. Function,that works with user creating.
         /// </summary>
         /// <returns></returns>

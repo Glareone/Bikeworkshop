@@ -93,6 +93,17 @@
             </tr>
         </HeaderTemplate>
         
+        <ItemTemplate>
+        <tr>
+            <td width="150"><%# DataBinder.Eval(Container, "DataItem.UserName")%>
+            </td>
+            <td width="150"><%# DataBinder.Eval(Container, "DataItem.Role")%>
+            </td>
+            <td width="150"><%# DataBinder.Eval(Container, "DataItem.Permissions")%>
+            </td>
+        </tr>
+        </ItemTemplate>
+
         <SeparatorTemplate>
             <tr>
             <td colspan="6"><hr></td>
