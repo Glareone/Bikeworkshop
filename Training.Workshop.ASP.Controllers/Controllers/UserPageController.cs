@@ -14,13 +14,18 @@ namespace Training.Workshop.ASP.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        public void Add(string username, string password,string[] roles)
+        public User AddUser(string username, string password,string[] roles)
         {
-            User.Create(username, password,roles);
+           return User.Create(username, password,roles);
         }
         /// <summary>
-        /// Delete all existing users with this username.
+        /// returns all roles which user has
         /// </summary>
         /// <param name="username"></param>
+        /// <returns></returns>
+        public List<string> GetRolesbyUsername(string username)
+        {
+            return User.GetPermissionsbyRoleName(username);
+        }
     }
 }

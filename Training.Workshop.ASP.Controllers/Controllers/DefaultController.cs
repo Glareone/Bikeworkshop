@@ -8,5 +8,6 @@ namespace Training.Workshop.ASP.Controllers
 {
     public class DefaultController:IDefaultController
     {
+
     }
 }

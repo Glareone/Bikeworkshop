@@ -70,7 +70,9 @@ namespace Training.Workshop.ConsoleClient
                     case "login":
                         var user=User.GetUser(commandArgs[1], commandArgs[2]);
                         break;
-                    
+                    case "searchuser":
+                        var list=Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesandPermissionsbyUsername(commandArgs[1]);
+                        break;
                     case "addbike":
                         Bike.Create(commandArgs[1], commandArgs[2], Convert.ToInt32(commandArgs[3]), Convert.ToInt32(commandArgs[4]),commandArgs[5]);
                         break;

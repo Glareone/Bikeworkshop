@@ -183,7 +183,7 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\CountUsersWithUsername.sql">
       <SubType>NotInBuild</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\SearchUserbyName.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\TakeSaltbyUserName.sql">
       <SubType>NotInBuild</SubType>
     </Build>
   </ItemGroup>
@@ -212,6 +212,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\DeletefromUserRole.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\CheckUsernameUserPasswordAndReturnUsername.sql">
       <SubType>NotInBuild</SubType>
     </Build>
   </ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Principal;
 using System.Web.Security;
+using Training.Workshop.Domain.Entities;
 
 namespace Training.Workshop.ASP.Client.PrincipalRealization
 {
@@ -28,22 +29,24 @@ namespace Training.Workshop.ASP.Client.PrincipalRealization
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        public bool IsInRole(string condition)
+        public bool IsInRole(string conditionstate)
         {
-            //TODO
-            //REWORK cause roles and permissions creates in new domain
-            var list = new List<string>();
-
+            var Rolelist = new List<Role>();
+            //If user are logIn
             if (Identity != null)
             {
-              //  list = Data.Context.Current.RepositoryFactory.GetUserRepository().Search(Identity.Name);
-            }
-            //if user role is "condition" or user permissions has "condition" 
-            if (list[1] == condition || list[0].Contains(condition))
-            {
-                return true;
+                Rolelist = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesandPermissionsbyUsername(Identity.Name);
             }
             else return false;
+            //check user permissions and role names to check is user may user concrete function where method "IsInRole" called.
+            foreach (var role in Rolelist)
+            {
+                if (role.Name == conditionstate || role.Permissions.Contains(conditionstate))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

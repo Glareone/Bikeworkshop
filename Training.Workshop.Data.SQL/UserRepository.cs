@@ -41,12 +41,13 @@ namespace Training.Workshop.Data.SQL
 
                 }
                 //Adding into UserRole table
-                using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+                foreach (var role in rolearray)
                 {
-                    using (var command = unitofwork.Connection.CreateCommand())
+                    using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
                     {
-                        foreach (var role in rolearray)
+                        using (var command = unitofwork.Connection.CreateCommand())
                         {
+
                             //TODO
                             //adding new userrole rows
                             command.CommandText = "InputintoUserRole";
@@ -54,6 +55,7 @@ namespace Training.Workshop.Data.SQL
                             command.Parameters.AddWithValue("Username", username);
                             command.Parameters.AddWithValue("Rolename", role);
                             command.ExecuteNonQuery();
+
                         }
                     }
                 }
@@ -97,48 +99,59 @@ namespace Training.Workshop.Data.SQL
         /// <param name="password"></param>
         public User GetUser(string username, string password)
         {
-            var user = new User();
-            //need to check password from database with entering from UI   
-            string userpasswordfromdatabase;
+            var user = new User(); 
             string saltfromdatabase;
+            string enteredPasswordwithSaltHash;
+            //take salt from database by username and generate SHA hash from entered password and salt
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
-                    var userpassword = new SqlParameter("userpassword", SqlDbType.VarChar);
-
                     var salt = new SqlParameter("salt", SqlDbType.VarChar);
                     
                     //add Value to search by username
-                    command.CommandText = "SearchUserbyName";
+                    command.CommandText = "TakeSaltbyUserName";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username",username);
                     //add values to output data from database
-                    userpassword.Direction = ParameterDirection.Output;
-                    userpassword.Size = 50;
+
                     salt.Direction = ParameterDirection.Output;
                     salt.Size = 15;
-
-                    command.Parameters.Add(userpassword);
 
                     command.Parameters.Add(salt);
 
                     command.ExecuteNonQuery();
-                    //take password and salt from database to check entering from UI
-                    userpasswordfromdatabase=command.Parameters["userpassword"].Value.ToString();
-                    saltfromdatabase=command.Parameters["salt"].Value.ToString();
+
+                    saltfromdatabase = command.Parameters["salt"].Value.ToString();
+                    enteredPasswordwithSaltHash = GenerateSHAHashFromPasswordWithSalt(password, saltfromdatabase);
+                    
                 }
             }
+            //check the entered password with user password in database.is entered password correct-return username and his roles\permissions
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
 
-                    //if input password are equals with user's password in database
-                    if (userpasswordfromdatabase == GenerateSHAHashFromPasswordWithSalt(password, saltfromdatabase))
-                    {
-                        user.Username = username;
-                        user.Password = userpasswordfromdatabase;
-                        user.Roles = GetRolesandPermissionsbyUsername(username);
-                    }
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "CheckPasswordAndReturnUsername";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("username", username);
+                    command.Parameters.AddWithValue("enteredpassword", enteredPasswordwithSaltHash);
+
+                    var correctusername = new SqlParameter("correctusername", SqlDbType.VarChar);
+                    correctusername.Direction = ParameterDirection.Output;
+                    correctusername.Size = 50;
+                    command.Parameters.Add(correctusername);
+                    command.ExecuteNonQuery();
+                    //Construct User
+                    user.Username = command.Parameters["correctusername"].Value.ToString();
+                    
+                }
+            }
+            //return filled user if username and password is correct
             //return empty user if user does not exist in database
+            user.Roles = GetRolesandPermissionsbyUsername(user.Username);
             return user;
         }
         /// <summary>

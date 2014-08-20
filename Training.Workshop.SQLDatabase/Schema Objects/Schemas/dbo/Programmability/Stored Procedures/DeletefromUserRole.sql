@@ -2,6 +2,14 @@
 										@Username nvarchar(50)
 									)
 AS
+DELETE P 
+FROM [UserRole] P
+INNER JOIN [User] ON [User].UserID = P.UserID
+	WHERE [User].Username=@Username 
+
+
+
+/*
 DELETE FROM [UserRole] 
 WHERE UserID=
 (
@@ -12,3 +20,4 @@ WHERE UserID=
 	WHERE
 	A.Username=@Username
 )
+*/

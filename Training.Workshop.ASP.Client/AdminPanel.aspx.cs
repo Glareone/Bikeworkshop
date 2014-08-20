@@ -29,8 +29,10 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected override void OnLoad(System.EventArgs e)
         {
-            if (HttpContext.Current.User.IsInRole("admin"))
+            if (HttpContext.Current.User.IsInRole("administrator"))
             {
+                Usercatalog.DataSource = GetController().GetAllUsers();
+                Usercatalog.DataBind();
                 base.OnLoad(e);
             }
             else Response.Redirect("~\\Authentication.aspx");

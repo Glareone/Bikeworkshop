@@ -83,4 +83,25 @@
         </fieldset>
     </div>
 
+    <asp:Repeater id="Usercatalog" runat="server">
+        <HeaderTemplate>
+            <table border="0" width="100%">
+            <tr>
+            <th align="left">Username</th>
+            <th align="left">Roles</th>
+            <th align="left">Permissions</th>
+            </tr>
+        </HeaderTemplate>
+        
+        <SeparatorTemplate>
+            <tr>
+            <td colspan="6"><hr></td>
+            </tr>
+        </SeparatorTemplate>
+        
+        <FooterTemplate>
+            </table>
+        </FooterTemplate>
+    </asp:Repeater>
+
 </asp:Content>

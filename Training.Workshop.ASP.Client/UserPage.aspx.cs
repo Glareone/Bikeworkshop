@@ -26,10 +26,6 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected override void OnLoad(System.EventArgs e /*mb without anything*/)
         {
-            //Control me
-            //TODO
-            //need to rework
-            // onLoad(blabla.Init(this));
             base.OnLoad(e);
         }
         /// <summary>
@@ -39,15 +35,9 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected void AddNewUser(object sender, EventArgs e)
         {
-            try
-            {
-                string[] roles = { UserPermissionsTextBox.Text };
-                GetController().Add(UserNameTextBox.Text, UserPasswordTextBox.Text,roles);
-            }
-            catch
-            {
-                Response.Redirect("Default.aspx");
-            }
+                string[] roles = UserRoleTextBox.Text.Split(' ');
+                
+                GetController().AddUser(UserNameTextBox.Text, UserPasswordTextBox.Text,roles);
             
         }
         /// <summary>

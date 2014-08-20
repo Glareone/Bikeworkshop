@@ -12,11 +12,6 @@ namespace Training.Workshop.Domain.Entities
         /// User's name / login
         /// </summary>
         public string Username { get; set; }
-
-        /// <summary>
-        /// User's password
-        /// </summary>
-        public string Password { get; set; }
         /// <summary>
         /// User's permissions
         /// </summary>

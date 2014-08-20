@@ -13,11 +13,11 @@ namespace Training.Workshop.Service
         /// <param name="password"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        public virtual User Create(string username, string password, string[] role)
+        public virtual User Create(string username, string password, string[] roles)
         {
             //If user created correctly return User with roles and permissions, else return empty user
             if (Data.Context.Current.RepositoryFactory.GetUserRepository().
-                SaveNewUser(username, password, role))
+                SaveNewUser(username, password, roles))
             {
                 return GetUser(username, password);
             }

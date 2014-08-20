@@ -19,13 +19,9 @@
            <asp:Label ID="UserPasswordLabel" runat="server">Password:</asp:Label>
             <br />
            <asp:TextBox ID="UserPasswordTextBox" runat="server" CssClass="textEntry"></asp:TextBox>
-           <asp:Label ID="UserPermissionsLabel" runat="server">Permissions:</asp:Label>
-           <br />
-           <asp:TextBox ID="UserPermissionsTextBox" runat="server" CssClass="textEntry"></asp:TextBox>
-           <br />
+            <br />
            <asp:Label ID="UserRoleLabel" runat="server">User Role:</asp:Label>
            <asp:TextBox ID="UserRoleTextBox" runat="server" CssClass="textEntry"></asp:TextBox>
-            
             <br />
             
            <p class="submitButton">
