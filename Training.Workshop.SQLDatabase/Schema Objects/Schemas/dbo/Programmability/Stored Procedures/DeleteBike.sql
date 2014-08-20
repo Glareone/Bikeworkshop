@@ -2,7 +2,7 @@
 							 @mark nvarchar(50))
 AS
 BEGIN
-DELETE FROM [dbo.Bike]
+DELETE FROM [Bike]
 WHERE
  [OwnerID]=@ownerID AND
  [Mark]=mark

@@ -21,6 +21,7 @@ namespace Training.Workshop.Data.SQL
             //Added user if username doesn't exist in database
             if (CountUsersWithUsername(username) == 0)
             {
+                var User = new User();
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
                 {
                     using (var command = unitofwork.Connection.CreateCommand())
@@ -34,9 +35,16 @@ namespace Training.Workshop.Data.SQL
                         command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(password, salt));
                         command.Parameters.AddWithValue("Salt", salt);
                         command.ExecuteNonQuery();
+                       
+                    }
 
+                }
+                using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+                {
+                    using (var command = unitofwork.Connection.CreateCommand())
+                    {
                         foreach (var role in rolearray)
-                        { 
+                        {
                             //TODO
                             //adding new userrole rows
                             command.CommandText = "InputintoUserRole";
@@ -46,8 +54,9 @@ namespace Training.Workshop.Data.SQL
                             command.ExecuteNonQuery();
                         }
                     }
-
                 }
+
+
                 return true;
             }
             return false;
@@ -70,7 +79,7 @@ namespace Training.Workshop.Data.SQL
             }
         }
         /// <summary>
-        /// Search and return user if he exist in database
+        /// Search and return user if he exist in database,with all his roles and permissions.
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -109,12 +118,10 @@ namespace Training.Workshop.Data.SQL
                         user.Username = username;
                         user.Password = command.Parameters["userpassword"].Value.ToString();
                         user.Roles = GetRolesandPermissionsbyUsername(username);
-                        //TODO
-                        //Rework
-                        //may be need return user role and his permissions??
                     }
                 }
             }
+            //return empty user if user does not exist in database
             return user;
         }
         /// <summary>
@@ -183,7 +190,7 @@ namespace Training.Workshop.Data.SQL
         /// </summary>
         /// <param name="roles"></param>
         /// <returns></returns>
-        public List<string> GetRolesByUsername(string username)
+        public List<string> GetRoleNamesByUsername(string username)
         {
             var rolenamelist = new List<string>();
 
@@ -206,13 +213,13 @@ namespace Training.Workshop.Data.SQL
             return rolenamelist;
         }
         /// <summary>
-        /// 
+        /// return all obtained User Roles by username and fill it by permissions,return List of Roles with all permissions.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         public List<Role> GetRolesandPermissionsbyUsername(string username)
         {
-            List<string> RoleNamesListwhichUserhas = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesByUsername(username);
+            List<string> RoleNamesListwhichUserhas = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRoleNamesByUsername(username);
 
             var RoleList = new List<Role>();
 

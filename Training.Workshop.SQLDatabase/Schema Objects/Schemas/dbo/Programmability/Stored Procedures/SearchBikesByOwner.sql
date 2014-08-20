@@ -8,7 +8,7 @@
 AS
 SELECT
 *
-FROM [dbo.Bike]
+FROM [Bike]
 WHERE OwnerID=
 (
  SELECT I.UserID

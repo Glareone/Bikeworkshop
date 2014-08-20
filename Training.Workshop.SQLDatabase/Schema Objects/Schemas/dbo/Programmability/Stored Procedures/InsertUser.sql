@@ -3,7 +3,7 @@
 							 @Salt nvarchar(15))
 AS
 BEGIN
-INSERT INTO [dbo.User]
+INSERT INTO [User]
 (
  [Username], 
  [UserPassword],

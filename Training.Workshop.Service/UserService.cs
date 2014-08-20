@@ -15,13 +15,17 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual User Create(string username, string password, string[] role)
         {
-            
-            Data.Context.Current.RepositoryFactory.GetUserRepository().
-                SaveNewUser(username, password,role);
-            
-            //TODO
-            //need rework
-            return new User();
+            //If user created correctly or not, else return empty user
+            if (Data.Context.Current.RepositoryFactory.GetUserRepository().
+                SaveNewUser(username, password, role))
+            {
+                return GetUser(username, password);
+            }
+            else
+            {
+                return new User();
+            }
+
         }
         /// <summary>
         /// Removes a user from the system by username
@@ -40,42 +44,7 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual User GetUser(string username, string password)
         {
-            //TODO
-            //Rework cause roles and permissions changed
-
-            var user=Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password);
-            //return existing user
-            if (user.Username!=null)
-            {
-                //if username and password correct-take his roles and permissions,construct new user and return him
-                //take list of rolenames which user has
-                var rolenames = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesByUsername(username);
-                //construct new list of Roles and fill it by permissions from database
-                var UserRoles = new List<Role>();
-
-                foreach (var roleelement in rolenames)
-                {
-                    var NewRole = new Role()
-                    {
-                        Name = roleelement,
-                        Permissions = GetPermissionsbyRoleName(roleelement)
-                    };
-                    UserRoles.Add(NewRole);
-                }
-                //Construct user and return him
-                var newuser = new User()
-                {
-                    Username = username,
-                    Password = password,
-                    Roles = UserRoles
-                };
-                return newuser;
-            }
-            //return empty user if user are not exist in database
-            else 
-            {
-                return new User();
-            }
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password); 
         }
         /// <summary>
         /// return list of permissions that role with rolename has
@@ -93,21 +62,8 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual List<Role> GetRolesandPermissionsbyUsername(string username)
         {
-            List<string> RoleNamesListwhichUserhas = Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesByUsername(username);
-
-            var RoleList = new List<Role>();
-
-            foreach (var role in RoleNamesListwhichUserhas)
-            {
-                var Role = new Role()
-                {
-                    Name = role,
-                    Permissions = GetPermissionsbyRoleName(role)
-                };
-                RoleList.Add(Role);
-            }
-
-            return RoleList;
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesandPermissionsbyUsername(username);
         }
+
     }
 }

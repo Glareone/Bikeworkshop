@@ -6,5 +6,5 @@ AS
 SELECT 
 @userpassword=UserPassword,
 @salt=Salt
-FROM [dbo.User]
+FROM [User]
 WHERE Username=@username

@@ -45,8 +45,17 @@ namespace Training.Workshop.ConsoleClient
                 switch (commandArgs[0])
                 {
                     case "adduser":
-                        string[] str = {commandArgs[3],commandArgs[4]};
-                        User.Create(commandArgs[1], commandArgs[2],str);
+
+                        if (commandArgs.Count() == 4)
+                        {
+                            string[] str = { commandArgs[3] };
+                            User.Create(commandArgs[1], commandArgs[2], str);
+                        }
+                        else
+                        { 
+                            string[] str = {commandArgs[3],commandArgs[4]};
+                            User.Create(commandArgs[1], commandArgs[2], str);
+                        }
                         break;
                     
                     case "deleteuser":

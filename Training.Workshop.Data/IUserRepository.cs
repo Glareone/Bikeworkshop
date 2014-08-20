@@ -34,7 +34,7 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <param name="roles"></param>
         /// <returns></returns>
-        List<string> GetRolesByUsername(string roles);
+        List<string> GetRoleNamesByUsername(string username);
         /// <summary>
         /// 
         /// </summary>
