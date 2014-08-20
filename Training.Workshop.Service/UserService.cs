@@ -15,7 +15,7 @@ namespace Training.Workshop.Service
         /// <returns></returns>
         public virtual User Create(string username, string password, string[] role)
         {
-            //If user created correctly or not, else return empty user
+            //If user created correctly return User with roles and permissions, else return empty user
             if (Data.Context.Current.RepositoryFactory.GetUserRepository().
                 SaveNewUser(username, password, role))
             {
@@ -34,7 +34,7 @@ namespace Training.Workshop.Service
         public virtual void Delete(string username)
         {
             Data.Context.Current.RepositoryFactory.GetUserRepository()
-                .Delete(username);
+                .DeleteUser(username);
         }
         /// <summary>
         /// reads user with current username,check the password and return user if he exist in database, else return empty user 

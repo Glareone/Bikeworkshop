@@ -15,7 +15,7 @@ namespace Training.Workshop.Data
         /// Deletes user by username
         /// </summary>
         /// <param name="username"></param>
-        void Delete(string username);
+        void DeleteUser(string username);
         /// <summary>
         /// Get all user information
         /// </summary>

@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE RetrieveRolesbyUsername	( @Username nvarchar(50),
-											  @Rolename nvarchar(50) OUTPUT
+											  @RoleName nvarchar(50) OUTPUT
 											)
 AS
 SELECT

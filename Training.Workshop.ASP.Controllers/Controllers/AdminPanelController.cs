@@ -19,7 +19,7 @@ namespace Training.Workshop.ASP.Controllers
         /// <param name="username"></param>
         public void DeleteUser(string username)
         {
-            Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(username);
+            Data.Context.Current.RepositoryFactory.GetUserRepository().DeleteUser(username);
         }
         /// <summary>
         /// 

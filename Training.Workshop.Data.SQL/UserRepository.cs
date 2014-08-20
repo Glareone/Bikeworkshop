@@ -22,6 +22,7 @@ namespace Training.Workshop.Data.SQL
             if (CountUsersWithUsername(username) == 0)
             {
                 var User = new User();
+                //Adding into User table
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
                 {
                     using (var command = unitofwork.Connection.CreateCommand())
@@ -39,6 +40,7 @@ namespace Training.Workshop.Data.SQL
                     }
 
                 }
+                //Adding into UserRole table
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
                 {
                     using (var command = unitofwork.Connection.CreateCommand())
@@ -55,8 +57,6 @@ namespace Training.Workshop.Data.SQL
                         }
                     }
                 }
-
-
                 return true;
             }
             return false;
@@ -65,8 +65,20 @@ namespace Training.Workshop.Data.SQL
         /// Delete all users with username from SQL Database
         /// </summary>
         /// <param name="username"></param>
-        public void Delete(string username)
+        public void DeleteUser(string username)
         {
+            //Delete all user roles and user permissions.
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "DeletefromUserRole";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("Username", username);
+                    command.ExecuteNonQuery();
+                }
+            }
+            //Deleting user from database
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
@@ -86,9 +98,12 @@ namespace Training.Workshop.Data.SQL
         public User GetUser(string username, string password)
         {
             var user = new User();
-
+            //need to check password from database with entering from UI   
+            string userpasswordfromdatabase;
+            string saltfromdatabase;
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
+                
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
                     var userpassword = new SqlParameter("userpassword", SqlDbType.VarChar);
@@ -100,7 +115,6 @@ namespace Training.Workshop.Data.SQL
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username",username);
                     //add values to output data from database
-                    
                     userpassword.Direction = ParameterDirection.Output;
                     userpassword.Size = 50;
                     salt.Direction = ParameterDirection.Output;
@@ -111,16 +125,19 @@ namespace Training.Workshop.Data.SQL
                     command.Parameters.Add(salt);
 
                     command.ExecuteNonQuery();
-                    //if input password are equals with user's password in database
-                    if (command.Parameters["userpassword"].Value.ToString() == GenerateSHAHashFromPasswordWithSalt(password, command.Parameters["salt"].Value.ToString()))
-                    {
-
-                        user.Username = username;
-                        user.Password = command.Parameters["userpassword"].Value.ToString();
-                        user.Roles = GetRolesandPermissionsbyUsername(username);
-                    }
+                    //take password and salt from database to check entering from UI
+                    userpasswordfromdatabase=command.Parameters["userpassword"].Value.ToString();
+                    saltfromdatabase=command.Parameters["salt"].Value.ToString();
                 }
             }
+
+                    //if input password are equals with user's password in database
+                    if (userpasswordfromdatabase == GenerateSHAHashFromPasswordWithSalt(password, saltfromdatabase))
+                    {
+                        user.Username = username;
+                        user.Password = userpasswordfromdatabase;
+                        user.Roles = GetRolesandPermissionsbyUsername(username);
+                    }
             //return empty user if user does not exist in database
             return user;
         }
@@ -198,6 +215,11 @@ namespace Training.Workshop.Data.SQL
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
+                    var Rolename = new SqlParameter("@Rolename", SqlDbType.VarChar);
+                    Rolename.Direction = ParameterDirection.Output;
+                    Rolename.Size = 50;
+                    command.Parameters.Add(Rolename);
+
                     command.CommandText = "RetrieveRolesbyUsername";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username", username);
@@ -206,7 +228,7 @@ namespace Training.Workshop.Data.SQL
 
                     while (reader.Read())
                     {
-                        rolenamelist.Add(reader["Rolename"].ToString());    
+                        rolenamelist.Add(reader["RoleName"].ToString());    
                     }
                 }
             }

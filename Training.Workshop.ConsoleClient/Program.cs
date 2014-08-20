@@ -62,13 +62,13 @@ namespace Training.Workshop.ConsoleClient
                         
                         //TODO
                         //wrong version of code,need rework (but working version)
-                        Data.Context.Current.RepositoryFactory.GetUserRepository().Delete(commandArgs[1]);
+                        Data.Context.Current.RepositoryFactory.GetUserRepository().DeleteUser(commandArgs[1]);
                         break;
                     
                     case "updateuser":
                         break;
                     case "login":
-                        User.GetUser(commandArgs[1], commandArgs[2]);
+                        var user=User.GetUser(commandArgs[1], commandArgs[2]);
                         break;
                     
                     case "addbike":

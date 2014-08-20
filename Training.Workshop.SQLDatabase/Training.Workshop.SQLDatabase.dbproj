@@ -210,4 +210,9 @@
       <SubType>NotInBuild</SubType>
     </Build>
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\DeletefromUserRole.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+  </ItemGroup>
 </Project>
