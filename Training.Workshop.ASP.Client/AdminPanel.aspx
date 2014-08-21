@@ -82,8 +82,8 @@
            </p>
         </fieldset>
     </div>
-    <!--OnItemDataBound="Usercatalogrepeater_OnItemDataBound"-->
-    <asp:Repeater id="Usercatalogrepeater" runat="server"> 
+    <!---->
+    <asp:Repeater id="Usercatalogrepeater" runat="server" OnItemDataBound="Usercatalogrepeater_OnItemDataBound"> 
         <HeaderTemplate>
             <table border="0" width="100%">
             <tr>

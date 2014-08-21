@@ -37,12 +37,12 @@ namespace Training.Workshop.ASP.Client
                 
 
                 //Call the binding of data. if it didnt call the data information didnt attach to repeater
-                //Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
+                Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
                 
                 
                 //example,need rework
-                Usercatalogrepeater.DataSource = CreateDataSource();
-                Usercatalogrepeater.DataBind();
+                //Usercatalogrepeater.DataSource = CreateDataSource();
+                //Usercatalogrepeater.DataBind();
 
                 base.OnLoad(e);
             }
@@ -54,7 +54,7 @@ namespace Training.Workshop.ASP.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /*
+        
         protected void Usercatalogrepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
@@ -80,15 +80,17 @@ namespace Training.Workshop.ASP.Client
                         }
 
                     }
-
-
                     dt.Rows.Add(user.Username, alluserroles,alluserpermissionbyrole);
                 }
-
- 
+                
+                Usercatalogrepeater.DataSource = CreateDataSource();
+                Usercatalogrepeater.DataBind();
             }
         }
-        */
+        /// <summary>
+        /// TEST METHODS
+        /// </summary>
+        /// <returns></returns>
         ICollection CreateDataSource()
         {
             DataTable dt = new DataTable();
