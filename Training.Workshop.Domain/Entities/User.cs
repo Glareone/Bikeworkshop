@@ -13,10 +13,6 @@ namespace Training.Workshop.Domain.Entities
         /// </summary>
         public string Username { get; set; }
         /// <summary>
-        /// User's permissions
-        /// </summary>
-        public string Permissions { get; set; }
-        /// <summary>
         /// User's role
         /// </summary>
         public List<Role> Roles { get; set; }

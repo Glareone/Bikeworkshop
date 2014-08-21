@@ -2,6 +2,16 @@
 											    @Permissionname nvarchar(50) OUTPUT
 				  							  )
 AS 
+SELECT DISTINCT
+P.Permissionname
+FROM [Permission] P
+JOIN [PermissionRole] PR
+ ON PR.PermissionID = P.PermissionID 
+JOIN [Role] R
+ ON R.RoleName=@Rolename
+
+
+/*
 SELECT
 Permissionname
 FROM [Permission]
@@ -16,3 +26,4 @@ WHERE Permission.PermissionID IN
 		WHERE A.RoleName=@Rolename
 	)
 )
+*/

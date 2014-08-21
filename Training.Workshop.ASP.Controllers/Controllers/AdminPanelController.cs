@@ -34,10 +34,7 @@ namespace Training.Workshop.ASP.Controllers
         /// <returns></returns>
         public List<User> GetAllUsers()
         {
-            Data.Context.Current.RepositoryFactory.GetUserRepository().GetUsers();
-            return new List<User>();
-
-
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().GetAllUsers();
         }
         /// <summary>
         /// Added new roles to updating user

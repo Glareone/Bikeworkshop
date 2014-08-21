@@ -34,7 +34,7 @@ namespace Training.Workshop.ASP.Client
             {
                
                 var alluserlist= GetController().GetAllUsers();
-                Usercatalog.DataSource = alluserlist.ToArray();
+                Usercatalog.DataSource = alluserlist;
                 Usercatalog.DataBind();
                 base.OnLoad(e);
             }

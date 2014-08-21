@@ -274,14 +274,40 @@ namespace Training.Workshop.Data.SQL
         /// return all users from database with permissions and roles
         /// </summary>
         /// <returns></returns>
-        public List<User> GetUsers()
+        public List<User> GetAllUsers()
         {
-            //return user
-            //role - get permissions
+            
+            var listofusernames = new List<string>();
+            
+            var listofusers = new List<User>();
+            //return all usernames
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "RetrieveAllUsernames";
+                    command.CommandType = CommandType.StoredProcedure;
 
-            //TODO
-            //need realization
-            return new List<User>();
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        listofusernames.Add(reader["username"].ToString());
+                    }
+                }
+            }
+            //take all roles by usernames and construct list of users with userroles
+            foreach (var username in listofusernames)
+            {
+                var user = new User()
+                {
+                    Username = username,
+                    Roles = GetRolesandPermissionsbyUsername(username)
+                };
+                listofusers.Add(user);
+            }
+
+            return listofusers;
         }
 
         /// <summary>

@@ -45,6 +45,6 @@ namespace Training.Workshop.Data
         /// return all users with permissions from database
         /// </summary>
         /// <returns></returns>
-        List<User> GetUsers();
+        List<User> GetAllUsers();
     }
 }

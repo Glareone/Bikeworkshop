@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Training.Workshop.Domain.Entities
 {
+    [Serializable]
     public class Role:Entitybase
     {
         public string Name {get; set;}
