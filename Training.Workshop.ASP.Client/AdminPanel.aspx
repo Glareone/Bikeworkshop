@@ -83,23 +83,20 @@
         </fieldset>
     </div>
 
-    <asp:Repeater id="Usercatalog" runat="server">
+    <asp:Repeater id="Usercatalogrepeater" runat="server" OnItemDataBound="Repeater1_OnItemDataBound">
         <HeaderTemplate>
             <table border="0" width="100%">
             <tr>
             <th align="left">Username</th>
             <th align="left">Roles</th>
-            <th align="left">Permissions</th>
             </tr>
         </HeaderTemplate>
         
         <ItemTemplate>
         <tr>
-            <td width="150"><%# DataBinder.Eval(Container, "DataItem.UserName")%>
+            <td width="150"><%# DataBinder.Eval(Container, "DataItem.Username")%>
             </td>
-            <td width="150"><%# DataBinder.Eval(Container, "DataItem.Role")%>
-            </td>
-            <td width="150"><%# DataBinder.Eval(Container, "DataItem.Permissions")%>
+            <td width="150"><asp:Label runat="server" ID="RoleName" Text='<%#Databinder.Eval(Container.DataItem.Roles.Name)%>'></asp:Label>
             </td>
         </tr>
         </ItemTemplate>

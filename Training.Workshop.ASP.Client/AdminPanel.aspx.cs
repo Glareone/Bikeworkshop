@@ -30,17 +30,38 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected override void OnLoad(System.EventArgs e)
         {
+            //retrieve information about all users
             if (HttpContext.Current.User.IsInRole("administrator"))
             {
-               
                 var alluserlist= GetController().GetAllUsers();
-                Usercatalog.DataSource = alluserlist;
-                Usercatalog.DataBind();
+
+                //construct data and insert it into repeater
+                Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
+               
                 base.OnLoad(e);
             }
             else Response.Redirect("~\\Authentication.aspx");
             
         }
+        /// <summary>
+        /// Method that boundeed data to Repeater
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Usercatalogrepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            //base initialized
+            //may be need to delete, trying to use
+            base.OnInit(e);
+
+            
+            RepeaterItem item = e.Item;
+            if (item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.Item)
+            { 
+             
+            }
+        }
+
         /// <summary>
         /// Add new user method from admin panel
         /// </summary>
