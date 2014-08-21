@@ -89,14 +89,17 @@
             <tr>
             <th align="left">Username</th>
             <th align="left">Roles</th>
+            <th align="left">Permissions</th>
             </tr>
         </HeaderTemplate>
         
         <ItemTemplate>
         <tr>
-            <td width="150"><%# DataBinder.Eval(Container, "DataItem.Username")%>
+            <td width="150"><asp:Label runat="server" ID="UserName"></asp:Label> 
             </td>
-            <td width="150"><asp:Label runat="server" ID="RoleName" Text='<%#Databinder.Eval(Container.DataItem.Roles.Name)%>'></asp:Label>
+            <td width="150"><asp:Label runat="server" ID="Roles"></asp:Label>
+            </td>
+            <td width="150"><asp:Label runat="server" ID="Permissions"></asp:Label>
             </td>
         </tr>
         </ItemTemplate>

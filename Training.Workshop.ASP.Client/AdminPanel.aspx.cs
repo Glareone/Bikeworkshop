@@ -33,11 +33,14 @@ namespace Training.Workshop.ASP.Client
             //retrieve information about all users
             if (HttpContext.Current.User.IsInRole("administrator"))
             {
-                var alluserlist= GetController().GetAllUsers();
+                
 
                 //construct data and insert it into repeater
                 Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
-               
+
+                //Call the binding of data. if it didnt call the data information didnt attach to repeater
+                Usercatalogrepeater.DataBind();
+
                 base.OnLoad(e);
             }
             else Response.Redirect("~\\Authentication.aspx");
@@ -50,15 +53,11 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected void Usercatalogrepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            //base initialized
-            //may be need to delete, trying to use
-            base.OnInit(e);
+            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
+            {
+                var alluserlist = GetController().GetAllUsers();
 
-            
-            RepeaterItem item = e.Item;
-            if (item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.Item)
-            { 
-             
+ 
             }
         }
 
