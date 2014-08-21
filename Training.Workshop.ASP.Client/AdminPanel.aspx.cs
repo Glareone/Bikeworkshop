@@ -25,7 +25,16 @@ namespace Training.Workshop.ASP.Client
             return PageControllerLocator.PageControllerLocator.Resolve<IAdminPanelController>();
         }
         /// <summary>
-        /// Call base onload to check is all needed resourses are create and connected
+        /// Repeater construction before page loading
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected override void Page_Init(object sender, EventArgs e)
+        {
+            Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
+        }
+        /// <summary>
+        /// Page Loading
         /// </summary>
         /// <param name="e"></param>
         protected override void OnLoad(System.EventArgs e)
@@ -57,6 +66,10 @@ namespace Training.Workshop.ASP.Client
             {
                 var alluserlist = GetController().GetAllUsers();
 
+                foreach (var user in alluserlist)
+                { 
+                 
+                }
  
             }
         }
