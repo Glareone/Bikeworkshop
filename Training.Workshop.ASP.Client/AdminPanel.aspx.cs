@@ -11,6 +11,7 @@ using Training.Workshop.Domain.Entities;
 using System.Web.Script.Serialization;
 using Training.Workshop.ASP.Client.PrincipalRealization;
 using System.Data;
+using System.Collections;
 
 namespace Training.Workshop.ASP.Client
 {
@@ -25,15 +26,6 @@ namespace Training.Workshop.ASP.Client
             return PageControllerLocator.PageControllerLocator.Resolve<IAdminPanelController>();
         }
         /// <summary>
-        /// Repeater construction before page loading
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected override void Page_Init(object sender, EventArgs e)
-        {
-            Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
-        }
-        /// <summary>
         /// Page Loading
         /// </summary>
         /// <param name="e"></param>
@@ -44,10 +36,12 @@ namespace Training.Workshop.ASP.Client
             {
                 
 
-                //construct data and insert it into repeater
-                Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
-
                 //Call the binding of data. if it didnt call the data information didnt attach to repeater
+                //Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
+                
+                
+                //example,need rework
+                Usercatalogrepeater.DataSource = CreateDataSource();
                 Usercatalogrepeater.DataBind();
 
                 base.OnLoad(e);
@@ -60,20 +54,72 @@ namespace Training.Workshop.ASP.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /*
         protected void Usercatalogrepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
             {
-                var alluserlist = GetController().GetAllUsers();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("UserNameEval", typeof(string));
+                dt.Columns.Add("RoleEval", typeof(string));
+                dt.Columns.Add("PermissionEval", typeof(string));
+                
+                var allusers = GetController().GetAllUsers();
 
-                foreach (var user in alluserlist)
-                { 
-                 
+                foreach (var user in allusers)
+                {
+                    string alluserroles = "";
+                    string alluserpermissionbyrole = "";
+                    foreach(var userrole in user.Roles)
+                    {
+                        alluserroles += " " + userrole.Name;
+
+                        foreach (var userpermission in userrole.Permissions)
+                        {
+                            alluserpermissionbyrole += " " + userpermission;
+                        }
+
+                    }
+
+
+                    dt.Rows.Add(user.Username, alluserroles,alluserpermissionbyrole);
                 }
+
  
             }
         }
+        */
+        ICollection CreateDataSource()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("UserNameEval", typeof(string));
+            dt.Columns.Add("RoleEval", typeof(string));
+            dt.Columns.Add("PermissionEval", typeof(string));
+            
+            var allusers = GetController().GetAllUsers();
 
+            foreach (var user in allusers)
+            {
+                string alluserroles = "";
+                string alluserpermissionbyrole = "";
+                foreach (var userrole in user.Roles)
+                {
+                    alluserroles += " " + userrole.Name;
+
+                    foreach (var userpermission in userrole.Permissions)
+                    {
+                        alluserpermissionbyrole += " " + userpermission;
+                    }
+
+                }
+
+
+                dt.Rows.Add(user.Username, alluserroles, alluserpermissionbyrole);
+            }
+
+            DataView dv = new DataView(dt);
+            return dv;
+        }
         /// <summary>
         /// Add new user method from admin panel
         /// </summary>

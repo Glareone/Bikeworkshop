@@ -82,8 +82,8 @@
            </p>
         </fieldset>
     </div>
-
-    <asp:Repeater id="Usercatalogrepeater" runat="server" OnItemDataBound="Repeater1_OnItemDataBound">
+    <!--OnItemDataBound="Usercatalogrepeater_OnItemDataBound"-->
+    <asp:Repeater id="Usercatalogrepeater" runat="server"> 
         <HeaderTemplate>
             <table border="0" width="100%">
             <tr>
@@ -95,11 +95,11 @@
         
         <ItemTemplate>
         <tr>
-            <td width="150"><asp:Label runat="server" ID="UserName"></asp:Label> 
+            <td width="150"><asp:Label runat="server" ID="UserName"  Text='<%#Eval("UserNameEval")%>'></asp:Label> 
             </td>
-            <td width="150"><asp:Label runat="server" ID="Roles"></asp:Label>
+            <td width="150"><asp:Label runat="server" ID="Roles"  Text='<%#Eval("RoleEval")%>'></asp:Label>
             </td>
-            <td width="150"><asp:Label runat="server" ID="Permissions"></asp:Label>
+            <td width="150"><asp:Label runat="server" ID="Permissions"  Text='<%#Eval("PermissionEval")%>'></asp:Label>
             </td>
         </tr>
         </ItemTemplate>
