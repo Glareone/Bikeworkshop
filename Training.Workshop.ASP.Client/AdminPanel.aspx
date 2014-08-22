@@ -95,18 +95,18 @@
         
         <ItemTemplate>
             <tr>
-                <td width="150"><asp:Literal runat="server" ID="UserNameliteral"  Text='<%#Eval("UserName")%>'></asp:Literal> 
+                <td width="150"><asp:Literal runat="server" ID="UserNameliteral"  ></asp:Literal> 
                 </td>
-                <td width="150"><asp:Literal runat="server" ID="Rolesliteral"  Text='<%#Eval("Roles")%>'></asp:Literal>
+                <td width="150"><asp:Literal runat="server" ID="Rolesliteral" ></asp:Literal>
                 </td>
-                <td width="150"><asp:Literal runat="server" ID="Permissionsliteral"  Text='<%#Eval("Roles.Permissions")%>'></asp:Literal>
+                <td width="150"><asp:Literal runat="server" ID="Permissionsliteral" ></asp:Literal>
                 </td>
             </tr>
         </ItemTemplate>
 
         <SeparatorTemplate>
             <tr>
-                <td colspan="6"><hr></td>
+            <td colspan="6"></td>
             </tr>
         </SeparatorTemplate>
         

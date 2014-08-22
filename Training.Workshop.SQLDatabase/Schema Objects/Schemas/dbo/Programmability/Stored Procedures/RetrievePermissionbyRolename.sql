@@ -2,12 +2,12 @@
 											    @Permissionname nvarchar(50) OUTPUT
 				  							  )
 AS 
-SELECT DISTINCT
+SELECT
 P.Permissionname
 FROM [Permission] P
-JOIN [PermissionRole] PR
- ON PR.PermissionID = P.PermissionID 
-JOIN [Role] R
+RIGHT JOIN [PermissionRole] PR 
+ ON P.PermissionID = PR.PermissionID 
+LEFT JOIN [Role] R
  ON R.RoleName=@Rolename
 
 

@@ -8,6 +8,6 @@ FROM [Bike]
 WHERE OwnerID=
 (
  SELECT I.UserID
- FROM [dbo.User] 
+ FROM [User] AS I
  WHERE I.Username=@Username
 )

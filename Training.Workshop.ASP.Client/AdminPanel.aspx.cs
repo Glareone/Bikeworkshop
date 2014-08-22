@@ -62,9 +62,37 @@ namespace Training.Workshop.ASP.Client
             if ((e.Item.ItemType == ListItemType.Item) ||
                      (e.Item.ItemType == ListItemType.AlternatingItem))
             {
-                Label permissions = (Label)e.Item.FindControl("Permissionsliteral");
+                Literal Permissionsliteral = (Literal)e.Item.FindControl("Permissionsliteral");
+                Literal Rolesliteral = (Literal)e.Item.FindControl("Rolesliteral");
+                Literal UserNameliteral = (Literal)e.Item.FindControl("UserNameliteral");
+                User user = (User)e.Item.DataItem;
+
+                
+                
+                if (UserNameliteral.Text=="" && Rolesliteral.Text == "" && Permissionsliteral.Text == "")
+                {
+                    UserNameliteral.Text = user.Username;
+                    string roles = "";
+                    string permissions = "";
+
+                    foreach (var role in user.Roles)
+                    {
+                        roles += role.Name + " ";
+                        foreach (var permission in role.Permissions)
+                        {
+                            if (!permissions.Contains(permission))
+                            {
+                                permissions += permission + " ";
+                            }
+                        }
+                    }
+
+                    Rolesliteral.Text = roles;
+                    Permissionsliteral.Text = permissions;
+                }
+                
                 //check data type in permission column and rewrite it into string=", , ,"
-                string permissiontext = permissions.Text;
+               
             }
         }
 
@@ -78,19 +106,7 @@ namespace Training.Workshop.ASP.Client
             string[] roles = { UserRoleTextBox.Text };
             var user=GetController().AddNewUser(UserNameTextBox.Text, UserPasswordTextBox.Text,roles);
              //user correctly added to database
-                if (user.Username != null)
-                {
-                    CreateAuthenticationTicket(user);
-
-                    AddedPopUp.Text = "user Correctly added to database";
-                    AddedPopUp.Visible = true;
-                }
-                //if user with this username already existing in database-returns empty user 
-                else 
-                {
-                    AddedPopUp.Text = "User with this username Already exist in database";
-                    AddedPopUp.Visible = true;
-                }
+            Response.Redirect("~\\Default.aspx");
 
         }
         /// <summary>
@@ -145,24 +161,5 @@ namespace Training.Workshop.ASP.Client
         /// Create ticket for user
         /// </summary>
         /// <param name="user"></param>
-        public void CreateAuthenticationTicket(User user)
-        {
-            var serializemodel = new CustomPrincipalSerializedModel();
-
-            serializemodel.Username = user.Username;
-            //need or not? need to think 
-            //serializemodel.Id= SOMETHING
-
-            //serializing our user
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            string userData = serializer.Serialize(serializemodel);
-            //create new ticket and encrypted it
-            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, user.Username, DateTime.Now, DateTime.Now.AddHours(2), false, userData);
-            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            //create http cookie which exist ticket and added it
-            HttpCookie ourCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-            Response.Cookies.Add(ourCookie);
-
-        }
     }
 }
