@@ -82,31 +82,31 @@
            </p>
         </fieldset>
     </div>
-    <!---->
-    <asp:Repeater id="Usercatalogrepeater" runat="server" OnItemDataBound="Usercatalogrepeater_OnItemDataBound"> 
+
+    <asp:Repeater ID="Usercatalogrepeater" runat="server" OnItemDataBound="Usercatalogrepeater_OnItemDataBound"> 
         <HeaderTemplate>
-            <table border="0" width="100%">
+                <table border="0" width="100%">
             <tr>
-            <th align="left">Username</th>
-            <th align="left">Roles</th>
-            <th align="left">Permissions</th>
+                <th align="left">Username</th>
+                <th align="left">Roles</th>
+                <th align="left">Permissions</th>
             </tr>
         </HeaderTemplate>
         
         <ItemTemplate>
-        <tr>
-            <td width="150"><asp:Label runat="server" ID="UserName"  Text='<%#Eval("UserNameEval")%>'></asp:Label> 
-            </td>
-            <td width="150"><asp:Label runat="server" ID="Roles"  Text='<%#Eval("RoleEval")%>'></asp:Label>
-            </td>
-            <td width="150"><asp:Label runat="server" ID="Permissions"  Text='<%#Eval("PermissionEval")%>'></asp:Label>
-            </td>
-        </tr>
+            <tr>
+                <td width="150"><asp:Literal runat="server" ID="UserNameliteral"  Text='<%#Eval("UserName")%>'></asp:Literal> 
+                </td>
+                <td width="150"><asp:Literal runat="server" ID="Rolesliteral"  Text='<%#Eval("Roles")%>'></asp:Literal>
+                </td>
+                <td width="150"><asp:Literal runat="server" ID="Permissionsliteral"  Text='<%#Eval("Roles.Permissions")%>'></asp:Literal>
+                </td>
+            </tr>
         </ItemTemplate>
 
         <SeparatorTemplate>
             <tr>
-            <td colspan="6"><hr></td>
+                <td colspan="6"><hr></td>
             </tr>
         </SeparatorTemplate>
         

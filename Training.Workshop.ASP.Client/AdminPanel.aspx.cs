@@ -34,17 +34,18 @@ namespace Training.Workshop.ASP.Client
             //retrieve information about all users
             if (HttpContext.Current.User.IsInRole("administrator"))
             {
-                
-
-                //Call the binding of data. if it didnt call the data information didnt attach to repeater
                 Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
-                
-                
+                    
+                if (!IsPostBack)
+                {
+                    //Manually register the event-handling
+                    //Adding user information to repeater
+                    Usercatalogrepeater.DataSource = GetController().GetAllUsers();
+                    Usercatalogrepeater.DataBind();
+                }
+                base.OnLoad(e);
                 //example,need rework
                 //Usercatalogrepeater.DataSource = CreateDataSource();
-                //Usercatalogrepeater.DataBind();
-
-                base.OnLoad(e);
             }
             else Response.Redirect("~\\Authentication.aspx");
             
@@ -54,74 +55,19 @@ namespace Training.Workshop.ASP.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
-        protected void Usercatalogrepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+
+        protected void Usercatalogrepeater_OnItemDataBound(Object Sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
+
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                     (e.Item.ItemType == ListItemType.AlternatingItem))
             {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("UserNameEval", typeof(string));
-                dt.Columns.Add("RoleEval", typeof(string));
-                dt.Columns.Add("PermissionEval", typeof(string));
-                
-                var allusers = GetController().GetAllUsers();
-
-                foreach (var user in allusers)
-                {
-                    string alluserroles = "";
-                    string alluserpermissionbyrole = "";
-                    foreach(var userrole in user.Roles)
-                    {
-                        alluserroles += " " + userrole.Name;
-
-                        foreach (var userpermission in userrole.Permissions)
-                        {
-                            alluserpermissionbyrole += " " + userpermission;
-                        }
-
-                    }
-                    dt.Rows.Add(user.Username, alluserroles,alluserpermissionbyrole);
-                }
-                
-                Usercatalogrepeater.DataSource = CreateDataSource();
-                Usercatalogrepeater.DataBind();
+                Label permissions = (Label)e.Item.FindControl("Permissionsliteral");
+                //check data type in permission column and rewrite it into string=", , ,"
+                string permissiontext = permissions.Text;
             }
         }
-        /// <summary>
-        /// TEST METHODS
-        /// </summary>
-        /// <returns></returns>
-        ICollection CreateDataSource()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("UserNameEval", typeof(string));
-            dt.Columns.Add("RoleEval", typeof(string));
-            dt.Columns.Add("PermissionEval", typeof(string));
-            
-            var allusers = GetController().GetAllUsers();
 
-            foreach (var user in allusers)
-            {
-                string alluserroles = "";
-                string alluserpermissionbyrole = "";
-                foreach (var userrole in user.Roles)
-                {
-                    alluserroles += " " + userrole.Name;
-
-                    foreach (var userpermission in userrole.Permissions)
-                    {
-                        alluserpermissionbyrole += " " + userpermission;
-                    }
-
-                }
-
-
-                dt.Rows.Add(user.Username, alluserroles, alluserpermissionbyrole);
-            }
-
-            DataView dv = new DataView(dt);
-            return dv;
-        }
         /// <summary>
         /// Add new user method from admin panel
         /// </summary>
