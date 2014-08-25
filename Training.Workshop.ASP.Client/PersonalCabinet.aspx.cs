@@ -25,7 +25,9 @@ namespace Training.Workshop.ASP.Client
             else
             {
                 GridView1.DataSource=GetController().SearchBikesbyOwnername(HttpContext.Current.User.Identity.Name);
+                
                 GridView1.DataBind();
+                
                 base.OnLoad(e);
             }
 

@@ -9,6 +9,7 @@ namespace Training.Workshop.ASP.Controllers.Interfaces
     public interface IUserPageController:IPageController
     {
         User AddUser(string username, string password,string[] roles);
+        
         List<string> GetRolesbyUsername(string username);
     }
 }

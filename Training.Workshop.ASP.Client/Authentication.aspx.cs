@@ -78,9 +78,11 @@ namespace Training.Workshop.ASP.Client
                 string userData = serializer.Serialize(serializemodel);
                 //create new ticket and encrypted it
                 FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, user.Username, DateTime.Now, DateTime.Now.AddHours(2), false, userData);
+                
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 //create http cookie which exist ticket and added it
                 HttpCookie ourCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                
                 Response.Cookies.Add(ourCookie);
 
             }

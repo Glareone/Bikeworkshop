@@ -75,7 +75,9 @@ namespace Training.Workshop.ASP.Client
                 if (UserNameliteral.Text=="")
                 {
                     UserNameliteral.Text = user.Username;
+                    
                     string roles = "";
+                    
                     string permissions = "";
 
                     foreach (var role in user.Roles)
