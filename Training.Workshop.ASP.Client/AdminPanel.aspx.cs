@@ -151,19 +151,7 @@ namespace Training.Workshop.ASP.Client
                 
                 string[] commands = clickedbutton.CommandArgument.Split(' ');
 
-                GetController().UpdateExistingBike(commands[2], commands[3], int.Parse(commands[4]), "GOOD");
-                //Change bike condition to good.
-                //().UpdateExistingBike(
-                //e.CommandArgument.ToString();
-                //TextBoxUpdatePrice.Text = ((Literal)e.Item.FindControl("LiteralProductPrice")).Text;
-                
-                // Add code here to add the item to the shopping cart.
-                // Use the value of e.Item.ItemIndex to retrieve the data 
-                // item in the control.
-
-
-                //add your custom logic here
-
+                GetController().UpdateExistingBike(commands[0], commands[1], int.Parse(commands[2]), "Good");
             }
         }
 

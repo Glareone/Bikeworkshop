@@ -114,7 +114,8 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
-
+<br \>
+<br \>
      <asp:Repeater ID="Bikecatalogrepeater" runat="server" OnItemDataBound="Bikecatalogrepeater_OnItemDataBound"> 
         <HeaderTemplate>
            <table border="0" width="100%">
