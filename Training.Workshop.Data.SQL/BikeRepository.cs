@@ -85,34 +85,8 @@ namespace Training.Workshop.Data.SQL
                 {
                     command.CommandText = "SearchBikesByOwner";
                     command.CommandType = CommandType.StoredProcedure;
-                    
-
-                    var manufacturer = new SqlParameter("Manufacturer",SqlDbType.VarChar);
-
-                    var mark = new SqlParameter("Mark",SqlDbType.VarChar);
-
-                    var bikeYear = new SqlParameter("BikeYear",SqlDbType.Date);
-
-                    var ownerID = new SqlParameter("OwnerID",0);
-
-                    var conditionState = new SqlParameter("ConditionState", SqlDbType.VarChar);
-
                     command.Parameters.AddWithValue("Username", owner);
-                    //Parameters Configuration
-                    manufacturer.Direction = ParameterDirection.Output;
-                    manufacturer.Size = 30;
-                    mark.Direction = ParameterDirection.Output;
-                    mark.Size = 50;
-                    bikeYear.Direction = ParameterDirection.Output;
-                    ownerID.Direction = ParameterDirection.Output;
-                    conditionState.Direction = ParameterDirection.Output;
-                    conditionState.Size = 50;
 
-                    command.Parameters.Add(manufacturer);
-                    command.Parameters.Add(mark);
-                    command.Parameters.Add(bikeYear);
-                    command.Parameters.Add(ownerID);
-                    command.Parameters.Add(conditionState);
 
                     var reader=command.ExecuteReader();
                     

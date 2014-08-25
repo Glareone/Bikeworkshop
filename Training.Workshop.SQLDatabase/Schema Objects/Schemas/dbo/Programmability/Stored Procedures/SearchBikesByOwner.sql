@@ -3,7 +3,7 @@
 									)
 AS
 SELECT
-*
+Manufacturer,Mark,OwnerID,BikeYear,ConditionState
 FROM [Bike]
 WHERE OwnerID=
 (

@@ -41,9 +41,9 @@ namespace Training.Workshop.Domain.Entities
         /// <param name="owner"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public static Bike Create(string manufacturer, string mark, int ownerID, int year,string conditionstate)
+        public static Bike Create(string manufacturer, string mark, string ownername, int year,string conditionstate)
         {
-            return ServiceLocator.Resolve<IBikeService>().Create(manufacturer,mark,ownerID,year,conditionstate);
+            return ServiceLocator.Resolve<IBikeService>().Create(manufacturer,mark,ownername,year,conditionstate);
         }
         /// <summary>
         /// this func deletes all bike by mark and owner,this function used only by admins

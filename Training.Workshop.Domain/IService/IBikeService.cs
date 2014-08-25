@@ -13,7 +13,7 @@ namespace Training.Workshop.Domain.Services
         /// <param name="owner"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        Bike Create(string manufacturer, string mark, int ownerID, int bikeyear,string condition);
+        Bike Create(string manufacturer, string mark, string ownername, int bikeyear,string condition);
 
         /// <summary>
         /// Delete existing bike from the system

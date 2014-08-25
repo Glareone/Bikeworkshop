@@ -309,6 +309,37 @@ namespace Training.Workshop.Data.SQL
 
             return listofusers;
         }
+        /// <summary>
+        /// return userid by username. this method used when bike creating with ownerID field
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public int GetUserIDbyUsername(string username)
+        {
+            int userid = 0;
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "RetrieveUserIdbyUsername";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("username", username);
+
+                    var userID = new SqlParameter("userID",0);
+                    userID.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(userID);
+
+                    command.ExecuteNonQuery();
+                    //If owner with username exist in database return UserId, else return 0
+                    if (command.Parameters["userID"].Value.ToString() != "")
+                    {
+                        userid = Int32.Parse(command.Parameters["userID"].Value.ToString());
+                    }
+                    
+                }
+            }
+            return userid;
+        }
 
         /// <summary>
         /// Generate Salt. Function,that works with user creating.

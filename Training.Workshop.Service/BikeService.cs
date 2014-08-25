@@ -17,19 +17,27 @@ namespace Training.Workshop.Service
         /// <param name="owner"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public virtual Bike Create(string manufacturer, string mark, int ownerID, int bikeyear,string conditionstate)
+        public virtual Bike Create(string manufacturer, string mark, string ownername, int bikeyear,string conditionstate)
         {
-            var bike = new Bike
+            //if owner with ownername exist in database-add bike to database and return it,else return bike with empty fields.
+            int ownerID=Data.Context.Current.RepositoryFactory.GetUserRepository().GetUserIDbyUsername(ownername);
+            
+            if (ownerID != 0)
             {
-                Manufacturer = manufacturer,
-                Mark = mark,
-                OwnerID = ownerID,
-                BikeYear = Convert.ToDateTime(bikeyear),
-                ConditionState=conditionstate
-            };
-            Data.Context.Current.RepositoryFactory.GetBikeRepository()
-              .Save(bike);
-            return bike;
+
+                var bike = new Bike
+                {
+                    Manufacturer = manufacturer,
+                    Mark = mark,
+                    OwnerID = ownerID,
+                    BikeYear = new DateTime(bikeyear,1,1),
+                    ConditionState = conditionstate
+                };
+                Data.Context.Current.RepositoryFactory.GetBikeRepository()
+                  .Save(bike);
+                return bike;
+            }
+            else return new Bike();
         }
 
         /// <summary>

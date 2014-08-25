@@ -46,5 +46,11 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <returns></returns>
         List<User> GetAllUsers();
+        /// <summary>
+        /// return userid by username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        int GetUserIDbyUsername(string username);
     }
 }

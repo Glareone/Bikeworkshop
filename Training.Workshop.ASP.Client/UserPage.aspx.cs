@@ -26,6 +26,7 @@ namespace Training.Workshop.ASP.Client
         /// <param name="e"></param>
         protected override void OnLoad(System.EventArgs e /*mb without anything*/)
         {
+
             base.OnLoad(e);
         }
         /// <summary>

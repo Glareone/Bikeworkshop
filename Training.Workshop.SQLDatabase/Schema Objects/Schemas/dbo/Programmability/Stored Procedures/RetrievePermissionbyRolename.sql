@@ -3,10 +3,11 @@
 				  							  )
 AS 
 SELECT
-P.Permissionname,R.RoleName,PR.PermissionRolesID
+P.Permissionname
 FROM [Permission] AS P
 INNER JOIN [PermissionRole] AS PR ON P.PermissionID=PR.PermissionID
-LEFT JOIN [Role] AS R ON R.RoleName=@Rolename
+LEFT JOIN [Role] AS R ON R.RoleID=PR.RoleID
+WHERE R.RoleName=@Rolename
 
 
 /*
