@@ -1,13 +1,12 @@
-﻿CREATE PROCEDURE RetrievePermissionbyRolename (	@Rolename nvarchar(50),
-											    @Permissionname nvarchar(50) OUTPUT
+﻿CREATE PROCEDURE usp_RetrievePermissionbyRolename (	@Rolename nvarchar(50)
 				  							  )
 AS 
 SELECT
 P.Permissionname
-FROM [Permission] AS P
-INNER JOIN [PermissionRole] AS PR ON P.PermissionID=PR.PermissionID
-LEFT JOIN [Role] AS R ON R.RoleID=PR.RoleID
-WHERE R.RoleName=@Rolename
+FROM [dbo].[Permission] p
+JOIN [PermissionRole] AS PR ON P.PermissionID=PR.PermissionID
+JOIN [Role] AS R ON R.RoleID=PR.RoleID
+WHERE R.RoleName = @Rolename
 
 
 /*

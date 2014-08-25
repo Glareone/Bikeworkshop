@@ -142,7 +142,7 @@ namespace Training.Workshop.ASP.Client
         }
         /// <summary>
         /// Repeater button event executer
-        /// </summary>
+        /// </summary>D:\Myproject_git\Bikeworkshop\Training.Workshop.ASP.Client\PrincipalRealization\CustomPrincipal.cs
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void RepeaterListOfUsers_OnItemCommand(object sender, RepeaterCommandEventArgs e)

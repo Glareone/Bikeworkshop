@@ -1,4 +1,5 @@
-﻿namespace Training.Workshop.Data
+﻿using System;
+namespace Training.Workshop.Data
 {
     public sealed class Context
     {

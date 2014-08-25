@@ -36,18 +36,12 @@ namespace Training.Workshop.Data.SQL
                         command.Parameters.AddWithValue("Password", GenerateSHAHashFromPasswordWithSalt(password, salt));
                         command.Parameters.AddWithValue("Salt", salt);
                         command.ExecuteNonQuery();
-                       
-                    }
 
-                }
+                        command.Parameters.Clear();
+
                 //Adding into UserRole table
-                foreach (var role in rolearray)
-                {
-                    using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
-                    {
-                        using (var command = unitofwork.Connection.CreateCommand())
+                        foreach (var role in rolearray)
                         {
-
                             //TODO
                             //adding new userrole rows
                             command.CommandText = "InputintoUserRole";
@@ -55,7 +49,7 @@ namespace Training.Workshop.Data.SQL
                             command.Parameters.AddWithValue("Username", username);
                             command.Parameters.AddWithValue("Rolename", role);
                             command.ExecuteNonQuery();
-
+                            command.Parameters.Clear();
                         }
                     }
                 }
@@ -78,13 +72,9 @@ namespace Training.Workshop.Data.SQL
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("Username", username);
                     command.ExecuteNonQuery();
-                }
-            }
-            //Deleting user from database
-            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
-            {
-                using (var command = unitofwork.Connection.CreateCommand())
-                {
+                    command.Parameters.Clear();
+
+                    //Deleting user from database
                     command.CommandText = "DeleteUser";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("Username", username);
@@ -125,22 +115,15 @@ namespace Training.Workshop.Data.SQL
 
                     saltfromdatabase = command.Parameters["salt"].Value.ToString();
                     enteredPasswordwithSaltHash = GenerateSHAHashFromPasswordWithSalt(password, saltfromdatabase);
-                    
-                }
-            }
-            //check the entered password with user password in database.is entered password correct-return username and his roles\permissions
-            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
-            {
-
-                using (var command = unitofwork.Connection.CreateCommand())
-                {
+                    //clear parameters for new procedure
+                    command.Parameters.Clear();
+            
                     command.CommandText = "CheckPasswordAndReturnUsername";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("username", username);
                     command.Parameters.AddWithValue("enteredpassword", enteredPasswordwithSaltHash);
 
                     var correctusername = new SqlParameter("correctusername", SqlDbType.VarChar);
-                    
                     correctusername.Direction = ParameterDirection.Output;
                     correctusername.Size = 50;
                     command.Parameters.Add(correctusername);
