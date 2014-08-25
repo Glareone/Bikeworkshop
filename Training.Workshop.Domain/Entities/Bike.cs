@@ -72,7 +72,13 @@ namespace Training.Workshop.Domain.Entities
         {
             return ServiceLocator.Resolve<IBikeService>().Search();
         }
-
+        /// <summary>
+        /// Update bike condition
+        /// </summary>
+        /// <param name="manufacturer"></param>
+        /// <param name="mark"></param>
+        /// <param name="ownerID"></param>
+        /// <param name="condition"></param>
         public static void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
         {
             ServiceLocator.Resolve<IBikeService>().UpdateCondition(manufacturer, mark, ownerID, condition);

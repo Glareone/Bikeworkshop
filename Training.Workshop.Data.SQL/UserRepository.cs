@@ -140,6 +140,7 @@ namespace Training.Workshop.Data.SQL
                     command.Parameters.AddWithValue("enteredpassword", enteredPasswordwithSaltHash);
 
                     var correctusername = new SqlParameter("correctusername", SqlDbType.VarChar);
+                    
                     correctusername.Direction = ParameterDirection.Output;
                     correctusername.Size = 50;
                     command.Parameters.Add(correctusername);
@@ -229,6 +230,7 @@ namespace Training.Workshop.Data.SQL
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
                     var Rolename = new SqlParameter("@Rolename", SqlDbType.VarChar);
+                    
                     Rolename.Direction = ParameterDirection.Output;
                     Rolename.Size = 50;
                     command.Parameters.Add(Rolename);
