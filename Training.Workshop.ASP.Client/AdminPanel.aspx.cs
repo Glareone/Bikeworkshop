@@ -134,8 +134,8 @@ namespace Training.Workshop.ASP.Client
                     ConditionStateliteral.Text = bike.ConditionState;
                 }
 
-                UpdateBikeConditionButton.Text = "Update Condition " + Manufacturerliteral.Text + " " + Markliteral.Text + " " + OwnerIDliteral.Text;
-                
+                UpdateBikeConditionButton.Text = "Update Condition";
+                UpdateBikeConditionButton.CommandArgument = Manufacturerliteral.Text + " " + Markliteral.Text + " " + OwnerIDliteral.Text;
             }
         }
         /// <summary>
@@ -149,7 +149,7 @@ namespace Training.Workshop.ASP.Client
             {
                 var clickedbutton = (Button)Bikecatalogrepeater.Items[e.Item.ItemIndex].FindControl("UpdateBikeConditionButton");
                 
-                string[] commands = clickedbutton.Text.Split(' ');
+                string[] commands = clickedbutton.CommandArgument.Split(' ');
 
                 GetController().UpdateExistingBike(commands[2], commands[3], int.Parse(commands[4]), "GOOD");
                 //Change bike condition to good.
