@@ -8,3 +8,4 @@ JOIN [dbo].[Role] AS R ON R.RoleID=UR.RoleID
 JOIN [dbo].[PermissionRole] AS PR ON PR.RoleID=R.RoleID
 JOIN [dbo].[Permission] AS P ON P.PermissionID=PR.PermissionID
 WHERE U.Username=@username
+

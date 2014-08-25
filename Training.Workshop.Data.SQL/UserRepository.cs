@@ -371,6 +371,41 @@ namespace Training.Workshop.Data.SQL
             return stringbuilder.ToString();
         }
 
+
+
+        /*
+        public List<User> GetAllUsers()
+        {
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+
+                        // process the first result
+                        displayCountryRegions(reader);
+
+                        // use NextResult to move to the second result and verify it is returned
+                        if (!reader.NextResult())
+                            throw new InvalidOperationException("Expected second result (StateProvinces) but only one was returned");
+
+                        // process the second result
+                        displayStateProvinces(reader);
+
+                        reader.Close();
+                    }
+                }
+            }
+
+
+            //TODO
+            //Need realization
+
+            return new List<User>();
+        }
+        */
         
     }
 }
