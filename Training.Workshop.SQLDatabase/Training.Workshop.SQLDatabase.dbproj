@@ -196,9 +196,9 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\RetrievePermissionbyRolename.sql">
       <SubType>NotInBuild</SubType>
     </Build>
-    <NotInBuild Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\UpdateBike.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\UpdateBikeCondition.sql">
       <SubType>NotInBuild</SubType>
-    </NotInBuild>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\RetrieveRolesbyUsername.sql">

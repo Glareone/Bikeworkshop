@@ -64,9 +64,18 @@ namespace Training.Workshop.Domain.Entities
         {
             return ServiceLocator.Resolve<IBikeService>().Search(owner);
         }
+        /// <summary>
+        /// return all bikes
+        /// </summary>
+        /// <returns></returns>
         public static List<Bike> Search()
         {
             return ServiceLocator.Resolve<IBikeService>().Search();
+        }
+
+        public static void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
+        {
+            ServiceLocator.Resolve<IBikeService>().UpdateCondition(manufacturer, mark, ownerID, condition);
         }
     }
 }

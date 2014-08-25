@@ -32,5 +32,7 @@ namespace Training.Workshop.Domain.Services
         /// </summary>
         /// <returns></returns>
         List<Bike> Search();
+
+        void UpdateCondition(string manufacturer, string mark, int ownerID, string condition);
     }
 }

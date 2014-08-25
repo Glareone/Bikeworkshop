@@ -107,22 +107,11 @@ namespace Training.Workshop.ASP.Controllers
         /// <param name="ownerID"></param>
         /// <param name="newcondition"></param>
         /// <returns></returns>
-        public Bike UpdateExistingBike(string manufacturer, string mark, string ownername, string newcondition)
-        { 
-            //take ownerID by ownername
-
-            //take bike by ownerID,mark and manufacturer
-
-            //Update bike condition
-
-            //delete old bike from database
-
-            //enter bike with new condition
-
-
+        public void UpdateExistingBike(string manufacturer, string mark, int ownerID, string newcondition)
+        {
+            Bike.UpdateCondition(manufacturer, mark, ownerID, newcondition);
             //TODO
             //need realization
-            return new Bike();
         }
     }
 }

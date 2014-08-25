@@ -139,7 +139,7 @@
                 </td>
                 <td width="150"><asp:Literal runat="server" ID="ConditionStateliteral" ></asp:Literal>
                 </td>
-                 <td width="150"><asp:Button runat="server" ID="UpdateBikeConditionButton" Text="UpdateCondition" CommandName="UpdateCondition" ></asp:Button>
+                 <td width="150"><asp:Button runat="server" ID="UpdateBikeConditionButton" CommandName="UpdateCondition" ></asp:Button>
                 </td>
                 </tr>
         </ItemTemplate>

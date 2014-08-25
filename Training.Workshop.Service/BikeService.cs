@@ -69,5 +69,16 @@ namespace Training.Workshop.Service
             return Data.Context.Current.RepositoryFactory.GetBikeRepository().
                 RetrieveAllBikes();
         }
+        /// <summary>
+        /// update any bike condition to good
+        /// </summary>
+        /// <param name="manufacturer"></param>
+        /// <param name="mark"></param>
+        /// <param name="ownerID"></param>
+        /// <param name="condition"></param>
+        public void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
+        {
+            Data.Context.Current.RepositoryFactory.GetBikeRepository().UpdateCondition(manufacturer, mark, ownerID, condition);
+        }
     }
 }

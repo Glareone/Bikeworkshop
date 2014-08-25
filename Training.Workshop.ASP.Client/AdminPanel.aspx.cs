@@ -35,7 +35,9 @@ namespace Training.Workshop.ASP.Client
             if (HttpContext.Current.User.IsInRole("administrator"))
             {
                 Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
-                    
+                //command event initialized
+                Bikecatalogrepeater.ItemCommand += new RepeaterCommandEventHandler(RepeaterListOfUsers_OnItemCommand);    
+                
                 if (!IsPostBack)
                 {
                     //Manually register the event-handling
@@ -47,8 +49,6 @@ namespace Training.Workshop.ASP.Client
                     Bikecatalogrepeater.DataBind();
                 }
                 base.OnLoad(e);
-                //example,need rework
-                //Usercatalogrepeater.DataSource = CreateDataSource();
             }
             else Response.Redirect("~\\Authentication.aspx");
             
@@ -65,13 +65,14 @@ namespace Training.Workshop.ASP.Client
                      (e.Item.ItemType == ListItemType.AlternatingItem))
             {
                 Literal Permissionsliteral = (Literal)e.Item.FindControl("Permissionsliteral");
+                
                 Literal Rolesliteral = (Literal)e.Item.FindControl("Rolesliteral");
+                
                 Literal UserNameliteral = (Literal)e.Item.FindControl("UserNameliteral");
+                
                 User user = (User)e.Item.DataItem;
 
-                
-                
-                if (UserNameliteral.Text=="" && Rolesliteral.Text == "" && Permissionsliteral.Text == "")
+                if (UserNameliteral.Text=="")
                 {
                     UserNameliteral.Text = user.Username;
                     string roles = "";
@@ -110,13 +111,20 @@ namespace Training.Workshop.ASP.Client
                 Bike bike = (Bike)e.Item.DataItem;
 
                 Literal Manufacturerliteral = (Literal)e.Item.FindControl("Manufacturerliteral");
+                
                 Literal Markliteral = (Literal)e.Item.FindControl("Markliteral");
+                
                 Literal OwnerIDliteral = (Literal)e.Item.FindControl("OwnerIDliteral");
+                
                 Literal BikeYearliteral = (Literal)e.Item.FindControl("BikeYearliteral");
+                
                 Literal ConditionStateliteral = (Literal)e.Item.FindControl("ConditionStateliteral");
+                
                 Button UpdateBikeConditionButton = (Button)e.Item.FindControl("UpdateBikeConditionButton");
+                
                 UpdateBikeConditionButton.CommandArgument = ConditionStateliteral.Text;
-
+                
+                
                 if (Manufacturerliteral.Text == "")
                 {
                     Manufacturerliteral.Text = bike.Manufacturer;
@@ -125,6 +133,9 @@ namespace Training.Workshop.ASP.Client
                     BikeYearliteral.Text = Convert.ToString(bike.BikeYear);
                     ConditionStateliteral.Text = bike.ConditionState;
                 }
+
+                UpdateBikeConditionButton.Text = "Update Condition " + Manufacturerliteral.Text + " " + Markliteral.Text + " " + OwnerIDliteral.Text;
+                
             }
         }
         /// <summary>
@@ -136,11 +147,21 @@ namespace Training.Workshop.ASP.Client
         {
             if (e.CommandName == "UpdateCondition")
             {
+                var clickedbutton = (Button)Bikecatalogrepeater.Items[e.Item.ItemIndex].FindControl("UpdateBikeConditionButton");
+                
+                string[] commands = clickedbutton.Text.Split(' ');
+
+                GetController().UpdateExistingBike(commands[2], commands[3], int.Parse(commands[4]), "GOOD");
                 //Change bike condition to good.
                 //().UpdateExistingBike(
                 //e.CommandArgument.ToString();
                 //TextBoxUpdatePrice.Text = ((Literal)e.Item.FindControl("LiteralProductPrice")).Text;
                 
+                // Add code here to add the item to the shopping cart.
+                // Use the value of e.Item.ItemIndex to retrieve the data 
+                // item in the control.
+
+
                 //add your custom logic here
 
             }
@@ -194,9 +215,8 @@ namespace Training.Workshop.ASP.Client
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void AddNewBike(object sender,EventArgs e)
-        { 
-            //TODO
-            //need realization
+        {
+            Bike.Create(_BikeManufacturer.Text, _BikeMark.Text, _BikeOwner.Text, int.Parse(_BikeTear.Text), _BikeCondition.Text);                
         }
         /// <summary>
         /// Update existing bike from admin panel
