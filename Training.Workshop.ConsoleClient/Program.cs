@@ -8,6 +8,7 @@ using Training.Workshop.Service.ServiceLocator;
 using Training.Workshop.Domain.Services;
 using Training.Workshop.UnitOfWork;
 using Training.Workshop.Data.SQL;
+using System.Collections.Generic;
 
 namespace Training.Workshop.ConsoleClient
 {
@@ -67,15 +68,17 @@ namespace Training.Workshop.ConsoleClient
                     
                     case "updateuser":
                         break;
+
                     case "login":
                         var user=User.GetUser(commandArgs[1], commandArgs[2]);
                         break;
+
                     case "searchuser":
                         var list=Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesandPermissionsbyUsername(commandArgs[1]);
                         break;
+
                     case "addbike":
                         Bike.Create(commandArgs[1], commandArgs[2], commandArgs[3], Convert.ToInt32(commandArgs[4]),commandArgs[5]);
-                        
                         break;
                     
                     case "deletebike":
@@ -84,10 +87,15 @@ namespace Training.Workshop.ConsoleClient
                     
                     case "updatebike":
                         break;
+
                     case "searchbike":
-                        var ownerbikes=Bike.Search(commandArgs[1]);
+                        List<Bike> ownerbikes=Bike.Search(commandArgs[1]);
                         break;
-                    
+
+                    case "getallbikes":
+                        List<Bike> allbikes=Bike.Search();
+                        break;
+
                     case "addsparepart":
                         Sparepart.Create(commandArgs[1], commandArgs[2], Convert.ToInt32(commandArgs[3]));
                         break;

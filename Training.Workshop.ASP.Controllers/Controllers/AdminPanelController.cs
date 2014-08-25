@@ -49,7 +49,12 @@ namespace Training.Workshop.ASP.Controllers
             //Need realization
             return new User();
         }
-        
+
+        public List<Bike> GetAllBikes()
+        {
+            return Bike.Search();
+        }
+
         /// <summary>
         /// Change password to existing user
         /// </summary>

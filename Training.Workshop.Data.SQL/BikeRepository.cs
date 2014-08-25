@@ -109,5 +109,39 @@ namespace Training.Workshop.Data.SQL
             }
             return OwnerBikes;
         }
+        /// <summary>
+        /// Return all bikes
+        /// </summary>
+        /// <returns></returns>
+        public List<Bike> RetrieveAllBikes()
+        {
+            var allbikes = new List<Bike>();
+
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "RetrieveAllBikes";
+                    command.CommandType = CommandType.StoredProcedure;
+                     
+                    var reader=command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        allbikes.Add
+                                    (new Bike
+                                    {
+                                     Manufacturer = reader["Manufacturer"].ToString(),
+                                     Mark = reader["Mark"].ToString(),
+                                     OwnerID = int.Parse(reader["OwnerID"].ToString()),
+                                     BikeYear = Convert.ToDateTime(reader["BikeYear"].ToString()),
+                                     ConditionState = reader["ConditionState"].ToString()
+                                    }
+                                    );
+                    }
+                }
+            }
+            return allbikes;
+        }
     }
 }

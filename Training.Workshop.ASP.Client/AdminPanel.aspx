@@ -115,4 +115,45 @@
         </FooterTemplate>
     </asp:Repeater>
 
+     <asp:Repeater ID="Bikecatalogrepeater" runat="server" OnItemDataBound="Bikecatalogrepeater_OnItemDataBound"> 
+        <HeaderTemplate>
+           <table border="0" width="100%">
+            <tr>
+                <th align="left">Manufacturer</th>
+                <th align="left">Mark</th>
+                <th align="left">OwnerID</th>
+                <th align="left">BikeYear</th>
+                <th align="left">ConditionState</th>
+            </tr>
+        </HeaderTemplate>
+         
+         <ItemTemplate>
+            <tr>
+             <td width="150"><asp:Literal runat="server" ID="Manufacturerliteral"  ></asp:Literal> 
+                </td>
+                <td width="150"><asp:Literal runat="server" ID="Markliteral" ></asp:Literal>
+                </td>
+                <td width="150"><asp:Literal runat="server" ID="OwnerIDliteral" ></asp:Literal>
+                </td>
+                <td width="150"><asp:Literal runat="server" ID="BikeYearliteral"  ></asp:Literal> 
+                </td>
+                <td width="150"><asp:Literal runat="server" ID="ConditionStateliteral" ></asp:Literal>
+                </td>
+                 <td width="150"><asp:Button runat="server" ID="UpdateBikeConditionButton" Text="UpdateCondition" CommandName="UpdateCondition" ></asp:Button>
+                </td>
+                </tr>
+        </ItemTemplate>
+
+         <SeparatorTemplate>
+            <tr>
+            <td colspan="6"></td>
+            </tr>
+        </SeparatorTemplate>
+  
+        <FooterTemplate>
+            </table>
+        </FooterTemplate>
+    </asp:Repeater>
+
+
 </asp:Content>

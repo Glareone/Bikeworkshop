@@ -50,11 +50,24 @@ namespace Training.Workshop.Service
             Data.Context.Current.RepositoryFactory.GetBikeRepository().
                 Delete(mark,ownerID);
         }
-
+        /// <summary>
+        /// Search and return all bikes which belong to owner
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
         public virtual List<Bike> Search(string owner)
         {
             return Data.Context.Current.RepositoryFactory.GetBikeRepository().
                 Search(owner);
+        }
+        /// <summary>
+        /// Search and return all bikes
+        /// </summary>
+        /// <returns></returns>
+        public virtual List<Bike> Search()
+        {
+            return Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                RetrieveAllBikes();
         }
     }
 }

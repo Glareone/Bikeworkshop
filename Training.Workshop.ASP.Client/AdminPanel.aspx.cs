@@ -42,6 +42,9 @@ namespace Training.Workshop.ASP.Client
                     //Adding user information to repeater
                     Usercatalogrepeater.DataSource = GetController().GetAllUsers();
                     Usercatalogrepeater.DataBind();
+
+                    Bikecatalogrepeater.DataSource = GetController().GetAllBikes();
+                    Bikecatalogrepeater.DataBind();
                 }
                 base.OnLoad(e);
                 //example,need rework
@@ -55,7 +58,6 @@ namespace Training.Workshop.ASP.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         protected void Usercatalogrepeater_OnItemDataBound(Object Sender, RepeaterItemEventArgs e)
         {
 
@@ -95,6 +97,55 @@ namespace Training.Workshop.ASP.Client
                
             }
         }
+        /// <summary>
+        /// Bike repeater data bound
+        /// </summary>
+        /// <param name="Sender"></param>
+        /// <param name="e"></param>
+        protected void Bikecatalogrepeater_OnItemDataBound(Object Sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                   (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                Bike bike = (Bike)e.Item.DataItem;
+
+                Literal Manufacturerliteral = (Literal)e.Item.FindControl("Manufacturerliteral");
+                Literal Markliteral = (Literal)e.Item.FindControl("Markliteral");
+                Literal OwnerIDliteral = (Literal)e.Item.FindControl("OwnerIDliteral");
+                Literal BikeYearliteral = (Literal)e.Item.FindControl("BikeYearliteral");
+                Literal ConditionStateliteral = (Literal)e.Item.FindControl("ConditionStateliteral");
+                Button UpdateBikeConditionButton = (Button)e.Item.FindControl("UpdateBikeConditionButton");
+                UpdateBikeConditionButton.CommandArgument = ConditionStateliteral.Text;
+
+                if (Manufacturerliteral.Text == "")
+                {
+                    Manufacturerliteral.Text = bike.Manufacturer;
+                    Markliteral.Text = bike.Mark;
+                    OwnerIDliteral.Text = Convert.ToString(bike.OwnerID);
+                    BikeYearliteral.Text = Convert.ToString(bike.BikeYear);
+                    ConditionStateliteral.Text = bike.ConditionState;
+                }
+            }
+        }
+        /// <summary>
+        /// Repeater button event executer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void RepeaterListOfUsers_OnItemCommand(object sender, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "UpdateCondition")
+            {
+                //Change bike condition to good.
+                //().UpdateExistingBike(
+                //e.CommandArgument.ToString();
+                //TextBoxUpdatePrice.Text = ((Literal)e.Item.FindControl("LiteralProductPrice")).Text;
+                
+                //add your custom logic here
+
+            }
+        }
+
 
         /// <summary>
         /// Add new user method from admin panel

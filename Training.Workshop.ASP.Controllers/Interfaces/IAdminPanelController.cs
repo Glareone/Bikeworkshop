@@ -15,5 +15,6 @@ namespace Training.Workshop.ASP.Controllers.Interfaces
         User UpdateUserRole(string username, string password, string[] newroles);
         Bike AddNewBike(string manufacturer, string mark, int bikeyear, int ownerID, string condition);
         Bike UpdateExistingBike(string manufacturer, string mark, string ownername, string newcondition);
+        List<Bike> GetAllBikes();
     }
 }

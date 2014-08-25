@@ -55,10 +55,18 @@ namespace Training.Workshop.Domain.Entities
             ServiceLocator.Resolve<IBikeService>().Delete(mark, ownerID);
             //Context.Current.BikeService.Delete(mark, owner);
         }
-
+        /// <summary>
+        /// return list of bikes which belong by owner
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
         public static List<Bike> Search(string owner)
         {
             return ServiceLocator.Resolve<IBikeService>().Search(owner);
+        }
+        public static List<Bike> Search()
+        {
+            return ServiceLocator.Resolve<IBikeService>().Search();
         }
     }
 }

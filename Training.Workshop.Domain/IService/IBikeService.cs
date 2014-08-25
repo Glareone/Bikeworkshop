@@ -21,7 +21,16 @@ namespace Training.Workshop.Domain.Services
         /// <param name="owner"></param>
         /// <param name="mark"></param>
         void Delete(string mark, int ownerID);
-
-        List<Bike> Search(string owner);
+        /// <summary>
+        /// Search all bikes belong to Owner with username
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        List<Bike> Search(string username);
+        /// <summary>
+        /// Return all bikes
+        /// </summary>
+        /// <returns></returns>
+        List<Bike> Search();
     }
 }

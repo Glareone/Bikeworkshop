@@ -29,7 +29,16 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <param name="username"></param>
         void Update(string owner, string mark);
-
+        /// <summary>
+        /// return all bikes which belong to owner by owner name
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
         List<Bike> Search(string owner);
+        /// <summary>
+        /// Return all bikes
+        /// </summary>
+        /// <returns></returns>
+        List<Bike> RetrieveAllBikes();
     }
 }
