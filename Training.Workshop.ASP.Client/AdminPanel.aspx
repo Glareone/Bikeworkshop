@@ -163,9 +163,9 @@
        <HeaderTemplate>
            <table border="0" width="100%">
             <tr>
-                <th align="left">Usernamefield</th>
-                <th align="left">Rolesfield</th>
-                <th align="left">Permissionsfield</th>
+                <th align="left" id="Usernamefield">Username</th>
+                <th align="left" id="Rolesfield">Roles</th>
+                <th align="left" id="Permissionsfield">Permissions</th>
            </tr>
         </HeaderTemplate>
    

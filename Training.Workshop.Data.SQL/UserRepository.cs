@@ -373,8 +373,8 @@ namespace Training.Workshop.Data.SQL
 
 
 
-        /*
-        public List<User> GetAllUsers()
+        
+        public List<User> GetUser(string username)
         {
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
@@ -385,14 +385,14 @@ namespace Training.Workshop.Data.SQL
                     {
 
                         // process the first result
-                        displayCountryRegions(reader);
+                       // displayCountryRegions(reader);
 
                         // use NextResult to move to the second result and verify it is returned
                         if (!reader.NextResult())
-                            throw new InvalidOperationException("Expected second result (StateProvinces) but only one was returned");
+                            throw new InvalidOperationException("Only One Select are working right");
 
                         // process the second result
-                        displayStateProvinces(reader);
+                       // displayStateProvinces(reader);
 
                         reader.Close();
                     }
@@ -405,7 +405,7 @@ namespace Training.Workshop.Data.SQL
 
             return new List<User>();
         }
-        */
+        
         
     }
 }

@@ -108,7 +108,7 @@ namespace Training.Workshop.ASP.Client
             }
         }
         /// <summary>
-        /// Nested User Item data bound
+        /// External repeater data bound
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -144,7 +144,11 @@ namespace Training.Workshop.ASP.Client
                 NestedNewUserRepeater.DataBind();
             }
         }
-
+        /// <summary>
+        /// Internal repeater data bound
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void NestedNewUserRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if ((e.Item.ItemType == ListItemType.Item) ||
@@ -164,8 +168,6 @@ namespace Training.Workshop.ASP.Client
 
             }
         }
-
-
         /// <summary>
         /// Bike repeater data bound
         /// </summary>
