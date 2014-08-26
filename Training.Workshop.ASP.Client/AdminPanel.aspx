@@ -114,8 +114,8 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
-<br \>
-<br \>
+<br />
+<br />
      <asp:Repeater ID="Bikecatalogrepeater" runat="server" OnItemDataBound="Bikecatalogrepeater_OnItemDataBound"> 
         <HeaderTemplate>
            <table border="0" width="100%">
@@ -155,6 +155,44 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
+<br />
+<br />
+<br />
 
+ <asp:Repeater ID="NewUserRepeater" runat="server" OnItemDataBound="NewUserRepeater_OnItemDataBound"> 
+       <HeaderTemplate>
+           <table border="0" width="100%">
+            <tr>
+                <th align="left">Usernamefield</th>
+                <th align="left">Rolesfield</th>
+                <th align="left">Permissionsfield</th>
+           </tr>
+        </HeaderTemplate>
+   
+    <ItemTemplate>
+         <td width="150"><asp:Literal runat="server" ID="Usernamefield"  ></asp:Literal> 
+         </td>
+         <td width="150"><asp:Literal runat="server" ID="Rolesfield" ></asp:Literal>
+         </td>
+
+        <asp:Repeater ID="NestedNewUserRepeater" runat="server" onitemdatabound="NestedNewUserRepeater_ItemDataBound">
+            <ItemTemplate>
+                 <td width="150"><asp:Literal runat="server" ID="Permissionsfield"  ></asp:Literal> 
+                 </td>
+            </ItemTemplate>
+        </asp:Repeater>
+    </ItemTemplate>
+
+    <SeparatorTemplate>
+       <tr>
+       <td colspan="6"></td>
+       </tr>
+    </SeparatorTemplate>
+  
+    <FooterTemplate>
+       </table>
+    </FooterTemplate>
+
+ </asp:Repeater>
 
 </asp:Content>

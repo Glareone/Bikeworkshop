@@ -35,6 +35,9 @@ namespace Training.Workshop.ASP.Client
             if (HttpContext.Current.User.IsInRole("administrator"))
             {
                 Usercatalogrepeater.ItemDataBound += new RepeaterItemEventHandler(Usercatalogrepeater_OnItemDataBound);
+
+                NewUserRepeater.ItemDataBound += new RepeaterItemEventHandler(NewUserRepeater_OnItemDataBound);
+                
                 //command event initialized
                 Bikecatalogrepeater.ItemCommand += new RepeaterCommandEventHandler(RepeaterListOfUsers_OnItemCommand);    
                 
@@ -42,11 +45,15 @@ namespace Training.Workshop.ASP.Client
                 {
                     //Manually register the event-handling
                     //Adding user information to repeater
-                    Usercatalogrepeater.DataSource = GetController().GetAllUsers();
+                    var data=GetController().GetAllUsers();
+                    Usercatalogrepeater.DataSource = data;
                     Usercatalogrepeater.DataBind();
 
                     Bikecatalogrepeater.DataSource = GetController().GetAllBikes();
                     Bikecatalogrepeater.DataBind();
+
+                    NewUserRepeater.DataSource = data;
+                    NewUserRepeater.DataBind();
                 }
                 base.OnLoad(e);
             }
@@ -100,6 +107,65 @@ namespace Training.Workshop.ASP.Client
                
             }
         }
+        /// <summary>
+        /// Nested User Item data bound
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void NewUserRepeater_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                         (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+
+                
+                //Construct the fields of external repeater
+                Literal Usernamefield = (Literal)e.Item.FindControl("Usernamefield");
+
+                Literal Rolesfield = (Literal)e.Item.FindControl("Rolesfield");
+
+                User user = (User)e.Item.DataItem;
+
+                //Bind the data to nested repeater
+                Repeater NestedNewUserRepeater = (Repeater)e.Item.FindControl("NestednewUserRepeater");
+                
+                NestedNewUserRepeater.DataSource = user.Roles;
+
+                if (Usernamefield.Text == "")
+                {
+                    Usernamefield.Text = user.Username;
+
+                    foreach (var role in user.Roles)
+                    {
+                        Rolesfield.Text += " " + role.Name;
+                    }
+
+                }
+                NestedNewUserRepeater.DataBind();
+            }
+        }
+
+        protected void NestedNewUserRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                         (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                Literal Permissionsfield = (Literal)e.Item.FindControl("Permissionsfield");
+
+                var role = (Role)e.Item.DataItem;
+
+                foreach (var permission in role.Permissions)
+                {
+                    if(!Permissionsfield.Text.Contains(permission))
+                    {
+                     Permissionsfield.Text+=" "+permission;
+                    }
+                }
+
+            }
+        }
+
+
         /// <summary>
         /// Bike repeater data bound
         /// </summary>
