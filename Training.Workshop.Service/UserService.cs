@@ -52,6 +52,12 @@ namespace Training.Workshop.Service
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
+
+        public virtual List<User> GetAllUsers()
+        {
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().RetrieveAllUsers();
+        }
+
         public virtual User GetUser(string username)
         {
             return Data.Context.Current.RepositoryFactory.GetUserRepository().RetrieveUser(username);

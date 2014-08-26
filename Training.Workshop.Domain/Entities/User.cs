@@ -37,6 +37,17 @@ namespace Training.Workshop.Domain.Entities
         {
             ServiceLocator.Resolve<IUserService>().Delete(username);
         }
+
+        public static List<User> GetAllUsers()
+        {
+            return ServiceLocator.Resolve<IUserService>().GetAllUsers();
+        }
+
+        /// <summary>
+        /// Returns completely constructing user with roles and permissions
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static User GetUser(string username)
         {
             return ServiceLocator.Resolve<IUserService>().GetUser(username);

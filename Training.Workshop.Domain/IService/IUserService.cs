@@ -33,6 +33,12 @@ namespace Training.Workshop.Domain.Services
         /// <returns></returns>
         User GetUser(string username);
         /// <summary>
+        /// returns all users with roles and permissions. Actual method works 
+        /// by using 1 stored procedure
+        /// </summary>
+        /// <returns></returns>
+        List<User> GetAllUsers();
+        /// <summary>
         /// return all roles with permisions which user has
         /// </summary>
         /// <param name="username"></param>

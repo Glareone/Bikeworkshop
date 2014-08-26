@@ -370,8 +370,85 @@ namespace Training.Workshop.Data.SQL
 
             return stringbuilder.ToString();
         }
+        /// <summary>
+        /// Returns all users with permissions and roles.
+        /// New method works with 1 stored procedure.
+        /// </summary>
+        /// <returns></returns>
+        public List<User> RetrieveAllUsers()
+        {
+            var listofusers = new List<User>();
 
 
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "usp_GetAllUsers";
+                    command.CommandType = CommandType.StoredProcedure;
+                    
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        //UserID,Username
+                        List<Tuple<string, string>> userlist = GetUser(reader);
+
+                        if (!reader.NextResult())
+                            throw new InvalidOperationException("Cant execute SELECT ROLES");
+                        //UserID,RoleID,RoleName
+                        List<Tuple<string, string, string>> roleslist = GetRoles(reader);
+
+                        if (!reader.NextResult())
+                            throw new InvalidOperationException("Cant execute SELECT PERMISSIONS");
+
+                        // Get Permissions by username
+                        List<Tuple<string, string, string>> permissionslist = GetPermissions(reader);
+                        reader.Close();
+
+                        //filled user fields before return.
+                        foreach (var userelement in userlist)
+                        {
+                            var newuser = new User();
+                            
+                            newuser.Username = userelement.Item2.ToString();
+
+                            var rolelist = new List<Role>();
+
+                            foreach (var roleelement in roleslist)
+                            {
+                                var role = new Role();
+
+                                role.Name = roleelement.Item3.ToString();
+
+                                var Permissionlist = new List<string>();
+
+                                foreach (var permissionelement in permissionslist)
+                                {
+                                    //if permission relates to role-adding permission to list belongs to role.
+                                    if (roleelement.Item2.ToString() == permissionelement.Item2.ToString())
+                                    {
+                                        Permissionlist.Add(permissionelement.Item3.ToString());
+                                    }
+                                }
+                                //adding all permissions to role
+                                role.Permissions = Permissionlist;
+                                //adding role to role list of user
+                                rolelist.Add(role);
+
+                            }
+                            newuser.Roles = rolelist;
+
+                            listofusers.Add(newuser);
+                        }
+
+
+
+
+                    }
+                }
+            }
+
+            return listofusers;
+        }
 
         /// <summary>
         /// Get User with roles and permissions by one stored procedure
@@ -437,9 +514,6 @@ namespace Training.Workshop.Data.SQL
 
                         }
                         user.Roles = rolelist;
-
-                        //TODO
-                        //need to complete
                     }
                 }
             }

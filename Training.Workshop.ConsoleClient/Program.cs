@@ -80,6 +80,10 @@ namespace Training.Workshop.ConsoleClient
                         var usertest = User.GetUser(commandArgs[1]);
                         break;
 
+                    case "getallusers":
+                        var listofusers = User.GetAllUsers();
+                        break;
+
                     case "addbike":
                         Bike.Create(commandArgs[1], commandArgs[2], commandArgs[3], Convert.ToInt32(commandArgs[4]),commandArgs[5]);
                         break;

@@ -31,6 +31,12 @@ namespace Training.Workshop.Data
         /// <returns></returns>
         User RetrieveUser(string username);
         /// <summary>
+        /// Returns all users with permissions and roles.
+        /// New method works with 1 stored procedure.
+        /// </summary>
+        /// <returns></returns>
+        List<User> RetrieveAllUsers();
+        /// <summary>
         /// returns all permissions for 1 role
         /// </summary>
         /// <param name="rolename"></param>

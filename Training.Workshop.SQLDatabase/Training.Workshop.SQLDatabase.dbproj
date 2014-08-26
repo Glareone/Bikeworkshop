@@ -245,4 +245,9 @@
       <SubType>NotInBuild</SubType>
     </Build>
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\usp_GetAllUsers.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+  </ItemGroup>
 </Project>
