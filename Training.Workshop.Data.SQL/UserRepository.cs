@@ -378,7 +378,7 @@ namespace Training.Workshop.Data.SQL
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public User GetUser(string username)
+        public User RetrieveUser(string username)
         {
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
@@ -391,15 +391,18 @@ namespace Training.Workshop.Data.SQL
                     using (IDataReader reader = command.ExecuteReader())
                     {
 
-                        // process the first result
-                        var roles=GetUserRoles(reader);
+                        var user = GetUser(reader);
 
-                        // use NextResult to move to the second result and verify it is returned
+                         if (!reader.NextResult())
+                             throw new InvalidOperationException("Cant execute SELECT ROLES");
+                        // Get Roles by username
+                        var roles=GetRoles(reader);
+
                         if (!reader.NextResult())
-                            throw new InvalidOperationException("Only One Stored Procedure is working right");
+                            throw new InvalidOperationException("Cant execute SELECT PERMISSIONS");
 
-                        // process the second result
-                        GetUserPermissions(reader,roles);
+                        // Get Permissions by username
+                        var permissions=GetPermissions(reader);
 
                         reader.Close();
                     }
@@ -408,35 +411,65 @@ namespace Training.Workshop.Data.SQL
             return new User();
         }
         /// <summary>
-        /// Get user roles. Ised from GetUser(string username)
+        /// Get user roles. Used from GetUser(string username)
         /// </summary>
         /// <param name="?"></param>
         /// <returns></returns>
-        public List<Role> GetUserRoles(IDataReader reader)
+        public List<Tuple<string, string, string>> GetRoles(IDataReader reader)
         {
-            var listofroles = new List<Role>();
+            var listofroles = new List<Tuple<string, string, string>>();
+
             while (reader.Read())
             {
-                var role = new Role();
-                role.Name = reader["RoleName"].ToString();
-                listofroles.Add(role);
+                var RoleElement = new Tuple<string, string, string>(
+                    reader["UserID"].ToString(),
+                    reader["RoleID"].ToString(),
+                    reader["RoleName"].ToString());
+
+                listofroles.Add(RoleElement);
             }
             return listofroles;
         }
         /// <summary>
-        /// Get user permissions. Ised from GetUser(string username)
+        /// Get user permissions. Used from GetUser(string username)
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        public string[] GetUserPermissions(IDataReader reader, List<Role> roles)
+        public List<Tuple<string,string,string>> GetPermissions(IDataReader reader)
         {
+            var listofpermissions = new List<Tuple<string,string,string>>();
+            
             while (reader.Read())
-            { 
-            // str
+            {
+                var PermissionElement = new Tuple<string, string, string>(
+                    reader["UserID"].ToString(),
+                    reader["RoleID"].ToString(),
+                    reader["Permissionname"].ToString());
+                
+                listofpermissions.Add(PermissionElement);
             }
-
-            string[] str;
-            return str;
+            return listofpermissions;
         }
+        /// <summary>
+        /// Get User by username. Used from RetrieveUser(string username)
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public List<Tuple<string, string>> GetUser(IDataReader reader)
+        {
+            var listofusers = new List<Tuple<string, string>>();
+
+            while (reader.Read())
+            {
+                var UserElement = new Tuple<string, string>(
+                    reader["UserID"].ToString(),
+                    reader["Username"].ToString());
+
+                listofusers.Add(UserElement);
+
+            }
+            return listofusers;
+        }
+
     }
 }
