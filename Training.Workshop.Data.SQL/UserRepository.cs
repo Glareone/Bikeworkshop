@@ -373,39 +373,70 @@ namespace Training.Workshop.Data.SQL
 
 
 
-        
-        public List<User> GetUser(string username)
+        /// <summary>
+        /// Get User with roles and permissions by one stored procedure
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public User GetUser(string username)
         {
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
+                    command.CommandText = "usp_GetUser";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("Username", username);
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
 
                         // process the first result
-                       // displayCountryRegions(reader);
+                        var roles=GetUserRoles(reader);
 
                         // use NextResult to move to the second result and verify it is returned
                         if (!reader.NextResult())
-                            throw new InvalidOperationException("Only One Select are working right");
+                            throw new InvalidOperationException("Only One Stored Procedure is working right");
 
                         // process the second result
-                       // displayStateProvinces(reader);
+                        GetUserPermissions(reader,roles);
 
                         reader.Close();
                     }
                 }
             }
-
-
-            //TODO
-            //Need realization
-
-            return new List<User>();
+            return new User();
         }
-        
-        
+        /// <summary>
+        /// Get user roles. Ised from GetUser(string username)
+        /// </summary>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        public List<Role> GetUserRoles(IDataReader reader)
+        {
+            var listofroles = new List<Role>();
+            while (reader.Read())
+            {
+                var role = new Role();
+                role.Name = reader["RoleName"].ToString();
+                listofroles.Add(role);
+            }
+            return listofroles;
+        }
+        /// <summary>
+        /// Get user permissions. Ised from GetUser(string username)
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public string[] GetUserPermissions(IDataReader reader, List<Role> roles)
+        {
+            while (reader.Read())
+            { 
+            // str
+            }
+
+            string[] str;
+            return str;
+        }
     }
 }
