@@ -380,6 +380,9 @@ namespace Training.Workshop.Data.SQL
         /// <returns></returns>
         public User RetrieveUser(string username)
         {
+            //User Construction
+            var user = new User();
+
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
@@ -390,25 +393,31 @@ namespace Training.Workshop.Data.SQL
 
                     using (IDataReader reader = command.ExecuteReader())
                     {
+                        //UserID,Username
+                        List<Tuple<string, string>> userlist = GetUser(reader);
 
-                        var user = GetUser(reader);
-
-                         if (!reader.NextResult())
-                             throw new InvalidOperationException("Cant execute SELECT ROLES");
-                        // Get Roles by username
-                        var roles=GetRoles(reader);
+                        if (!reader.NextResult())
+                            throw new InvalidOperationException("Cant execute SELECT ROLES");
+                        //UserID,RoleID,RoleName
+                        List<Tuple<string, string, string>> roleslist = GetRoles(reader);
 
                         if (!reader.NextResult())
                             throw new InvalidOperationException("Cant execute SELECT PERMISSIONS");
 
                         // Get Permissions by username
-                        var permissions=GetPermissions(reader);
-
+                        List<Tuple<string, string, string>> permissionslist = GetPermissions(reader);
                         reader.Close();
+
+                        
+                        //filled user fields before return.
+                        user.Username = username;
+                        List<Role> listofroles = new List<Role>();
+                        //TODO
+                        //need to complete
                     }
                 }
             }
-            return new User();
+            return user;
         }
         /// <summary>
         /// Get user roles. Used from GetUser(string username)
