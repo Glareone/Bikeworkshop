@@ -24,6 +24,13 @@ namespace Training.Workshop.Data
         /// <returns></returns>
         User GetUser(string username, string password);
         /// <summary>
+        /// Get user with permissions and roles by username. New method executing by 
+        /// 1 stored procedure
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        User RetrieveUser(string username);
+        /// <summary>
         /// returns all permissions for 1 role
         /// </summary>
         /// <param name="rolename"></param>

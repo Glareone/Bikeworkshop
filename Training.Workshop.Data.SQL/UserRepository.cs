@@ -411,7 +411,33 @@ namespace Training.Workshop.Data.SQL
                         
                         //filled user fields before return.
                         user.Username = username;
-                        List<Role> listofroles = new List<Role>();
+
+                        var rolelist=new List<Role>();
+
+                        foreach (var roleelement in roleslist)
+                        {
+                            var role = new Role();
+                            
+                            role.Name = roleelement.Item3.ToString();
+
+                            var Permissionlist = new List<string>();
+
+                            foreach (var permissionelement in permissionslist)
+                            {
+                                //if permission relates to role-adding permission to list belongs to role.
+                                if (roleelement.Item2.ToString() == permissionelement.Item2.ToString())
+                                {
+                                    Permissionlist.Add(permissionelement.Item3.ToString());
+                                }
+                            }
+                            //adding all permissions to role
+                            role.Permissions = Permissionlist;
+                            //adding role to role list of user
+                            rolelist.Add(role);
+
+                        }
+                        user.Roles = rolelist;
+
                         //TODO
                         //need to complete
                     }
@@ -426,7 +452,7 @@ namespace Training.Workshop.Data.SQL
         /// <returns></returns>
         public List<Tuple<string, string, string>> GetRoles(IDataReader reader)
         {
-            var listofroles = new List<Tuple<string, string, string>>();
+            var tableofroles = new List<Tuple<string, string, string>>();
 
             while (reader.Read())
             {
@@ -435,9 +461,9 @@ namespace Training.Workshop.Data.SQL
                     reader["RoleID"].ToString(),
                     reader["RoleName"].ToString());
 
-                listofroles.Add(RoleElement);
+                tableofroles.Add(RoleElement);
             }
-            return listofroles;
+            return tableofroles;
         }
         /// <summary>
         /// Get user permissions. Used from GetUser(string username)
@@ -446,7 +472,7 @@ namespace Training.Workshop.Data.SQL
         /// <returns></returns>
         public List<Tuple<string,string,string>> GetPermissions(IDataReader reader)
         {
-            var listofpermissions = new List<Tuple<string,string,string>>();
+            var tableofpermissions = new List<Tuple<string,string,string>>();
             
             while (reader.Read())
             {
@@ -455,9 +481,9 @@ namespace Training.Workshop.Data.SQL
                     reader["RoleID"].ToString(),
                     reader["Permissionname"].ToString());
                 
-                listofpermissions.Add(PermissionElement);
+                tableofpermissions.Add(PermissionElement);
             }
-            return listofpermissions;
+            return tableofpermissions;
         }
         /// <summary>
         /// Get User by username. Used from RetrieveUser(string username)
@@ -466,7 +492,7 @@ namespace Training.Workshop.Data.SQL
         /// <returns></returns>
         public List<Tuple<string, string>> GetUser(IDataReader reader)
         {
-            var listofusers = new List<Tuple<string, string>>();
+            var tableofusers = new List<Tuple<string, string>>();
 
             while (reader.Read())
             {
@@ -474,10 +500,10 @@ namespace Training.Workshop.Data.SQL
                     reader["UserID"].ToString(),
                     reader["Username"].ToString());
 
-                listofusers.Add(UserElement);
+                tableofusers.Add(UserElement);
 
             }
-            return listofusers;
+            return tableofusers;
         }
 
     }

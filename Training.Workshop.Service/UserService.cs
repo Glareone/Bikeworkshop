@@ -47,6 +47,17 @@ namespace Training.Workshop.Service
             return Data.Context.Current.RepositoryFactory.GetUserRepository().GetUser(username, password); 
         }
         /// <summary>
+        /// Get user with permissions and roles by username. New method executing by 
+        /// 1 stored procedure
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public virtual User GetUser(string username)
+        {
+            return Data.Context.Current.RepositoryFactory.GetUserRepository().RetrieveUser(username);
+        }
+
+        /// <summary>
         /// return list of permissions that role with rolename has
         /// </summary>
         /// <param name="rolename"></param>
