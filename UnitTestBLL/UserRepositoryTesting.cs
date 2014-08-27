@@ -7,7 +7,7 @@ using Training.Workshop.Data;
 using Training.Workshop.UnitOfWork;
 using Training.Workshop.Domain.Entities;
 
-namespace UnitTestBLL
+namespace Training.Workshop.UnitTestBLL
 {
     [TestClass]
     public class UserRepositoryTesting
@@ -63,13 +63,37 @@ namespace UnitTestBLL
             List<Role> listofuserroles=Training.Workshop.Data.Context.Current.
                 RepositoryFactory.GetUserRepository().GetRolesandPermissionsbyUsername(NewUser);
             //Testing GetUser and GetRolesandPermissonsbyUsername methods
-            Assert.AreEqual(user.Roles, listofuserroles,"Roles are not Equal after GetRolesandPermissionsbyUsername");
+            Assert.IsTrue(user.Roles.Count == listofuserroles.Count,"count of roles is not equal");
+            
+            foreach (var el in user.Roles)
+            {
+                Assert.IsTrue(listofuserroles.Contains(el),"something wrong with roles");
+            }
+            foreach (var el in listofuserroles)
+            {
+                Assert.IsTrue(user.Roles.Contains(el),"something wrong with roles");
+            }
 
+
+            //Testing GetAllUsers() and correct writing to database 
             List<User> listofuser=Training.Workshop.Data.Context.Current.
                 RepositoryFactory.GetUserRepository().GetAllUsers();
-            //Testing 
+            
             Assert.IsTrue(listofuser.Contains(user), "User are not added to database");
-        
+            //Testing retrieveallusers() Method
+            List<User> listofuser2 = Training.Workshop.Data.Context.Current.
+                RepositoryFactory.GetUserRepository().RetrieveAllUsers();
+
+            Assert.IsTrue(listofuser2.Count!=0,"Database is Empty after adding new user");
+
+            Assert.IsTrue(listofuser2.Contains(user), "user are not added to database or retrieve all users are incorrect");
+
+            //Check equals of old methods which based on 1 and 3 stored procedures
+            Assert.AreEqual(
+                Training.Workshop.Data.Context.Current.
+                RepositoryFactory.GetUserRepository().RetrieveUser(NewUser),
+                Training.Workshop.Data.Context.Current.
+                RepositoryFactory.GetUserRepository().GetUser(NewUser, password));
         }
     }
 }

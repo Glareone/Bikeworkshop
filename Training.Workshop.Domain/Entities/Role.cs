@@ -11,5 +11,37 @@ namespace Training.Workshop.Domain.Entities
         public string Name {get; set;}
         
         public List<string> Permissions { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var other = (Role)obj;
+
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Name == other.Name)
+            {
+                foreach (var el in other.Permissions)
+                {
+                    if (!Permissions.Contains(el))
+                    {
+                        return false;
+                    }
+                }
+
+                foreach (var el in Permissions)
+                {
+                    if (!other.Permissions.Contains(el))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
     }
+    
 }
