@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-using Training.Workshop.Data.FileSystem;
 using Training.Workshop.Domain.Entities;
 using Training.Workshop.Service;
 using Training.Workshop.Service.ServiceLocator;
