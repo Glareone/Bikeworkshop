@@ -93,6 +93,10 @@
       <Project>{206DFF09-6070-4E10-959F-52134FA2DC09}</Project>
       <Name>Training.Workshop.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Training.Workshop.UnitOfWork\Training.Workshop.UnitOfWork.csproj">
+      <Project>{01088FFF-7FAB-4207-9CFF-16BF6BDB8370}</Project>
+      <Name>Training.Workshop.UnitOfWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,7 +21,6 @@ namespace Training.Workshop.Data.SQL
             //Added user if username doesn't exist in database
             if (CountUsersWithUsername(username) == 0)
             {
-                var User = new User();
                 //Adding into User table
                 using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
                 {
