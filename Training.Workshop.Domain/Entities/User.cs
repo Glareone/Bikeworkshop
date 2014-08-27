@@ -17,6 +17,29 @@ namespace Training.Workshop.Domain.Entities
         /// </summary>
         public List<Role> Roles { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            var other = (User)obj;
+
+            if (other != null)
+            {
+
+                if (Username == other.Username)
+                {
+                    foreach (var role in Roles)
+                    {
+                        if (!other.Roles.Contains(role))
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         
         /// <summary>
         /// Creates a new user with many roles

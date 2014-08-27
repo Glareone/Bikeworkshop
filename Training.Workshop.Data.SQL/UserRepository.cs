@@ -407,7 +407,9 @@ namespace Training.Workshop.Data.SQL
                         foreach (var userelement in userlist)
                         {
                             var newuser = new User();
-                            
+
+                            var userid = userelement.Item1;
+
                             newuser.Username = userelement.Item2.ToString();
 
                             var rolelist = new List<Role>();
@@ -415,23 +417,28 @@ namespace Training.Workshop.Data.SQL
                             foreach (var roleelement in roleslist)
                             {
                                 var role = new Role();
-
-                                role.Name = roleelement.Item3.ToString();
-
-                                var Permissionlist = new List<string>();
-
-                                foreach (var permissionelement in permissionslist)
+                                if (userid == roleelement.Item1)
                                 {
-                                    //if permission relates to role-adding permission to list belongs to role.
-                                    if (roleelement.Item2.ToString() == permissionelement.Item2.ToString())
+                                    role.Name = roleelement.Item3;
+
+                                    var Permissionlist = new List<string>();
+
+                                    foreach (var permissionelement in permissionslist)
                                     {
-                                        Permissionlist.Add(permissionelement.Item3.ToString());
+                                        //if permission relates to role-adding permission to list belongs to role.
+                                        if (roleelement.Item2 == permissionelement.Item2)
+                                        {
+                                            {
+                                                Permissionlist.Add(permissionelement.Item3.ToString());
+                                            }
+                                        }
                                     }
+                                    //adding all permissions to role
+                                    role.Permissions = Permissionlist;
+                                    //adding role to role list of user
+                                    rolelist.Add(role);
                                 }
-                                //adding all permissions to role
-                                role.Permissions = Permissionlist;
-                                //adding role to role list of user
-                                rolelist.Add(role);
+                                
 
                             }
                             newuser.Roles = rolelist;

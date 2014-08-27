@@ -79,7 +79,10 @@ namespace Training.Workshop.UnitTestBLL
             List<User> listofuser=Training.Workshop.Data.Context.Current.
                 RepositoryFactory.GetUserRepository().GetAllUsers();
             
+            
+
             Assert.IsTrue(listofuser.Contains(user), "User are not added to database");
+            
             //Testing retrieveallusers() Method
             List<User> listofuser2 = Training.Workshop.Data.Context.Current.
                 RepositoryFactory.GetUserRepository().RetrieveAllUsers();

@@ -16,29 +16,29 @@ namespace Training.Workshop.Domain.Entities
         {
             var other = (Role)obj;
 
-            if (other == null)
+            if (other != null)
             {
-                return false;
-            }
-
-            if (Name == other.Name)
-            {
-                foreach (var el in other.Permissions)
+                if (Name == other.Name)
                 {
-                    if (!Permissions.Contains(el))
-                    {
-                        return false;
-                    }
-                }
+                    
+                        foreach (var el in other.Permissions)
+                        {
+                            if (!Permissions.Contains(el))
+                            {
+                                return false;
+                            }
+                        }
 
-                foreach (var el in Permissions)
-                {
-                    if (!other.Permissions.Contains(el))
-                    {
-                        return false;
-                    }
+                        foreach (var el in Permissions)
+                        {
+                            if (!other.Permissions.Contains(el))
+                            {
+                                return false;
+                            }
+                        }
+                    
+                    return true;
                 }
-                return true;
             }
             return false;
         }
