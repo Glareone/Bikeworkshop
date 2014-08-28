@@ -32,6 +32,13 @@ namespace UnitTestBLL
                 Roles=new List<Role>()
             };
             iuserservice.Setup(m => m.GetUser("glareone", "glareone")).Returns(user);
+
+            string[] role=new string[]{"customer"};
+
+            iuserservice.Setup(m=> m.Create("newuser","newuser",role)).Returns(
+
+
+
         }
     }
 }
