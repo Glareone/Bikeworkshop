@@ -97,8 +97,12 @@ namespace Training.Workshop.ConsoleClient
                         Bike.UpdateCondition(commandArgs[1], commandArgs[2], int.Parse(commandArgs[3]), commandArgs[4]);
                         break;
 
-                    case "searchbike":
+                    case "searchbikes":
                         List<Bike> ownerbikes=Bike.Findbikebyownername(commandArgs[1]);
+                        break;
+
+                    case "getbike":
+                        Bike bike=Bike.Findbikebybikeid(int.Parse(commandArgs[1]));
                         break;
 
                     case "getallbikes":

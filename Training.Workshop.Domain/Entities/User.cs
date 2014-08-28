@@ -43,7 +43,26 @@ namespace Training.Workshop.Domain.Entities
             }
             return false;
         }
+        /// <summary>
+        /// override gethashcode because Equals is overriding too.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            string roletostr="";
+            
+            string permissiontostr="";
 
+            foreach(var role in Roles)
+            {
+                roletostr+=role.Name;
+                foreach(var permission in role.Permissions)
+                {
+                      permissiontostr+=permission; 
+                }
+            }
+            return string.Format("{0}_{1}_{2}", Username, roletostr, permissiontostr).GetHashCode();
+        }
 
         
         /// <summary>

@@ -63,7 +63,7 @@ namespace Training.Workshop.Data.SQL
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
-                    command.CommandText = "FindBikebybikeID";
+                    command.CommandText = "usp_FindBikebybikeID";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("bikeID", bikeID);
 
@@ -91,11 +91,15 @@ namespace Training.Workshop.Data.SQL
                     command.Parameters.Add(conditionstate);
 
                     command.ExecuteNonQuery();
-
+                    //adding data from database to bike
                     bike.Manufacturer = command.Parameters["manufacturer"].Value.ToString();
                     bike.Mark = command.Parameters["mark"].Value.ToString();
-                    bike.BikeYear = Convert.ToDateTime(command.Parameters["bikeyear"].Value.ToString());
-                    bike.OwnerID = int.Parse(command.Parameters["ownerid"].Value.ToString());
+                    
+                    if (command.Parameters["bikeyear"].Value.ToString() != "")
+                    {
+                        bike.BikeYear = Convert.ToDateTime(command.Parameters["bikeyear"].Value.ToString());
+                        bike.OwnerID = int.Parse(command.Parameters["ownerid"].Value.ToString());
+                    }
                     bike.ConditionState = command.Parameters["conditionstate"].Value.ToString();
                 }
 

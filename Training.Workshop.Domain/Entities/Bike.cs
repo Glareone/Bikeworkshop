@@ -54,6 +54,14 @@ namespace Training.Workshop.Domain.Entities
             }
             return false;
         }
+        /// <summary>
+        /// override GetHashCode method because Bike Equal is overriding too
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return string.Format("{0}_{1}_{2}_{3}_{4}", Manufacturer, Mark, BikeYear.ToString(), OwnerID.ToString(), ConditionState).GetHashCode();
+        }
 
 
         /// <summary>
@@ -105,6 +113,11 @@ namespace Training.Workshop.Domain.Entities
         public static void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
         {
             ServiceLocator.Resolve<IBikeService>().UpdateCondition(manufacturer, mark, ownerID, condition);
+        }
+
+        public static Bike Findbikebybikeid(int bikeID)
+        {
+            return ServiceLocator.Resolve<IBikeService>().Findbybikeid(bikeID);
         }
     }
 }

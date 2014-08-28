@@ -42,6 +42,18 @@ namespace Training.Workshop.Domain.Entities
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            string stringforhashcode="";
+            
+            foreach(var permission in Permissions)
+            {
+                stringforhashcode+=permission;
+            }
+            return string.Format("{0}{1}", Name, stringforhashcode).GetHashCode();
+        }
+
     }
     
 }

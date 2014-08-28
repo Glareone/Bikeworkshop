@@ -95,7 +95,20 @@ namespace UnitTestBLL
                 UpdateCondition(newcurrentmanufacturer, newcurrentmark, newcurrentuserID, "GOOD!TEST!");
 
             //search bike and check new condition
-            
+            listofbikes = Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                RetrieveAllBikes();
+
+            var newbikeforcheckcondition = new Bike
+            {
+                Manufacturer = newcurrentmanufacturer,
+                Mark = newcurrentmark,
+                OwnerID = newcurrentuserID,
+                BikeYear = bikeyear,
+                ConditionState = "GOOD!TEST!"
+            };
+
+            Assert.IsTrue(listofbikes.Contains(newbikeforcheckcondition));
+
 
             //check that Delete method works right
             Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
