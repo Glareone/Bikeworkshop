@@ -71,14 +71,15 @@ namespace Training.Workshop.ConsoleClient
                     case "login":
                         var user=User.GetUser(commandArgs[1], commandArgs[2]);
                         break;
-
+                    //Old method
                     case "searchuser":
                         var list=Data.Context.Current.RepositoryFactory.GetUserRepository().GetRolesandPermissionsbyUsername(commandArgs[1]);
                         break;
+                   //new method by RetrieveUser(string username)
                     case "getuser":
                         var usertest = User.GetUser(commandArgs[1]);
                         break;
-
+                    //new method by RetrieveAllUsers()
                     case "getallusers":
                         var listofusers = User.GetAllUsers();
                         break;
@@ -92,6 +93,8 @@ namespace Training.Workshop.ConsoleClient
                         break;
                     
                     case "updatebike":
+                        //manufacturer, mark, ownerID, newcondition
+                        Bike.UpdateCondition(commandArgs[1], commandArgs[2], int.Parse(commandArgs[3]), commandArgs[4]);
                         break;
 
                     case "searchbike":

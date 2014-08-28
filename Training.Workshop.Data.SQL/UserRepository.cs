@@ -478,21 +478,24 @@ namespace Training.Workshop.Data.SQL
                     {
                         //UserID,Username
                         List<Tuple<string, string>> userlist = GetUser(reader);
-
+                        //to search roles and permissions by userID
+                        string userID = userlist[0].Item1;
+                        
                         if (!reader.NextResult())
                             throw new InvalidOperationException("Cant execute SELECT ROLES");
                         //UserID,RoleID,RoleName
-                        List<Tuple<string, string, string>> roleslist = GetRoles(reader);
+                        List<Tuple<string, string, string>> roleslist = GetRoles(reader,userID);
 
                         if (!reader.NextResult())
                             throw new InvalidOperationException("Cant execute SELECT PERMISSIONS");
 
                         // Get Permissions by username
-                        List<Tuple<string, string, string>> permissionslist = GetPermissions(reader);
+                        //UserID,RoleID,Permission
+                        List<Tuple<string, string, string>> permissionslist = GetPermissions(reader,userID);
                         reader.Close();
 
                         
-                        //filled user fields before return.
+                        //filled user role and permissions before return.
                         user.Username = username;
 
                         var rolelist=new List<Role>();
@@ -526,9 +529,61 @@ namespace Training.Workshop.Data.SQL
             return user;
         }
         /// <summary>
-        /// Get user roles. Used from GetUser(string username)
+        /// Get user roles by userID. Used by RetrieveUser(string username) method
         /// </summary>
         /// <param name="?"></param>
+        /// <returns></returns>
+        public List<Tuple<string, string, string>> GetRoles(IDataReader reader,string userID)
+        {
+            var tableofroles = new List<Tuple<string, string, string>>();
+
+            while (reader.Read())
+            {
+                var getuserIDfromdb = reader["UserID"].ToString();
+
+                if (userID == getuserIDfromdb)
+                {
+                    var RoleElement = new Tuple<string, string, string>(
+                           reader["UserID"].ToString(),
+                           reader["RoleID"].ToString(),
+                           reader["RoleName"].ToString());
+                    
+                    tableofroles.Add(RoleElement);
+                }
+               
+            }
+            return tableofroles;
+        }
+        /// <summary>
+        /// Get user permissions by userID. Used from RetrieveUser(string username)
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public List<Tuple<string, string, string>> GetPermissions(IDataReader reader, string userID)
+        {
+            var tableofpermissions = new List<Tuple<string, string, string>>();
+
+            while (reader.Read())
+            {
+                var getuserIDfromdb = reader["UserID"].ToString();
+
+                if (getuserIDfromdb == userID)
+                {
+                    var PermissionElement = new Tuple<string, string, string>(
+                            reader["UserID"].ToString(),
+                            reader["RoleID"].ToString(),
+                            reader["Permissionname"].ToString());
+
+                    tableofpermissions.Add(PermissionElement);
+                }
+
+            }
+            return tableofpermissions;
+        }
+        /// <summary>
+        /// Ger user roles. Userd by RetrieveAllUsers() method
+        /// </summary>
+        /// <param name="reader"></param>
         /// <returns></returns>
         public List<Tuple<string, string, string>> GetRoles(IDataReader reader)
         {
@@ -536,37 +591,38 @@ namespace Training.Workshop.Data.SQL
 
             while (reader.Read())
             {
-                var RoleElement = new Tuple<string, string, string>(
-                    reader["UserID"].ToString(),
-                    reader["RoleID"].ToString(),
-                    reader["RoleName"].ToString());
+                    var RoleElement = new Tuple<string, string, string>(
+                           reader["UserID"].ToString(),
+                           reader["RoleID"].ToString(),
+                           reader["RoleName"].ToString());
 
-                tableofroles.Add(RoleElement);
+                    tableofroles.Add(RoleElement);
+
             }
             return tableofroles;
         }
         /// <summary>
-        /// Get user permissions. Used from GetUser(string username)
+        /// Get user permissions. Used by RetrieveAllUsers() method
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        public List<Tuple<string,string,string>> GetPermissions(IDataReader reader)
+        public List<Tuple<string, string, string>> GetPermissions(IDataReader reader)
         {
-            var tableofpermissions = new List<Tuple<string,string,string>>();
-            
+            var tableofpermissions = new List<Tuple<string, string, string>>();
+
             while (reader.Read())
             {
-                var PermissionElement = new Tuple<string, string, string>(
-                    reader["UserID"].ToString(),
-                    reader["RoleID"].ToString(),
-                    reader["Permissionname"].ToString());
-                
-                tableofpermissions.Add(PermissionElement);
+                    var PermissionElement = new Tuple<string, string, string>(
+                            reader["UserID"].ToString(),
+                            reader["RoleID"].ToString(),
+                            reader["Permissionname"].ToString());
+
+                    tableofpermissions.Add(PermissionElement);
             }
             return tableofpermissions;
         }
         /// <summary>
-        /// Get User by username. Used from RetrieveUser(string username)
+        /// Get User by username. Used by RetrieveAllUsers() method
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
@@ -581,7 +637,6 @@ namespace Training.Workshop.Data.SQL
                     reader["Username"].ToString());
 
                 tableofusers.Add(UserElement);
-
             }
             return tableofusers;
         }
