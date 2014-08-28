@@ -52,15 +52,55 @@ namespace Training.Workshop.Data.SQL
             }
         }
         /// <summary>
-        /// Find First income bike from SQL Database by mark 
+        /// Find Only one bike by bikeID
         /// </summary>
         /// <param name="mark"></param>
         /// <returns></returns>
-        public Bike Find(string mark)
+        public Bike Find(int bikeID)
         {
-            //TODO
-            //Need realisation
-            return new Bike();
+            var bike = new Bike();
+            using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
+            {
+                using (var command = unitofwork.Connection.CreateCommand())
+                {
+                    command.CommandText = "FindBikebybikeID";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("bikeID", bikeID);
+
+                    var manufacturer = new SqlParameter("manufacturer", SqlDbType.VarChar);
+                    manufacturer.Direction = ParameterDirection.Output;
+                    manufacturer.Size = 30;
+                    command.Parameters.Add(manufacturer);
+
+                    var mark = new SqlParameter("mark", SqlDbType.VarChar);
+                    mark.Direction = ParameterDirection.Output;
+                    mark.Size = 50;
+                    command.Parameters.Add(mark);
+
+                    var bikeyear = new SqlParameter("bikeyear", SqlDbType.DateTime);
+                    bikeyear.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(bikeyear);
+
+                    var ownerid = new SqlParameter("ownerid", 0);
+                    ownerid.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(ownerid);
+
+                    var conditionstate = new SqlParameter("conditionstate", SqlDbType.VarChar);
+                    conditionstate.Direction = ParameterDirection.Output;
+                    conditionstate.Size = 30;
+                    command.Parameters.Add(conditionstate);
+
+                    command.ExecuteNonQuery();
+
+                    bike.Manufacturer = command.Parameters["manufacturer"].Value.ToString();
+                    bike.Mark = command.Parameters["mark"].Value.ToString();
+                    bike.BikeYear = Convert.ToDateTime(command.Parameters["bikeyear"].Value.ToString());
+                    bike.OwnerID = int.Parse(command.Parameters["ownerid"].Value.ToString());
+                    bike.ConditionState = command.Parameters["conditionstate"].Value.ToString();
+                }
+
+            }
+            return bike;
         }
         /// <summary>
         /// Update existing bike with owner,mark in SQL Database

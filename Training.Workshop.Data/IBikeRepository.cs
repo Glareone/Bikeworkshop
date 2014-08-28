@@ -12,23 +12,26 @@ namespace Training.Workshop.Data
         void Save(Bike user);
 
         /// <summary>
-        /// Deletes bike by username
+        /// Deletes bikes by userID and bikes.mark
         /// </summary>
         /// <param name="username"></param>
         /// TODO
         /// May be need returns bool
         void Delete(string mark, int ownerID);
+        
+
+        
         /// <summary>
         /// Find and return's concrete bike if he exist in BD
         /// </summary>
         /// <param name="username"></param>
-        Bike Find(string mark);
+        Bike Find(int bikeID);
 
         /// <summary>
-        /// Update bike's data
+        /// Update bike's condition to new condition
         /// </summary>
         /// <param name="username"></param>
-        void UpdateCondition(string manufacturer, string mark, int ownerID, string condition);
+        void UpdateCondition(string manufacturer, string mark, int ownerID, string newcondition);
         /// <summary>
         /// return all bikes which belong to owner by owner name
         /// </summary>

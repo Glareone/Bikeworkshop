@@ -55,10 +55,10 @@ namespace Training.Workshop.Service
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public virtual List<Bike> Search(string owner)
+        public virtual List<Bike> Findbikebyownername(string ownername)
         {
             return Data.Context.Current.RepositoryFactory.GetBikeRepository().
-                Search(owner);
+                Search(ownername);
         }
         /// <summary>
         /// Search and return all bikes
@@ -80,5 +80,15 @@ namespace Training.Workshop.Service
         {
             Data.Context.Current.RepositoryFactory.GetBikeRepository().UpdateCondition(manufacturer, mark, ownerID, condition);
         }
+        /// <summary>
+        /// retrieve bike from database by bikeID
+        /// </summary>
+        /// <param name="bikeid"></param>
+        /// <returns></returns>
+        public Bike Findbybikeid(int bikeid)
+        {
+            return Data.Context.Current.RepositoryFactory.GetBikeRepository().Find(bikeid);
+        }
+
     }
 }

@@ -26,13 +26,25 @@ namespace Training.Workshop.Domain.Services
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
-        List<Bike> Search(string username);
+        List<Bike> Findbikebyownername(string username);
         /// <summary>
         /// Return all bikes
         /// </summary>
         /// <returns></returns>
         List<Bike> Search();
-
-        void UpdateCondition(string manufacturer, string mark, int ownerID, string condition);
+        /// <summary>
+        /// Update bike condition to newcondition
+        /// </summary>
+        /// <param name="manufacturer"></param>
+        /// <param name="mark"></param>
+        /// <param name="ownerID"></param>
+        /// <param name="condition"></param>
+        void UpdateCondition(string manufacturer, string mark, int ownerID, string newcondition);
+        /// <summary>
+        /// retrieve bike from database by bikeID
+        /// </summary>
+        /// <param name="bikeid"></param>
+        /// <returns></returns>
+        Bike Findbybikeid(int bikeid);
     }
 }

@@ -98,7 +98,7 @@ namespace Training.Workshop.ConsoleClient
                         break;
 
                     case "searchbike":
-                        List<Bike> ownerbikes=Bike.Search(commandArgs[1]);
+                        List<Bike> ownerbikes=Bike.Findbikebyownername(commandArgs[1]);
                         break;
 
                     case "getallbikes":

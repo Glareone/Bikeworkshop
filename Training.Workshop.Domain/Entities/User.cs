@@ -16,7 +16,12 @@ namespace Training.Workshop.Domain.Entities
         /// User's role
         /// </summary>
         public List<Role> Roles { get; set; }
-
+        /// <summary>
+        /// override Equals method because User are reference type
+        /// used in .Equal(user) method and listofusers.Contains(user)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             var other = (User)obj;

@@ -34,6 +34,29 @@ namespace Training.Workshop.Domain.Entities
         /// </summary>
         public string ConditionState { get; set; }
         /// <summary>
+        /// override Equals method because Bike type is reference type
+        /// used in .Equal(bike) method and listofbikes.Contains(bike)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            var other = (Bike)obj;
+
+            if (other != null)
+            {
+                if (Manufacturer == other.Manufacturer && Mark == other.Mark &&
+                    OwnerID == other.OwnerID && BikeYear == other.BikeYear && 
+                    ConditionState == other.ConditionState)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        /// <summary>
         /// Add new Bike with all data. Uses this function by admin and owner
         /// </summary>
         /// <param name="manufacturer"></param>
@@ -60,9 +83,9 @@ namespace Training.Workshop.Domain.Entities
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public static List<Bike> Search(string owner)
+        public static List<Bike> Findbikebyownername(string owner)
         {
-            return ServiceLocator.Resolve<IBikeService>().Search(owner);
+            return ServiceLocator.Resolve<IBikeService>().Findbikebyownername(owner);
         }
         /// <summary>
         /// return all bikes

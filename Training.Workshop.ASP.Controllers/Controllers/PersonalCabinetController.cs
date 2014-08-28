@@ -11,7 +11,7 @@ namespace Training.Workshop.ASP.Controllers
     {
         public List<Bike> SearchBikesbyOwnername(string owner)
         {
-          return Bike.Search(owner);
+          return Bike.Findbikebyownername(owner);
         }
     }
 }

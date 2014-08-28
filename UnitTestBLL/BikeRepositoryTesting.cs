@@ -69,34 +69,42 @@ namespace UnitTestBLL
             //do that for checking Delete(string mark,int ownerid) method
             string newcurrentmark = newMark[randomel.Next(0, 8)];
             
-            int newuserID = randomel.Next(12, 40);
+            int newcurrentuserID = randomel.Next(12, 40);
             
+            string newcurrentmanufacturer=newManufacturer[randomel.Next(0,7)];
+
             var newbike = new Bike
             {
-                Manufacturer = newManufacturer[randomel.Next(0,7)],
+                Manufacturer = newcurrentmanufacturer,
                 Mark = newcurrentmark,
-                OwnerID = newuserID,
+                OwnerID = newcurrentuserID,
                 BikeYear = bikeyear,
                 ConditionState = newconditionstate[randomel.Next(0, 8)]
             };
 
             Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
                 Save(newbike);
-                    
-            //TODO
-            //check Getbike(username) which save upper
+            //Check that bike Save method works right
+            listofbikes=Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                RetrieveAllBikes();
 
+            CollectionAssert.Contains(listofallbikes, newbike,"listofbikes doesn't contain creating bike");
 
+            //check Update method works right
+            Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                UpdateCondition(newcurrentmanufacturer, newcurrentmark, newcurrentuserID, "GOOD!TEST!");
 
-
+            //search bike and check new condition
             
-            //TODO
-            //DELETE
-            
 
+            //check that Delete method works right
+            Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                Delete(newcurrentmark, newcurrentuserID);
 
-            //TODO
-            //SAVE-GET-DELETE-GET
+            listofbikes = Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                RetrieveAllBikes();
+
+            CollectionAssert.DoesNotContain(listofallbikes, newbike, "listofbikes contain bike,error");
         }
     }
 }

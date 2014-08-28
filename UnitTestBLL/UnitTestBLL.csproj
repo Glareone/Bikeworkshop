@@ -45,7 +45,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BikeDomainTesting.cs" />
+    <Compile Include="BikeRepositoryTesting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDomainTesting.cs" />
     <Compile Include="UserRepositoryTesting.cs" />
   </ItemGroup>
   <ItemGroup>
