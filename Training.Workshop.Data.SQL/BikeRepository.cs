@@ -87,7 +87,6 @@ namespace Training.Workshop.Data.SQL
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("Username", owner);
 
-
                     var reader=command.ExecuteReader();
                     
                     while(reader.Read())

@@ -15,11 +15,12 @@ namespace Training.Workshop.UnitTestBLL
         [TestMethod]
         public void UserRepositoryTestMethod()
         {
-            //configuring repository and UoW
-            Training.Workshop.Data.Context.Current.RepositoryFactory = new Training.Workshop.Data.SQL.RepositoryFactory();
-            
-            Training.Workshop.UnitOfWork.Context.Current.UnitOfWorkFactory = new Training.Workshop.Data.SQL.SQLSystemUnitOfWork.SQLSystemDatabaseUnitofWorkFactory();
+            //Configuration of Database
+            //Work with SQL Database,if need work with file database need to comment Factory;
+            Data.Context.Current.RepositoryFactory = new Training.Workshop.Data.SQL.RepositoryFactory();
 
+            UnitOfWork.Context.Current.UnitOfWorkFactory = new Training.Workshop.Data.SQL.SQLSystemUnitOfWork.SQLSystemDatabaseUnitofWorkFactory();
+          
             //new data of tries
             var randomel=new Random();
 
