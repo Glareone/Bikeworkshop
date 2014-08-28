@@ -19,10 +19,10 @@ namespace UnitTestBLL
             //Constructing check
             var bike = new Bike();
 
-            Assert.AreEqual(bike.Manufacturer, string.Empty, "manufacturer field after bike creating is not empty");
-            Assert.AreEqual(bike.Mark, string.Empty, "mark field after bike creating is not empty");
-            Assert.AreEqual(bike.OwnerID, null, "ownerid field after bike creating is not null");
-            Assert.AreEqual(bike.ConditionState, string.Empty, "condition after bike creating is not empty");
+            Assert.AreEqual(bike.Manufacturer, null, "manufacturer field after bike creating is not empty");
+            Assert.AreEqual(bike.Mark, null, "mark field after bike creating is not empty");
+            Assert.AreEqual(bike.OwnerID, 0, "ownerid field after bike creating is not null");
+            Assert.AreEqual(bike.ConditionState, null, "condition after bike creating is not empty");
         }
     }
 }
