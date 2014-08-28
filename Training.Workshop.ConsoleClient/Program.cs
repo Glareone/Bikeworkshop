@@ -94,7 +94,7 @@ namespace Training.Workshop.ConsoleClient
                     
                     case "updatebike":
                         //manufacturer, mark, ownerID, newcondition
-                        Bike.UpdateCondition(commandArgs[1], commandArgs[2], int.Parse(commandArgs[3]), commandArgs[4]);
+                        Bike.UpdateCondition(commandArgs[1], commandArgs[2], int.Parse(commandArgs[3]), commandArgs[4],commandArgs[5]);
                         break;
 
                     case "searchbikes":

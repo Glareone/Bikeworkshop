@@ -193,18 +193,22 @@ namespace Training.Workshop.Data.SQL
         /// <param name="mark"></param>
         /// <param name="ownerID"></param>
         /// <param name="condition"></param>
-        public void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
+        public void UpdateCondition(string manufacturer, string mark, int ownerID, string condition,string newcondition)
         {
             using (var unitofwork = (ISQLUnitOfWork)Training.Workshop.UnitOfWork.UnitOfWork.Start())
             {
                 using (var command = unitofwork.Connection.CreateCommand())
                 {
-                    command.CommandText = "UpdateBikeCondition";
+                    command.CommandText=
+                    
+                    
+                    command.CommandText = "usp_UpdateBikeCondition";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("manufacturer", manufacturer);
                     command.Parameters.AddWithValue("mark", mark);
                     command.Parameters.AddWithValue("ownerID", ownerID);
                     command.Parameters.AddWithValue("condition", condition);
+                    command.Parameters.AddWithValue("newcondition", newcondition);
                     command.ExecuteNonQuery();
                 }
             }

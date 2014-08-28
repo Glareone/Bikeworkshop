@@ -110,9 +110,9 @@ namespace Training.Workshop.Domain.Entities
         /// <param name="mark"></param>
         /// <param name="ownerID"></param>
         /// <param name="condition"></param>
-        public static void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
+        public static void UpdateCondition(string manufacturer, string mark, int ownerID, string condition,string newcondition)
         {
-            ServiceLocator.Resolve<IBikeService>().UpdateCondition(manufacturer, mark, ownerID, condition);
+            ServiceLocator.Resolve<IBikeService>().UpdateCondition(manufacturer, mark, ownerID, condition,newcondition);
         }
 
         public static Bike Findbikebybikeid(int bikeID)

@@ -39,7 +39,7 @@ namespace Training.Workshop.Domain.Services
         /// <param name="mark"></param>
         /// <param name="ownerID"></param>
         /// <param name="condition"></param>
-        void UpdateCondition(string manufacturer, string mark, int ownerID, string newcondition);
+        void UpdateCondition(string manufacturer, string mark, int ownerID, string condition,string newcondition);
         /// <summary>
         /// retrieve bike from database by bikeID
         /// </summary>

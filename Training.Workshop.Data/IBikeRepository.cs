@@ -31,7 +31,7 @@ namespace Training.Workshop.Data
         /// Update bike's condition to new condition
         /// </summary>
         /// <param name="username"></param>
-        void UpdateCondition(string manufacturer, string mark, int ownerID, string newcondition);
+        void UpdateCondition(string manufacturer, string mark, int ownerID, string condition,string newcondition);
         /// <summary>
         /// return all bikes which belong to owner by owner name
         /// </summary>

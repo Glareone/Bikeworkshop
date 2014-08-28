@@ -73,13 +73,15 @@ namespace UnitTestBLL
             
             string newcurrentmanufacturer=newManufacturer[randomel.Next(0,7)];
 
+            string newcondition = newconditionstate[randomel.Next(0, 8)];
+
             var newbike = new Bike
             {
                 Manufacturer = newcurrentmanufacturer,
                 Mark = newcurrentmark,
                 OwnerID = newcurrentuserID,
                 BikeYear = bikeyear,
-                ConditionState = newconditionstate[randomel.Next(0, 8)]
+                ConditionState = newcondition
             };
 
             Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
@@ -92,7 +94,7 @@ namespace UnitTestBLL
 
             //check Update method works right
             Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
-                UpdateCondition(newcurrentmanufacturer, newcurrentmark, newcurrentuserID, "GOOD!TEST!");
+                UpdateCondition(newcurrentmanufacturer, newcurrentmark, newcurrentuserID, newcondition, "GOOD!TEST!");
 
             //search bike and check new condition
             listofbikes = Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().

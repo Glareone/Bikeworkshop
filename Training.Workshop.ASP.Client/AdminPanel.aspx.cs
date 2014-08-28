@@ -205,7 +205,7 @@ namespace Training.Workshop.ASP.Client
                 }
 
                 UpdateBikeConditionButton.Text = "Update Condition";
-                UpdateBikeConditionButton.CommandArgument = Manufacturerliteral.Text + " " + Markliteral.Text + " " + OwnerIDliteral.Text;
+                UpdateBikeConditionButton.CommandArgument = Manufacturerliteral.Text + " " + Markliteral.Text + " " + OwnerIDliteral.Text + " " + ConditionStateliteral.Text;
             }
         }
         /// <summary>
@@ -221,7 +221,7 @@ namespace Training.Workshop.ASP.Client
                 
                 string[] commands = clickedbutton.CommandArgument.Split(' ');
 
-                GetController().UpdateExistingBike(commands[0], commands[1], int.Parse(commands[2]), "Good");
+                GetController().UpdateExistingBike(commands[0], commands[1], int.Parse(commands[2]),commands[3], "Good");
             }
         }
 

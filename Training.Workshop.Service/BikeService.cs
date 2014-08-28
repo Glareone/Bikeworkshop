@@ -76,9 +76,9 @@ namespace Training.Workshop.Service
         /// <param name="mark"></param>
         /// <param name="ownerID"></param>
         /// <param name="condition"></param>
-        public void UpdateCondition(string manufacturer, string mark, int ownerID, string condition)
+        public void UpdateCondition(string manufacturer, string mark, int ownerID, string condition,string newcondition)
         {
-            Data.Context.Current.RepositoryFactory.GetBikeRepository().UpdateCondition(manufacturer, mark, ownerID, condition);
+            Data.Context.Current.RepositoryFactory.GetBikeRepository().UpdateCondition(manufacturer, mark, ownerID, condition,newcondition);
         }
         /// <summary>
         /// retrieve bike from database by bikeID

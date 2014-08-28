@@ -107,9 +107,9 @@ namespace Training.Workshop.ASP.Controllers
         /// <param name="ownerID"></param>
         /// <param name="newcondition"></param>
         /// <returns></returns>
-        public void UpdateExistingBike(string manufacturer, string mark, int ownerID, string newcondition)
+        public void UpdateExistingBike(string manufacturer, string mark, int ownerID,string condition, string newcondition)
         {
-            Bike.UpdateCondition(manufacturer, mark, ownerID, newcondition);
+            Bike.UpdateCondition(manufacturer, mark, ownerID,condition, newcondition);
             //TODO
             //need realization
         }

@@ -20,7 +20,7 @@ namespace Training.Workshop.ASP.Controllers.Interfaces
         
         Bike AddNewBike(string manufacturer, string mark, int bikeyear, int ownerID, string condition);
         
-        void UpdateExistingBike(string manufacturer, string mark, int ownerID, string newcondition);
+        void UpdateExistingBike(string manufacturer, string mark, int ownerID,string condition, string newcondition);
         
         List<Bike> GetAllBikes();
     }
