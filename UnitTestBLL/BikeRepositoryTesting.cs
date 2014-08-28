@@ -88,7 +88,7 @@ namespace UnitTestBLL
             listofbikes=Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
                 RetrieveAllBikes();
 
-            CollectionAssert.Contains(listofallbikes, newbike,"listofbikes doesn't contain creating bike");
+            CollectionAssert.Contains(listofbikes, newbike,"listofbikes doesn't contain creating bike");
 
             //check Update method works right
             Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
@@ -108,7 +108,6 @@ namespace UnitTestBLL
             };
 
             Assert.IsTrue(listofbikes.Contains(newbikeforcheckcondition));
-
 
             //check that Delete method works right
             Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
