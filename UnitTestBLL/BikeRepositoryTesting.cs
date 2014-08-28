@@ -54,26 +54,47 @@ namespace UnitTestBLL
             //TODO
             //Check ALL bikes by userID
 
-
-            //TODO
-            //SAVE
+            //check Save(Bike bike) method
             var randomel=new Random();
-            var newbike = new Bike{ Manufacturer="HONDA",
-                                    Mark="CBR600",
-                                    OwnerID=randomel.Next(12,40),
-
             
-                                    }
-                
-                                
+            var bikeyear=new DateTime(randomel.Next(1985,2013),randomel.Next(1,12),randomel.Next(1,25));
 
+            string[] newManufacturer = new string[] { "Honda", "Suzuki", "Yamaha", "Ducatti", "Kawasaki", "Aprilia", "BMW", "MVAgusta"};
+            
+            string[] newMark=new string[]{"CBR600","CB500","Vulcan1300","Intruder1700","Hayabusa","Bandit650","Bandit1200","VFR800","VTR1000"};
+            
+            string[] newconditionstate=new string[]{"good","bad","oilflush","enginebroke","lossed","paint need","valves adjustment","carburetors cleaning","technical service"};
+            
+            //take combination
+            //do that for checking Delete(string mark,int ownerid) method
+            string newcurrentmark = newMark[randomel.Next(0, 8)];
+            
+            int newuserID = randomel.Next(12, 40);
+            
+            var newbike = new Bike
+            {
+                Manufacturer = newManufacturer[randomel.Next(0,7)],
+                Mark = newcurrentmark,
+                OwnerID = newuserID,
+                BikeYear = bikeyear,
+                ConditionState = newconditionstate[randomel.Next(0, 8)]
+            };
 
+            Training.Workshop.Data.Context.Current.RepositoryFactory.GetBikeRepository().
+                Save(newbike);
+                    
             //TODO
-            //SAVE-GETBIKE(name)
+            //check Getbike(username) which save upper
+
+
+
+
             
             //TODO
             //DELETE
             
+
+
             //TODO
             //SAVE-GET-DELETE-GET
         }
