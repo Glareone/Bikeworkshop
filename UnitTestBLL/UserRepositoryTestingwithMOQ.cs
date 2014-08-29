@@ -19,16 +19,6 @@ namespace UnitTestBLL
         [TestMethod]
         public void TestMethod1()
         {
-            ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
-
-            Training.Workshop.Data.Context.Current.RepositoryFactory = new Training.Workshop.Data.SQL.RepositoryFactory();
-
-            Training.Workshop.UnitOfWork.Context.Current.UnitOfWorkFactory = new Training.Workshop.Data.SQL.SQLSystemUnitOfWork.SQLSystemDatabaseUnitofWorkFactory();
-
-
-            //Constructing mock on service.
-           
-            
             string username = "testinguser";
             
             var listofpermission = new List<string>{"ReadAll","WriteAll","DeleteAll"};
@@ -37,10 +27,8 @@ namespace UnitTestBLL
             
             var roles = new List<Role> { role1 };
             
-            string[] role=new string[]{"customer"};
+            string[] repositorytestrole=new string[]{"administrator"};
 
-
-           
             string repositorytestusername="testuser";
 
             string repositorytestpassword="testpassword";
@@ -59,14 +47,16 @@ namespace UnitTestBLL
             //configuring userrepository mock
             var userrepository = new Mock<IUserRepository>();
             
-            userrepository.Setup(m => m.GetUser(repositorytestusername, repositorytestpassword)).Returns(new User { Username = username, Roles = roles });
+            userrepository.Setup(m => m.GetUser(repositorytestusername, repositorytestpassword)).Returns(new User { Username = repositorytestusername, Roles = roles });
             
-            userrepository.Setup(m => m.RetrieveAllUsers()).Returns(new List<User>{new User{Username = username,Roles = roles}});
+            userrepository.Setup(m => m.RetrieveAllUsers()).Returns(new List<User>{new User{Username = repositorytestusername,Roles = roles}});
             
-            userrepository.Setup(m => m.GetAllUsers()).Returns(new List<User>{new User{Username = username, Roles=roles}});
+            userrepository.Setup(m => m.GetAllUsers()).Returns(new List<User>{new User{Username = repositorytestusername, Roles=roles}});
 
             userrepository.Setup(m => m.GetUserIDbyUsername(username)).Returns(value);
-            
+
+            userrepository.Setup(m => m.SaveNewUser(repositorytestusername, repositorytestpassword, repositorytestrole)).Returns(true);
+
             //configuring bikerepository mock
             var bikerepository = new Mock<IBikeRepository>();
 
@@ -87,21 +77,35 @@ namespace UnitTestBLL
 
             repositoryfactory.Setup(m => m.GetUserRepository()).Returns(userrepository.Object);
 
+            repositoryfactory.Setup(m => m.GetBikeRepository()).Returns(bikerepository.Object);
 
+            //Start userrepository testing
+            ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
+
+            ServiceLocator.RegisterService<IUserService>(typeof(UserService));
 
             //Service->RepositoryFactory->Mock Object
             Training.Workshop.Data.Context.Current.RepositoryFactory = repositoryfactory.Object;
 
+            var user = User.Create(repositorytestusername, repositorytestpassword, repositorytestrole);
 
+            Assert.IsTrue(user.Username == repositorytestusername);
+            
+            Assert.IsTrue(user.Roles == roles);
 
                 
-            //==============================================    
+            //Stop userrepository testing
+ 
+            //Start bikerepository testing
+
+            //Stop bikerepository testing
+
             //test userservice based on mocked userrepository
             var iuserservice = new Mock<IUserService>();
 
             iuserservice.Setup(m => m.GetUser("glareone", "glareone")).Returns(new User { Username=username, Roles=roles});
-            
-            iuserservice.Setup(m => m.Create("newuser", "newuser", role)).Returns(new User { Username=username,Roles=roles});
+
+            iuserservice.Setup(m => m.Create("newuser", "newuser", repositorytestrole)).Returns(new User { Username = username, Roles = roles });
 
 
         }
