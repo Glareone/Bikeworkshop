@@ -20,14 +20,14 @@ namespace UnitTestBLL
         public void TestMethod1()
         {
             ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
-            
+
             Training.Workshop.Data.Context.Current.RepositoryFactory = new Training.Workshop.Data.SQL.RepositoryFactory();
 
             Training.Workshop.UnitOfWork.Context.Current.UnitOfWorkFactory = new Training.Workshop.Data.SQL.SQLSystemUnitOfWork.SQLSystemDatabaseUnitofWorkFactory();
 
 
             //Constructing mock on service.
-            var iuserservice = new Mock<IUserService>();
+           
             
             string username = "testinguser";
             
@@ -37,25 +37,73 @@ namespace UnitTestBLL
             
             var roles = new List<Role> { role1 };
             
-            iuserservice.Setup(m => m.GetUser("glareone", "glareone")).Returns(new User { Username=username, Roles=roles});
-
             string[] role=new string[]{"customer"};
 
-            iuserservice.Setup(m => m.Create("newuser", "newuser", role)).Returns(new User { Username=username,Roles=roles});
 
-
-            //Create mock on userrepository
+           
             string repositorytestusername="testuser";
 
             string repositorytestpassword="testpassword";
 
-            var userrepository = new Mock<IUserRepository>();
+            int value=0;
+
+            string repositorytestmark="CBR600RR";
+
+            string repositorytestmanufacturer="HONDA";
+
+            var repositorytestbikeyear= new DateTime(2000,1,1);
+
+            var repositorytestcondition="normal_for_test";
+
+            
             //configuring userrepository mock
+            var userrepository = new Mock<IUserRepository>();
+            
             userrepository.Setup(m => m.GetUser(repositorytestusername, repositorytestpassword)).Returns(new User { Username = username, Roles = roles });
             
-            userrepository.Setup(m=>m.RetrieveAllUsers()).Returns(new List<User>{new User{Username=username,Roles=roles}});
+            userrepository.Setup(m => m.RetrieveAllUsers()).Returns(new List<User>{new User{Username = username,Roles = roles}});
+            
+            userrepository.Setup(m => m.GetAllUsers()).Returns(new List<User>{new User{Username = username, Roles=roles}});
+
+            userrepository.Setup(m => m.GetUserIDbyUsername(username)).Returns(value);
+            
+            //configuring bikerepository mock
+            var bikerepository = new Mock<IBikeRepository>();
+
+            bikerepository.Setup(m => m.RetrieveAllBikes()).Returns(new List<Bike>
+            {
+                new Bike
+                {
+                Manufacturer=repositorytestmanufacturer,
+                Mark=repositorytestmark,
+                BikeYear=repositorytestbikeyear,
+                ConditionState=repositorytestcondition,
+                OwnerID=1
+                }
+            });
+
+            //configuring repository factory mock object in all repositories
+            var repositoryfactory = new Mock<IRepositoryFactory>();
+
+            repositoryfactory.Setup(m => m.GetUserRepository()).Returns(userrepository.Object);
+
+
+
+            //Service->RepositoryFactory->Mock Object
+            Training.Workshop.Data.Context.Current.RepositoryFactory = repositoryfactory.Object;
+
+
+
+                
+            //==============================================    
             //test userservice based on mocked userrepository
-            var service
+            var iuserservice = new Mock<IUserService>();
+
+            iuserservice.Setup(m => m.GetUser("glareone", "glareone")).Returns(new User { Username=username, Roles=roles});
+            
+            iuserservice.Setup(m => m.Create("newuser", "newuser", role)).Returns(new User { Username=username,Roles=roles});
+
+
         }
     }
 }
