@@ -14,7 +14,7 @@ using Training.Workshop.Data;
 namespace UnitTestBLL
 {
     [TestClass]
-    public class UserRepositoryTestingwithMOQ
+    public class TestingwithMOQ
     {
         [TestMethod]
         public void TestMethod1()
@@ -33,7 +33,7 @@ namespace UnitTestBLL
 
             string repositorytestpassword="testpassword";
 
-            int value=0;
+            int value=1;
 
             string repositorytestmark="CBR600RR";
 
@@ -41,7 +41,7 @@ namespace UnitTestBLL
 
             var repositorytestbikeyear= new DateTime(2000,1,1);
 
-            var repositorytestcondition="normal_for_test";
+            string repositorytestcondition="normal_for_test";
 
             
             //configuring userrepository mock
@@ -60,17 +60,19 @@ namespace UnitTestBLL
             //configuring bikerepository mock
             var bikerepository = new Mock<IBikeRepository>();
 
-            bikerepository.Setup(m => m.RetrieveAllBikes()).Returns(new List<Bike>
+            var currentbike=new Bike
             {
-                new Bike
-                {
                 Manufacturer=repositorytestmanufacturer,
                 Mark=repositorytestmark,
                 BikeYear=repositorytestbikeyear,
                 ConditionState=repositorytestcondition,
                 OwnerID=1
-                }
-            });
+                
+            };
+
+            bikerepository.Setup(m => m.RetrieveAllBikes()).Returns(new List<Bike>{currentbike});
+
+            bikerepository.Setup(m => m.Search(repositorytestusername)).Returns(new List<Bike>{currentbike});
 
             //configuring repository factory mock object in all repositories
             var repositoryfactory = new Mock<IRepositoryFactory>();
@@ -79,9 +81,7 @@ namespace UnitTestBLL
 
             repositoryfactory.Setup(m => m.GetBikeRepository()).Returns(bikerepository.Object);
 
-            //Start userrepository testing
-            ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
-
+            //Start Domain and Services testing with Repository isolation.
             ServiceLocator.RegisterService<IUserService>(typeof(UserService));
 
             //Service->RepositoryFactory->Mock Object
@@ -92,10 +92,20 @@ namespace UnitTestBLL
             Assert.IsTrue(user.Username == repositorytestusername);
             
             Assert.IsTrue(user.Roles == roles);
-
-                
+    
             //Stop userrepository testing
- 
+            ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
+
+
+            var bike = Bike.Create(repositorytestmark, repositorytestmanufacturer, repositorytestusername, value, repositorytestcondition);
+
+            Assert.IsTrue(
+                bike.Manufacturer == repositorytestmanufacturer &&
+                bike.Mark == repositorytestmark &&
+                bike.OwnerID == value &&
+                bike.ConditionState == repositorytestcondition
+                );
+
             //Start bikerepository testing
 
             //Stop bikerepository testing
