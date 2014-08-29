@@ -55,6 +55,8 @@ namespace UnitTestBLL
 
             userrepository.Setup(m => m.GetUserIDbyUsername(username)).Returns(value);
 
+            userrepository.Setup(m => m.GetUserIDbyUsername(repositorytestusername)).Returns(2);
+
             userrepository.Setup(m => m.SaveNewUser(repositorytestusername, repositorytestpassword, repositorytestrole)).Returns(true);
 
             //configuring bikerepository mock
@@ -94,30 +96,83 @@ namespace UnitTestBLL
             Assert.IsTrue(user.Roles == roles);
     
             //Stop userrepository testing
+            //Start bikerepository testing
             ServiceLocator.RegisterService<IBikeService>(typeof(BikeService));
 
 
-            var bike = Bike.Create(repositorytestmark, repositorytestmanufacturer, repositorytestusername, value, repositorytestcondition);
+            var bike1 = Bike.Create(repositorytestmanufacturer, repositorytestmark, repositorytestusername, value, repositorytestcondition);
 
-            Assert.IsTrue(
-                bike.Manufacturer == repositorytestmanufacturer &&
-                bike.Mark == repositorytestmark &&
-                bike.OwnerID == value &&
-                bike.ConditionState == repositorytestcondition
+            Assert.IsTrue
+                (
+                bike1.Manufacturer == repositorytestmanufacturer &&
+                bike1.Mark == repositorytestmark &&
+                bike1.OwnerID == 2 &&
+                bike1.ConditionState == repositorytestcondition
                 );
 
-            //Start bikerepository testing
+            var bike2 = Bike.Create(repositorytestmark, repositorytestmanufacturer, repositorytestusername, value, repositorytestcondition);
 
+            Assert.IsFalse
+               (
+               bike2.Manufacturer == repositorytestmanufacturer &&
+               bike2.Mark == repositorytestmark &&
+               bike2.OwnerID == value &&
+               bike2.ConditionState == repositorytestcondition
+               );
             //Stop bikerepository testing
 
-            //test userservice based on mocked userrepository
+            //Domain testing with service mock.
+            //cunfiguring services
             var iuserservice = new Mock<IUserService>();
 
-            iuserservice.Setup(m => m.GetUser("glareone", "glareone")).Returns(new User { Username=username, Roles=roles});
+            string newusername="testuser";
+            iuserservice.Setup(m => m.GetUser(newusername, newusername)).Returns(new User { Username=newusername, Roles=roles});
 
-            iuserservice.Setup(m => m.Create("newuser", "newuser", repositorytestrole)).Returns(new User { Username = username, Roles = roles });
+            iuserservice.Setup(m => m.Create("newuser", "newuser", repositorytestrole)).Returns(new User { Username = "newuser", Roles = roles });
+
+            iuserservice.Setup(m => m.Create("newuser2", "newuser2", repositorytestrole)).Returns(new User { Username = "newuser", Roles = roles });
+
+            iuserservice.Setup(m => m.GetUser(newusername, newusername)).Returns(new User { Username = "newuser", Roles = roles });
+
+            userrepository.Setup(m => m.SaveNewUser("newuser", "newuser", repositorytestrole)).Returns(false);
+
+            userrepository.Setup(m => m.SaveNewUser(newusername, newusername, repositorytestrole)).Returns(true);
+
+            //Start Domain testing
+            //uncorrect SaveNewUser(username,password,roles),uncorrect data in User
+            var newuser1 = User.Create("newuser", "newuser", repositorytestrole);
+            
+            
+
+            Assert.IsFalse
+                (
+                newuser1.Username == newusername &&
+                newuser1.Roles == roles
+                );
+
+            //correct SaveNewUser(), correct data in User
+            
+            var newuser2 = User.Create(newusername, newusername, repositorytestrole);
+
+            userrepository.Setup(m=>m.SaveNewUser("newuser","newuser",repositorytestrole)).Returns(true);
+
+            Assert.IsTrue
+                (
+                newuser2.Username == newusername &&
+                newuser2.Roles == roles
+                );
 
 
+            //uncorrect SaveNewUser(), correct data in User
+            var newuser3 = User.Create("newuser2", "newuser2", repositorytestrole);
+
+            Assert.IsFalse
+              (
+              newuser3.Username == newusername &&
+              newuser3.Roles == roles
+              );
+
+            //Stop Domain testing
         }
     }
 }
