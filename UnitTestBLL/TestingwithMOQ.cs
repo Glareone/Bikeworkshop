@@ -131,8 +131,10 @@ namespace UnitTestBLL
             iuserservice.Setup(m => m.Create("newuser", "newuser", repositorytestrole)).Returns(new User { Username = "newuser", Roles = roles });
 
             iuserservice.Setup(m => m.Create("newuser2", "newuser2", repositorytestrole)).Returns(new User { Username = "newuser", Roles = roles });
-
+            //right choise
             iuserservice.Setup(m => m.GetUser(newusername, newusername)).Returns(new User { Username = "newuser", Roles = roles });
+            //right
+            userrepository.Setup(m => m.GetUser(newusername, newusername)).Returns(new User { Username = newusername, Roles = roles });
 
             userrepository.Setup(m => m.SaveNewUser("newuser", "newuser", repositorytestrole)).Returns(false);
 
@@ -154,7 +156,7 @@ namespace UnitTestBLL
             
             var newuser2 = User.Create(newusername, newusername, repositorytestrole);
 
-            userrepository.Setup(m=>m.SaveNewUser("newuser","newuser",repositorytestrole)).Returns(true);
+            userrepository.Setup(m => m.SaveNewUser(newusername, newusername, repositorytestrole)).Returns(true);
 
             Assert.IsTrue
                 (
