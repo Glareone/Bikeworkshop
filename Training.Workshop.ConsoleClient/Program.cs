@@ -110,7 +110,7 @@ namespace Training.Workshop.ConsoleClient
                         break;
 
                     case "addsparepart":
-                        Sparepart.Create(commandArgs[1], commandArgs[2], Convert.ToInt32(commandArgs[3]));
+                        Sparepart.Create(commandArgs[1], commandArgs[2], commandArgs[3],Convert.ToInt32(commandArgs[4]));
                         break;
                     
                     case "deletesparepart":

@@ -14,8 +14,7 @@ namespace Training.Workshop.Data.SQL
         /// <param name="sparepart"></param>
         public void Save(Sparepart sparepart)
         {
-            //TODO
-            //Need realisation
+            //check if
         }
 
         /// <summary>
@@ -32,18 +31,18 @@ namespace Training.Workshop.Data.SQL
         /// </summary>
         /// <param name="sparepartname"></param>
         /// <param name="partnumber"></param>
-        public Sparepart GetSparepart(string partnumber)
+        public List<Sparepart> GetSparepartbyPartnumber(string partnumber)
         { 
             //TODO
             //Need realisation
-            return new Sparepart();
+            return new List<Sparepart>();
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sparepartname"></param>
         /// <returns></returns>
-        public List<Sparepart> GetSpareparts(string sparepartname)
+        public List<Sparepart> GetSparepartsbyName(string sparepartname)
         { 
             //TODO
             //Need realization
@@ -55,7 +54,7 @@ namespace Training.Workshop.Data.SQL
         /// <param name="minprice"></param>
         /// <param name="maxprice"></param>
         /// <returns></returns>
-        public List<Sparepart> GetSparepartsbyPrice(double minprice,double maxprice)
+        public List<Sparepart> GetSparepartsbyPrice(double minprice, double maxprice)
         {
             //TODO
             //Need realization

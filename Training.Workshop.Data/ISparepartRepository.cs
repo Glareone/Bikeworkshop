@@ -16,18 +16,18 @@ namespace Training.Workshop.Data
         /// <param name="username"></param>
         /// TODO
         /// May be need returns bool
-        bool Delete(string partnumber);
+        void Delete(string partnumber);
         /// <summary>
         /// Get sparepart by part number
         /// </summary>
         /// <param name="username"></param>
-        Sparepart GetSparepart(string partnumber);
+        List<Sparepart> GetSparepartbyPartnumber(string partnumber);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sparepartname"></param>
         /// <returns></returns>
-        List<Sparepart> GetSpareparts(string sparepartname);
+        List<Sparepart> GetSparepartsbyName(string sparepartname);
         /// <summary>
         /// 
         /// </summary>

@@ -32,10 +32,10 @@ namespace Training.Workshop.Domain.Entities
         /// <param name="partnumber"></param>
         /// <param name="prise"></param>
         /// <returns></returns>
-        public static Sparepart Create(string sparepartname, string partnumber, int prise)
+        public static Sparepart Create(string manufacturername, string sparepartname, string partnumber, int prise)
         {
             return ServiceLocator.Resolve<ISparepartService>().
-                Create(sparepartname, partnumber, prise);
+                Create(manufacturername,sparepartname, partnumber, prise);
         }
         /// <summary>
         /// Delete existing sparepart by partnumber
@@ -46,13 +46,13 @@ namespace Training.Workshop.Domain.Entities
             ServiceLocator.Resolve<ISparepartService>().Delete(partnumber);
         }
         /// <summary>
-        /// Get sparepart by part number
+        /// Get spareparts by part number
         /// </summary>
         /// <param name="partnumber"></param>
-        public Sparepart GetSparepart(string partnumber)
+        public List<Sparepart> GetSparepart(string partnumber)
         {
             return ServiceLocator.Resolve<ISparepartService>().
-                GetSparepart(partnumber);
+                GetSparepartbyPartsnumber(partnumber);
         }
         /// <summary>
         /// Get all spareparts by sparepart name
@@ -62,7 +62,7 @@ namespace Training.Workshop.Domain.Entities
         public List<Sparepart> GetSpareparts(string sparepartname)
         {
             return ServiceLocator.Resolve<ISparepartService>().
-                GetSpareparts(sparepartname);
+                GetSparepartsbyName(sparepartname);
         }
         /// <summary>
         /// take all parts by price
@@ -72,7 +72,7 @@ namespace Training.Workshop.Domain.Entities
         public List<Sparepart> GetSparepartbyPrice(double minprice, double maxprice)
         {
             return ServiceLocator.Resolve<ISparepartService>().
-                GetSparepartbyPrice(minprice, maxprice);
+                GetSparepartsbyPrice(minprice, maxprice);
         }
         /// <summary>
         /// Get all spareparts by manufacturer name

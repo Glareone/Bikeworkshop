@@ -42,20 +42,20 @@ namespace Training.Workshop.Service
         /// </summary>
         /// <param name="partnumber"></param>
         /// <returns></returns>
-        public Sparepart GetSparepart(string partnumber)
+        public List<Sparepart> GetSparepartbyPartsnumber(string partnumber)
         {
            return Data.Context.Current.RepositoryFactory.GetSparepartRepository()
-                    .GetSparepart(partnumber);
+                    .GetSparepartbyPartnumber(partnumber);
         }
         /// <summary>
         /// Get list of spareparts by sparepart name
         /// </summary>
         /// <param name="sparepartname"></param>
         /// <returns></returns>
-        public List<Sparepart> GetSpareparts(string sparepartname)
+        public List<Sparepart> GetSparepartsbyName(string sparepartname)
         {
             return Data.Context.Current.RepositoryFactory.GetSparepartRepository()
-                    .GetSpareparts(sparepartname);
+                    .GetSparepartsbyName(sparepartname);
         }
         /// <summary>
         /// Get list of spareparts by price

@@ -12,7 +12,7 @@ namespace Training.Workshop.Domain.Services
         /// <param name="partnumber"></param>
         /// <param name="prise"></param>
         /// <returns></returns>
-        Sparepart Create(string sparepartname, string partnumber, int prise);
+        Sparepart Create(string manufacturername,string sparepartname, string partnumber, int prise);
         /// <summary>
         /// Delete existing sparepart in system
         /// </summary>
@@ -22,20 +22,20 @@ namespace Training.Workshop.Domain.Services
         /// </summary>
         /// <param name="partnumber"></param>
         /// <returns></returns>
-        Sparepart GetSparepart(string partnumber);
+        List<Sparepart> GetSparepartbyPartsnumber(string partnumber);
         /// <summary>
         /// Get all spareparts by sparepart name
         /// </summary>
         /// <param name="sparepartname"></param>
         /// <returns></returns>
-        List<Sparepart> GetSpareparts(string sparepartname);
+        List<Sparepart> GetSparepartsbyName(string sparepartname);
         /// <summary>
         /// Get all spareparts by price
         /// </summary>
         /// <param name="minprice"></param>
         /// <param name="maxprice"></param>
         /// <returns></returns>
-        List<Sparepart> GetSparepartbyPrice(double minprice, double maxprice);
+        List<Sparepart> GetSparepartsbyPrice(double minprice, double maxprice);
         /// <summary>
         /// Get all spareparts by manufacturer name
         /// </summary>
