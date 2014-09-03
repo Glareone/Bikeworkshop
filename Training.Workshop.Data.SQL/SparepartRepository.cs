@@ -27,28 +27,52 @@ namespace Training.Workshop.Data.SQL
             //TODO
             //Need realisation
         }
-
-        /// <summary>
-        /// Find sparepart in SQL database by partnumber
-        /// </summary>
-        /// <param name="partnumber"></param>
-        public Sparepart Find(string partnumber)
-        {
-            //TODO
-            //Need realisation
-            return new Sparepart();
-        }
-
         /// <summary>
         /// Update existing sparepart in SQL database
         /// </summary>
         /// <param name="sparepartname"></param>
         /// <param name="partnumber"></param>
-        public void Update(string sparepartname, string partnumber)
+        public Sparepart GetSparepart(string partnumber)
         { 
             //TODO
             //Need realisation
+            return new Sparepart();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sparepartname"></param>
+        /// <returns></returns>
+        public List<Sparepart> GetSpareparts(string sparepartname)
+        { 
+            //TODO
+            //Need realization
+            return new List<Sparepart>();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="minprice"></param>
+        /// <param name="maxprice"></param>
+        /// <returns></returns>
+        public List<Sparepart> GetSparepartsbyPrice(double minprice,double maxprice)
+        {
+            //TODO
+            //Need realization
+            return new List<Sparepart>();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manufacturername"></param>
+        /// <returns></returns>
+        public List<Sparepart> GetSparepartbyManufacturer(string manufacturername)
+        { 
+            //TODO
+            //Need realization
+            return new List<Sparepart>();
+        }
+
     }
 
 }

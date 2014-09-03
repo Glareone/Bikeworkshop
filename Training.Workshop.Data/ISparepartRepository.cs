@@ -1,4 +1,5 @@
 ﻿using Training.Workshop.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Training.Workshop.Data
 {
@@ -9,24 +10,36 @@ namespace Training.Workshop.Data
         /// </summary>
         /// <param name="user"></param>
         void Save(Sparepart user);
-
         /// <summary>
         /// Deletes sparepart by sparepartname and partnumber
         /// </summary>
         /// <param name="username"></param>
         /// TODO
         /// May be need returns bool
-        void Delete(string partnumber);
+        bool Delete(string partnumber);
         /// <summary>
-        /// Find and return's concrete sparepart by partnumber if he exist in BD
+        /// Get sparepart by part number
         /// </summary>
         /// <param name="username"></param>
-        Sparepart Find(string partnumber);
-
+        Sparepart GetSparepart(string partnumber);
         /// <summary>
-        /// Update sparepart's data
+        /// 
         /// </summary>
-        /// <param name="username"></param>
-        void Update(string sparepartname, string partnumber);
+        /// <param name="sparepartname"></param>
+        /// <returns></returns>
+        List<Sparepart> GetSpareparts(string sparepartname);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="minprice"></param>
+        /// <param name="maxprice"></param>
+        /// <returns></returns>
+        List<Sparepart> GetSparepartsbyPrice(double minprice, double maxprice);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manufacturername"></param>
+        /// <returns></returns>
+        List<Sparepart> GetSparepartbyManufacturer(string manufacturername);
     }
 }
